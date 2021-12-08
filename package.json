@@ -1,0 +1,38 @@
+{
+  "name": "anubis",
+  "version": "1.0.0",
+  "description": "Batbook ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blue-Ocean-Anubis/Anubis.git"
+  },
+  "author": "Team Anubis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Blue-Ocean-Anubis/Anubis/issues"
+  },
+  "homepage": "https://github.com/Blue-Ocean-Anubis/Anubis#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "mongoose": "^6.1.0",
+    "morgan": "^1.10.0",
+    "node-cache": "^5.1.2",
+    "nodemon": "^2.0.15",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-transform-runtime": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "webpack": "^5.60.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
