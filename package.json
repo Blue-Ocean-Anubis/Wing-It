@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Blue-Ocean-Anubis/Anubis#readme",
   "dependencies": {
+    "amadeus": "^5.7.1",
     "axios": "^0.24.0",
     "babel-loader": "^8.2.3",
     "bootstrap": "^5.1.3",
