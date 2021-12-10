@@ -1,19 +1,11 @@
 require("dotenv").config();
-
 require("../db");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const axios = require("axios");
 var Amadeus = require("amadeus");
-const config = require("../config.js");
 
-var amadeus = new Amadeus({
-  clientId: config.TOKEN.client,
-  clientSecret: config.TOKEN.secret
-});
-
-var Amadeus = require("amadeus");
 var amadeus = new Amadeus({
   clientId: process.env.AMADEUS_KEY,
   clientSecret: process.env.AMADEUS_SECRET,
