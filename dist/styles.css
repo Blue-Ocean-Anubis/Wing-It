@@ -1,0 +1,9 @@
+.navigation {
+  margin: auto;
+  display: flex;
+  padding: 1rem;
+  justify-content: space-evenly;
+  background-color: aliceblue;
+  border-radius: 1rem;
+  border: 4px solid grey;
+}

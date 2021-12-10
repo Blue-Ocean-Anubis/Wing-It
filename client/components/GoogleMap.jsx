@@ -21,7 +21,7 @@ const GoogleMap = (props) => {
   })
 
     return (
-      <div style={{ height: '80vh', width: '90%', margin: '10vh auto 10vh auto'}}>
+      <div style={{ height: '80vh', width: '90%', margin: '3vh auto 10vh auto'}}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
           center={userLocation}
