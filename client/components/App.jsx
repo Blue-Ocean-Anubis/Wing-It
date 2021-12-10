@@ -20,6 +20,11 @@ const App = () => {
     setState((prevState) => {return {...prevState, searchedLocation: {lat: lat, lng: lng}}})
   }
 
+  // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED WITH UPDATED COORDINATES
+  useEffect(() => {
+    console.log('new place clicked')
+  }, [state.searchedLocation])
+
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -51,10 +56,6 @@ const App = () => {
     getUserLocation();
     convertAddressToCoords(state.userAddress);
   }, [])
-
-  useEffect(() => {
-    // console.log('updating App state: ', state)
-  })
 
   return (
     <div>
