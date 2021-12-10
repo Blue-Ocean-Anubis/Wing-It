@@ -20,9 +20,9 @@ const App = () => {
     setState((prevState) => {return {...prevState, searchedLocation: {lat: lat, lng: lng}}})
   }
 
-  // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED WITH UPDATED COORDINATES
+  // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED WITH UPDATED COORDINATES (state.searchedLocation)
   useEffect(() => {
-    console.log('new place clicked')
+    console.log('new place clicked', state.searchedLocation)
   }, [state.searchedLocation])
 
   const getUserLocation = () => {
