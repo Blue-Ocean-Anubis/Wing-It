@@ -1,14 +1,9 @@
-// import React from 'react';
-import SearchBar from './SearchBar.jsx';
-// import Autocomplete from "react-google-autocomplete";
+// import SimpleSearchBar from './SimpleSearchBar.jsx'; //saved just in case, likely won't need this component
 import React, {useState, useEffect} from 'react';
 import GoogleMap from './GoogleMap.jsx';
 import SearchBox from './SearchBox.jsx';
 import Autocomplete from "react-google-autocomplete";
 import GoogleMaps from 'google-maps';
-import GooglePlaces from 'google-places';
-
-var api_key='AIzaSyB-E2NDcGh7uSanw7qxslmHNJYPSWKEko4';
 
 const App = () => {
   const [state, setState] = useState ({
@@ -55,11 +50,7 @@ const App = () => {
 
   return (
     <div>
-      <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/>
       <GoogleMap location={state.location} onLocationChange={onLocationChange}/>
-      <Autocomplete
-        apiKey={api_key}
-        onPlaceSelected={(place) => {console.log(place);}}/>;
     </div>
   )
 }
