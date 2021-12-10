@@ -12,7 +12,7 @@ const App = () => {
     searchedLocation: {},
     userLocation: {},
     userAddressLocation: {},
-    userAddress: TEST_USER_ADDRESS, // placeholder - will need to set this to be geocoded form address string to lat/lng object,
+    userAddress: TEST_USER_ADDRESS, // placeholder - will have to insert user address here
     searchBoxText: 'Search a City!'
   })
 
@@ -46,15 +46,14 @@ const App = () => {
       .catch((err) => {console.log(err)})
   }
 
+  // on component mount, find userLocation and coords for their address
   useEffect(() => {
-    // console.log(' initial load: ', state)
     getUserLocation();
     convertAddressToCoords(state.userAddress);
   }, [])
 
   useEffect(() => {
     // console.log('updating App state: ', state)
-
   })
 
   return (
