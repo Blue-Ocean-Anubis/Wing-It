@@ -17,7 +17,7 @@ const App = () => {
     setState((prevState) => {return {...prevState, location: {lat: lat, lng: lng}}})
   }
 
-  const showCurrentLocation = () => {
+  const setCurrentLocation = () => {
     // console.log('finding user position', navigator.geolocation);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -32,14 +32,12 @@ const App = () => {
         })
         }, (err) => {console.log(err)}
       )
-    } else {
-      error => console.log(error)
-    }
+    } 
   }
 
   useEffect(() => {
     // console.log(' initial load: ', state)
-    showCurrentLocation();
+    setCurrentLocation();
   }, [])
 
   useEffect(() => {
