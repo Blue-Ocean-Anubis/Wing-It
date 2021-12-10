@@ -15,13 +15,18 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.static('dist'));
 
-/******************NEAREST AIRPORT TO LAT/LONG******************** */
+/******************NEAREST AIRPORT TO LAT/LONG********************
+ * 'lat': <latitude>
+ *  'long': <longitude>
+ * example query parameters: 'lat': 38.407524
+ *                           'long': -89.764714
+*/
 app.get("/latLongNearestAirport", (req, res) => {
   let lat = req.query.lat;
   let long = req.query.long;
 amadeus.referenceData.locations.airports.get({
-  longitude: 2.55,
-  latitude: 49.0000,
+  longitude: long,
+  latitude: lat,
   radius: 500,
   'page[limit]': 10,
   sort: 'distance'
@@ -44,13 +49,50 @@ amadeus.referenceData.locations.airports.get({
 });
 });
 
+/********************** AIRPORT BY CITY NAME ***********************
+ * 'city': 'CityNameHere'
+ * example query parameters: 'city': 'Dallas'
+*/
+
+app.get('/cityNameAirport', (req, res) => {
+  let city = req.query.city;
+  amadeus.referenceData.locations.get({
+    subType: 'AIRPORT',
+    keyword: city
+  })
+  .then(function (response) {
+    let airportData = JSON.parse(response.body);
+    let responseData = [];
+    airportData.data.map((airport) => {
+      let airportDetail = {
+        'location': airport.geoCode,
+        'city': airport.address.cityName,
+        'country': airport.address.countryName,
+        'name': airport.name
+      }
+      responseData.push(airportDetail);
+    })
+    res.send(responseData);
+  }).catch(function (response) {
+    res.status(404).send(response);
+  });
+})
+
+
 /********************POINT OF INTEREST***********************
  * Include in response: Geocode, name, category, rank, tags
+ *  'lat': <latitude>
+ *  'long': <longitude>
+ * example query parameters: 'lat': 38.407524
+ *                           'long': -89.764714
  */
 app.get('/POI', (req, res) => {
+  let lat = req.query.lat;
+  let long = req.query.long;
+
   amadeus.referenceData.locations.pointsOfInterest.get({
-    latitude: 41.397158,
-    longitude: 2.160873,
+    latitude: lat,
+    longitude: long,
     radius: 20
   }).then(function (response) {
     let poiData = JSON.parse(response.body);
