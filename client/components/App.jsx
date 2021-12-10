@@ -1,10 +1,14 @@
 // import React from 'react';
 import SearchBar from './SearchBar.jsx';
-import Autocomplete from "react-google-autocomplete";
+// import Autocomplete from "react-google-autocomplete";
 import React, {useState, useEffect} from 'react';
 import GoogleMap from './GoogleMap.jsx';
 import SearchBox from './SearchBox.jsx';
+import Autocomplete from "react-google-autocomplete";
+import GoogleMaps from 'google-maps';
+import GooglePlaces from 'google-places';
 
+var api_key='AIzaSyB-E2NDcGh7uSanw7qxslmHNJYPSWKEko4';
 
 const App = () => {
   const [state, setState] = useState ({
@@ -20,33 +24,6 @@ const App = () => {
     setState((prevState) => {return {...prevState, location: {lat: lat, lng: lng}}})
   }
 
-  // handleSearch(query){
-  //   console.log('query: ', query)
-  //   // axios.post('route here', query)
-  //   // .then((response)=>{
-  //   //   console.log(response);
-  //   // })
-  //   // .catch((err)=>{
-  //   //   console.log(err);
-  //   // })
-  // }
-
-  render () {
-
-    return (
-      <div>
-        Hello There!
-        <SearchBar handleSearch={this.handleSearch.bind(this)}></SearchBar>
-        import Autocomplete from "react-google-autocomplete";
-
-<Autocomplete
-  apiKey={YOUR_GOOGLE_MAPS_API_KEY}
-  onPlaceSelected={(place) => {
-    console.log(place);
-  }}
-/>;
-      </div>
-    )
   const showCurrentLocation = () => {
     // console.log('finding user position', navigator.geolocation);
     if (navigator.geolocation) {
@@ -80,6 +57,9 @@ const App = () => {
     <div>
       <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/>
       <GoogleMap location={state.location} onLocationChange={onLocationChange}/>
+      <Autocomplete
+        apiKey={api_key}
+        onPlaceSelected={(place) => {console.log(place);}}/>;
     </div>
   )
 }

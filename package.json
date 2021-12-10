@@ -30,6 +30,8 @@
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "google-map-react": "^2.1.10",
+    "google-maps": "^4.3.3",
+    "google-places": "0.0.2",
     "mongoose": "^6.1.0",
     "morgan": "^1.10.0",
     "node-cache": "^5.1.2",
