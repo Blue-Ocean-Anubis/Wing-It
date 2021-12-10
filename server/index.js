@@ -1,19 +1,28 @@
-const express = require('express');
+require("dotenv").config();
+
+require("../db");
+const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const axios = require("axios");
 var Amadeus = require("amadeus");
 const config = require("../config.js");
-//test
+
 var amadeus = new Amadeus({
   clientId: config.TOKEN.client,
   clientSecret: config.TOKEN.secret
 });
 
-const PORT = 3000;
+var Amadeus = require("amadeus");
+var amadeus = new Amadeus({
+  clientId: process.env.AMADEUS_KEY,
+  clientSecret: process.env.AMADEUS_SECRET,
+});
+
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.static('dist'));
+app.use(express.static("dist"));
 
 /******************NEAREST AIRPORT TO LAT/LONG********************
  * 'lat': <latitude>
@@ -117,5 +126,5 @@ app.get('/POI', (req, res) => {
 
 
 app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`)
+  console.log(`Listening on port: ${PORT}`);
 });
