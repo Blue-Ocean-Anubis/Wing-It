@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const axios = require("axios");
 var Amadeus = require("amadeus");
 const config = require("../config.js");
-
+//test
 var amadeus = new Amadeus({
   clientId: config.TOKEN.client,
   clientSecret: config.TOKEN.secret
