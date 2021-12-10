@@ -103,5 +103,4 @@ typings/
 # TernJS port file
 .tern-port
 
-
-google-API-key-TP.js
+tokens.js
