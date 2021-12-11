@@ -22,17 +22,20 @@ app.use(express.static("dist"));
 
 /******************RESTAURANTS WITHIN CITY********************/
 app.get('/restaurants', (req, res) => {
+  // May need to be altered based on front end inputs
+  let latitude = req.query.latitude;
+  let longitude = req.query.longitude;
   client.textSearch({
     params: {
-      // input: 'Restaurants Paris',
-      // inputtype: 'textquery',
       query: 'restaurant',
-      // location: [38.407524, -89.764714],
+      location: {
+        lat: latitude,
+        lng: longitude
+      },
       maxprice: 4,
       minprice: 4,
-      fields: ['name', 'place_id', 'geometry', 'types', 'formatted_address'],
       key: GOOGLE_API_KEY,
-    }
+    },
   })
   .then((r) => {
     res.send(r.data)
