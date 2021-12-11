@@ -8,6 +8,7 @@ import InfoList from './InfoList.jsx';
 
 const Home = () => {
   const [state, setState] = useState({
+    searchedLocationCity: '',
     searchedLocation: {},
     userLocation: {},
     userAddressLocation: {},
@@ -15,15 +16,27 @@ const Home = () => {
     searchBoxText: 'Search a City!',
   });
 
+  // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
-    setState((prevState) => ({ ...prevState, searchedLocation: { lat: lat, lng: lng } }));
+    Geocode.fromLatLng(lat.toString(), lng.toString())
+      .then((response) => {
+        setState((prevState) => ({
+          ...prevState,
+          searchedLocationCity: (response.plus_code.compound_code).substring(9),
+          searchedLocation: { lat: lat, lng: lng },
+        }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED WITH UPDATED COORDINATES (state.searchedLocation)
+  // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED
   useEffect(() => {
-    console.log('new place clicked', state.searchedLocation);
-  }, [state.searchedLocation]);
+    console.log('new place clicked', state.searchedLocation, state.searchedLocationCity);
+  }, [state.searchedLocation, state.searchedLocationCity]);
 
+  // GET USER LOCATION DATA
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -45,20 +58,19 @@ const Home = () => {
     }
   };
 
+  // TURN USER ADDRESS IN TO COORDINATES
   const convertAddressToCoords = (address) => {
     Geocode.fromAddress(address)
       .then((response) => {
         console.log(response);
-        setState((prevState) => (
-          { ...prevState, userAddressLocation: response.results[0].geometry.location }
-        ));
+        setState((prevState) => ({ ...prevState, userAddressLocation: response.results[0].geometry.location }));
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  // on component mount, find userLocation and coords for their address
+  // ON COMPONENT MOUNT, FIND USERLOCATION AND COORDS FOR THEIR ADDRESS
   useEffect(() => {
     getUserLocation();
     convertAddressToCoords(state.userAddress);
@@ -80,6 +92,3 @@ const Home = () => {
 
 export default Home;
 
-// // example for how to turn lat/lng geo data into city data:
-// Geocode.fromLatLng("39.0997", "-94.5786")
-// .then((response) => {console.log('geocode response: ', response)})
