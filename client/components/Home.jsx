@@ -16,6 +16,8 @@ const Home = () => {
     userAddressLocation: {},
     userAddress: TEST_USER_ADDRESS, // placeholder - will have to insert user address here
     searchBoxText: 'Search a City!',
+    restaurantData: [],
+    rentalData: []
   });
   const [airportData, setAirportData] = useState([]);
 
@@ -37,6 +39,23 @@ const Home = () => {
   // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED
   useEffect(() => {
     console.log('new place clicked', state.searchedLocation, state.searchedLocationCity);
+      const coordinates = {lat: state.searchedLocation.lat,lng: state.searchedLocation.lng};
+      axios.get('/restaurants', {params: coordinates})
+        .then((restaurants) => {
+          setState((prevState) => ({
+          ...prevState,
+          restaurantData: restaurants.data
+          }))
+        })
+        .catch((err) => {console.log('AxiosError: ', err)})
+      axios.get('/rentals', {params: coordinates})
+        .then((rentals) => {
+          setState((prevState) => ({
+          ...prevState,
+          rentalData: rentals.data
+          }))
+        })
+        .catch((err) => {console.log('AxiosError: ', err)})
   }, [state.searchedLocation, state.searchedLocationCity]);
 
   // Makes server request for nearest airport when searched location changes
