@@ -4,7 +4,6 @@ import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from '../../config.js';
 Geocode.setApiKey(GOOGLE_API_KEY)
 Geocode.setLocationType("ROOFTOP")
 import GoogleMap from './GoogleMap.jsx';
-import SearchBox from './SearchBox.jsx';
 import List from './List.jsx';
 
 
@@ -61,7 +60,6 @@ const App = () => {
   return (
     <div>
       <div key='MapComponent' className='map'>
-      {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
       <GoogleMap searchedLocation={state.searchedLocation} userLocation={state.userLocation} userAddressLocation={state.userAddressLocation} onLocationChange={onLocationChange}/>
       </div>
       <div key='ListComponent' className='list'>
