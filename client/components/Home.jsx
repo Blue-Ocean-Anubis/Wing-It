@@ -36,17 +36,26 @@ const Home = () => {
   useEffect(() => {
     console.log('new place clicked', searchedLocation);
 
-    const coordinates = {lat: searchedLocation.coordinates.lat, lng: searchedLocation.coordinates.lng};
+    let noState = false;
+    let cityData = searchedLocation.city.split(', ');
+    if (cityData.length < 3) { noState = true }
+    let location = {
+      lat: searchedLocation.coordinates.lat,
+      lng: searchedLocation.coordinates.lng,
+      city: cityData[0],
+      state: (noState ? '' : cityData[1]),
+      country: (noState? cityData[1] : cityData[2])
+    };
 
-    axios.get('/restaurants', {params: coordinates})
+    axios.get('/restaurants', {params: location})
       .then((restaurants) => {setRestaurantData(restaurants.data)})
       .catch((err) => {console.log('AxiosError: ', err)})
 
-    axios.get('/rentals', {params: coordinates})
+    axios.get('/rentals', {params: location})
       .then((rentals) => {setRentalData(rentals.data)})
       .catch((err) => {console.log('AxiosError: ', err)})
 
-    axios.get('/latLongNearestAirport', {params: coordinates})
+    axios.get('/latLongNearestAirport', {params: location})
       .then((airports) => {setAirportData(airports.data);})
       .catch((err) => {console.log('AxiosError: ', err)})
 
