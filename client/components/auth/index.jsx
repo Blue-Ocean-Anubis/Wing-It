@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import Login from "./login.jsx";
-import Registration from "./registration.jsx";
+import Login from "./Login.jsx";
+import Registration from "./Registration.jsx";
 
 const Auth = (props) => {
   const [hasUser, setLogin] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Clicked!!");
-  };
 
   return (
     <div className="auth-container">
@@ -16,14 +11,14 @@ const Auth = (props) => {
         <>
           <Login />
           <div className="redirect">
-            Already have an Account? <a href="#">Sign in</a>
+            Don't have an account? <a href="#">Sign up!</a>
           </div>
         </>
       ) : (
         <>
           <Registration />
           <div>
-            Don't have an account? <a href="#">Sign up!</a>
+            Already have an Account? <a href="#">Sign in</a>
           </div>
         </>
       )}
