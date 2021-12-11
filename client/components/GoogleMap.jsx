@@ -17,7 +17,7 @@ const GoogleMap = (props) => {
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation
 
   useEffect(() => {
-    console.log('userlocation: ', userLocation);
+    // console.log('userlocation: ', userLocation);
   })
 
     return (

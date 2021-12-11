@@ -5,6 +5,7 @@ Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
 import InfoList from './InfoList.jsx';
+import List from './List.jsx';
 
 const Home = () => {
   const [state, setState] = useState({
@@ -62,7 +63,6 @@ const Home = () => {
   const convertAddressToCoords = (address) => {
     Geocode.fromAddress(address)
       .then((response) => {
-        console.log(response);
         setState((prevState) => ({ ...prevState, userAddressLocation: response.results[0].geometry.location }));
       })
       .catch((err) => {
@@ -85,7 +85,8 @@ const Home = () => {
         userAddressLocation={state.userAddressLocation}
         onLocationChange={onLocationChange}
       />
-      <InfoList />
+      <List list={['a', 'b', 'C', 'D']} />
+      {/* <InfoList /> */}
     </div>
   );
 };
