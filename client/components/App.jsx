@@ -5,6 +5,7 @@ Geocode.setApiKey(GOOGLE_API_KEY)
 Geocode.setLocationType("ROOFTOP")
 import GoogleMap from './GoogleMap.jsx';
 import List from './List.jsx';
+import axios from 'axios';
 
 
 const App = () => {
@@ -15,6 +16,19 @@ const App = () => {
     userAddress: TEST_USER_ADDRESS, // placeholder - will have to insert user address here
     searchBoxText: 'Search a City!'
   })
+
+  // const [restaurantData, setRestaurantData] = useState([]);
+  // const [rentalData, setRentalData] = useState([]);
+
+  // useEffect(() => {
+  //   const coordinates = {lat: state.searchedLocation.lat,lng: state.searchedLocation.lng};
+  //   axios.get('/restaurants', {params: coordinates})
+  //     .then((restaurants) => {setRestaurantData(restaurants.data);})
+  //     .catch((err) => {console.log('AxiosError: ', err)})
+  //   axios.get('/rentals', {params: coordinates})
+  //     .then((rentals) => {setRentalData(rentals.data);})
+  //     .catch((err) => {console.log('AxiosError: ', err)})
+  // }, [state.searchedLocation])
 
   const onLocationChange = (lat, lng) => {
     setState((prevState) => {return {...prevState, searchedLocation: {lat: lat, lng: lng}}})
