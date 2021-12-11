@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
 import Geocode from 'react-geocode';
 import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from '../../config.js';
@@ -70,17 +71,55 @@ const App = () => {
     getUserLocation();
     convertAddressToCoords(state.userAddress);
   }, [])
+=======
+import React from 'react';
+import {BrowserRouter, Route, Routes, Switch, Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faHome, faSearch, faShoppingCart} from '@fortawesome/free-solid-svg-icons'
+import Home from './Home.jsx';
+import UserProfile from './UserProfile.jsx';
+import Cart from './Cart.jsx';
+
+
+const App = () => {
+>>>>>>> 3053f45f5e170cb0cceb074e83cbb60f805dfe2f
 
   return (
-    <div>
-      <div key='MapComponent' className='map'>
-      <GoogleMap searchedLocation={state.searchedLocation} userLocation={state.userLocation} userAddressLocation={state.userAddressLocation} onLocationChange={onLocationChange}/>
+    <BrowserRouter>
+      <div>
+        <nav className="navigation">
+              <Link to="/">
+                <FontAwesomeIcon icon={faHome} size="3x"/>
+              </Link>
+              <Link to="/user">
+                <FontAwesomeIcon icon={faUser} size="3x"/>
+              </Link>
+              <Link to="/search">
+                <FontAwesomeIcon icon={faSearch} size="3x"/>
+              </Link>
+              <Link to="/cart">
+                <FontAwesomeIcon icon={faShoppingCart} size="3x"/>
+              </Link>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+
+          <Route path="/user">
+            <UserProfile />
+          </Route>
+          <Route path="/cart">
+            <Cart />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+
+        </Switch>
       </div>
-      <div key='ListComponent' className='list'>
-    <List list={['a', 'b', 'C', 'D']} />
-      </div>
-    </div>
-  )
+    </BrowserRouter>
+  );
 }
 
 export default App;
