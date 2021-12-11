@@ -1,4 +1,7 @@
 .navigation {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   margin: auto;
   display: flex;
   padding: 1rem;
@@ -6,4 +9,11 @@
   background-color: aliceblue;
   border-radius: 1rem;
   border: 4px solid grey;
+}
+
+.info-list {
+  margin: auto;
+  width: 90%;
+  height: 300vh;
+  border: 2px solid black;
 }

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faHome, faSearch, faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 import Home from './Home.jsx';
 import UserProfile from './UserProfile.jsx';
+import Cart from './Cart.jsx';
 
 
 const App = () => {

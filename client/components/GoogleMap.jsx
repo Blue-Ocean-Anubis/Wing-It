@@ -17,7 +17,7 @@ const GoogleMap = (props) => {
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation
 
   useEffect(() => {
-
+    console.log('userlocation: ', userLocation);
   })
 
     return (
@@ -25,7 +25,7 @@ const GoogleMap = (props) => {
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
           center={userLocation}
-          defaultZoom={10}
+          defaultZoom={12}
           onClick={handleMapClik}
         >
           <Marker lat={props.searchedLocation.lat} lng={props.searchedLocation.lng} />
