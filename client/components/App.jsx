@@ -6,6 +6,8 @@ Geocode.setLocationType("ROOFTOP")
 import GoogleMap from './GoogleMap.jsx';
 import SearchBox from './SearchBox.jsx';
 import List from './List.jsx';
+import AirportDetails from './AirportDetails.jsx';
+import axios from 'axios';
 
 
 const App = () => {
@@ -16,6 +18,7 @@ const App = () => {
     userAddress: TEST_USER_ADDRESS, // placeholder - will have to insert user address here
     searchBoxText: 'Search a City!'
   })
+  const [airportData, setAirportData] = useState([]);
 
   const onLocationChange = (lat, lng) => {
     setState((prevState) => {return {...prevState, searchedLocation: {lat: lat, lng: lng}}})
@@ -24,6 +27,10 @@ const App = () => {
   // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED WITH UPDATED COORDINATES (state.searchedLocation)
   useEffect(() => {
     console.log('new place clicked', state.searchedLocation)
+    const airportParams = {lat: state.searchedLocation.lat,long: state.searchedLocation.lng};
+    axios.get('/latLongNearestAirport', {params: airportParams})
+      .then((airports) => {setAirportData(airports.data);})
+      .catch((err) => {console.log(error)})
   }, [state.searchedLocation])
 
   const getUserLocation = () => {
@@ -64,8 +71,8 @@ const App = () => {
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
       <GoogleMap searchedLocation={state.searchedLocation} userLocation={state.userLocation} userAddressLocation={state.userAddressLocation} onLocationChange={onLocationChange}/>
       </div>
-      <div key='ListComponent' className='list'>
-    <List list={['a', 'b', 'C', 'D']} />
+      <div key='airport-list-component' className='airport-list-component'>
+      <AirportDetails airports={airportData} />
       </div>
     </div>
   )

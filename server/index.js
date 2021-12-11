@@ -81,6 +81,9 @@ app.get('/rentals', (req, res) => {
 app.get("/latLongNearestAirport", (req, res) => {
   let lat = req.query.lat;
   let long = req.query.long;
+  if (lat === undefined || long === undefined) {
+    return res.send([]);
+  }
 amadeus.referenceData.locations.airports.get({
   longitude: long,
   latitude: lat,
@@ -96,7 +99,8 @@ amadeus.referenceData.locations.airports.get({
       'location': airport.geoCode,
       'city': airport.address.cityName,
       'country': airport.address.countryName,
-      'name': airport.name
+      'name': airport.name,
+      'code': airport.iataCode
     }
     responseData.push(airportDetail);
   })

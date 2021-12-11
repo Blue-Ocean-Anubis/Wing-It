@@ -1,0 +1,11 @@
+.airport-list-component {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+}
+.airport-list-container {
+  justify-content: center;
+}
+.airport-card {
+  border-style: solid;
+}
