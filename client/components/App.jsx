@@ -65,7 +65,7 @@ const App = () => {
       <GoogleMap searchedLocation={state.searchedLocation} userLocation={state.userLocation} userAddressLocation={state.userAddressLocation} onLocationChange={onLocationChange}/>
       </div>
       <div key='ListComponent' className='list'>
-    <List list={['this', 'is', 'an', 'item']} />
+    <List list={['a', 'b', 'C', 'D']} />
       </div>
     </div>
   )
