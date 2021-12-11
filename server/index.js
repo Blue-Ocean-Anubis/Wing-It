@@ -20,22 +20,26 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static("dist"));
 
+/******************RESTAURANTS WITHIN CITY********************/
 app.get('/restaurants', (req, res) => {
-  client.findPlaceFromText({
+  client.textSearch({
     params: {
-      input: 'Paris',
-      inputtype: 'textquery',
+      // input: 'Restaurants Paris',
+      // inputtype: 'textquery',
+      query: 'restaurant',
+      // location: [38.407524, -89.764714],
+      maxprice: 4,
+      minprice: 4,
       fields: ['name', 'place_id', 'geometry', 'types', 'formatted_address'],
       key: GOOGLE_API_KEY,
-    },
-    timeout: 1000, // milliseconds
+    }
   })
   .then((r) => {
-    console.log('SUCCESS: ', r.data.candidates);
-    res.send(r.data.candidates)
+    res.send(r.data)
   })
   .catch((e) => {
     console.log('ERROR: ', e);
+    res.send('Error loading restaurants.')
   });
 })
 
