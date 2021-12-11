@@ -6,7 +6,7 @@ const SearchBox = ({ maps, onPlacesChanged, placeholder }) => {
   const input = useRef(null);
   const searchBox = useRef(null);
 
-  console.log(searchBox.current);
+  // console.log(searchBox.current);
 
   const handleOnPlacesChanged = useCallback(() => {
       if (onPlacesChanged) {

@@ -11,30 +11,7 @@ const AutoCompleteComponent = () => {
 
   return (
     <div>
-      <GooglePlacesAutocomplete
-      //  apiOptions={{ language: 'fr', region: 'fr' }}
-        // selectProps={{
-        //   styles: {
-        //     input: (provided) => ({
-        //       ...provided,
-        //       color: 'blue',
-        //     }),
-        //     option: (provided) => ({
-        //       ...provided,
-        //       color: 'blue',
-        //     }),
-        //     singleValue: (provided) => ({
-        //       ...provided,
-        //       color: 'blue',
-        //     }),
-
-        //     types: (provided) => ({
-        //       ...provided,
-        //       types: 'cities',
-        //     }),
-        //   },
-        // }}
-      />
+      <GooglePlacesAutocomplete/>
     </div>
   );
 }

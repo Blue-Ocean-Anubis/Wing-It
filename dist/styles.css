@@ -33,3 +33,18 @@
   border: 1.5px solid #009688;
   background-color: white;
 }
+
+.search-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-search-input{
+  /* height: '80vh'; */
+  width: auto;
+  margin-bottom: 2px;
+  /* margin: '10vh auto 10vh auto' */
+}
