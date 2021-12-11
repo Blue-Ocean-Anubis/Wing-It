@@ -16,10 +16,17 @@ const GoogleMap = (props) => {
   }
 
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation;
+  let airportMarkers = [];
 
   useEffect(() => {
-    // console.log('userlocation: ', userLocation);
-  })
+    console.log('maps props: ', props);
+
+    airportMarkers = props.airports.map((each) => {
+      return <Marker lat={each.location.latitude} lng={each.location.longitude} />
+    })
+    console.log('airport markers: ', airportMarkers)
+  }, [props.airports])
+
 
     return (
       <div style={{ height: '80vh', width: '90%', margin: '3vh auto 10vh auto'}}>
@@ -31,8 +38,8 @@ const GoogleMap = (props) => {
           onClick={handleMapClik}
         >
           <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng} />
+          {airportMarkers}
         </GoogleMapReact>
-
       </div>
     );
 
