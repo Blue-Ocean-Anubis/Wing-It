@@ -22,10 +22,8 @@ app.use(express.static("dist"));
 
 /******************RESTAURANTS WITHIN CITY********************/
 app.get('/restaurants', (req, res) => {
-  // May need to be altered based on front end inputs
-  console.log('req')
-  let latitude = req.query.latitude;
-  let longitude = req.query.longitude;
+  let latitude = req.query.lat;
+  let longitude = req.query.lng;
 
   client.textSearch({
     params: {
@@ -35,24 +33,23 @@ app.get('/restaurants', (req, res) => {
         lng: longitude
       },
       maxprice: 4,
-      minprice: 4,
+      minprice: 3,
       key: GOOGLE_API_KEY,
     },
   })
   .then((r) => {
-    res.send(r.data)
+    res.send(r.data.results)
   })
   .catch((e) => {
-    console.log('ERROR: ', e);
+    console.log('ERROR IN RESTAURANTS');
     res.send('Error loading restaurants.')
   });
 })
 
 /******************CAR RENTALS WITHIN CITY********************/
 app.get('/rentals', (req, res) => {
-  // May need to be altered based on front end inputs
-  let latitude = req.query.latitude;
-  let longitude = req.query.longitude;
+  let latitude = req.query.lat;
+  let longitude = req.query.lng;
 
   client.textSearch({
     params: {
@@ -65,10 +62,10 @@ app.get('/rentals', (req, res) => {
     },
   })
   .then((r) => {
-    res.send(r.data)
+    res.send(r.data.results)
   })
   .catch((e) => {
-    console.log('ERROR: ', e);
+    console.log('ERROR IN RENTALS');
     res.send('Error loading vehicle rentals.')
   });
 })
