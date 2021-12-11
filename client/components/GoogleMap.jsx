@@ -15,7 +15,7 @@ const GoogleMap = (props) => {
     props.onLocationChange(event.lat, event.lng)
   }
 
-  let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation
+  let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation;
 
   useEffect(() => {
     // console.log('userlocation: ', userLocation);
@@ -30,7 +30,7 @@ const GoogleMap = (props) => {
           defaultZoom={12}
           onClick={handleMapClik}
         >
-          <Marker lat={props.searchedLocation.lat} lng={props.searchedLocation.lng} />
+          <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng} />
         </GoogleMapReact>
 
       </div>
