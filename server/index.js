@@ -9,6 +9,9 @@ const app = express();
 const morgan = require("morgan");
 const axios = require("axios");
 var Amadeus = require("amadeus");
+const { airport, restaurant, pointsOfInterest, rental, user } =
+  require("../db/schema").module;
+const { saveRestaurant } = require("../db/schema/restaurant.js");
 
 var amadeus = new Amadeus({
   clientId: process.env.AMADEUS_KEY,
@@ -21,24 +24,40 @@ app.use(express.json());
 app.use(express.static("dist"));
 
 /******************RESTAURANTS WITHIN CITY********************/
-app.get("/restaurants", (req, res) => {
+app.get("/restaurants", async (req, res) => {
   // May need to be altered based on front end inputs
-  const { latitude, longitude } = req.query;
+  const { lat, lng, city, state = "N/A", country } = req.query;
+
+  // const restaurants = await restaurant.getRestaurant({
+  //   city: city,
+  //   state: state,
+  //   country: country,
+  // });
 
   client
     .textSearch({
       params: {
         query: "restaurant",
         location: {
-          lat: latitude,
-          lng: longitude,
+          lat: lat,
+          lng: lng,
         },
         maxprice: 4,
         minprice: 4,
         key: GOOGLE_API_KEY,
       },
     })
-    .then((r) => {
+    .then(async (r) => {
+      await restaurant.saveRestaurant({
+        city: city,
+        state: state,
+        country: country,
+        coordinates: {
+          latitude: lat,
+          longitude: lng,
+        },
+        dateAdded:
+      });
       res.send(r.data);
     })
     .catch((e) => {
@@ -50,15 +69,15 @@ app.get("/restaurants", (req, res) => {
 /******************CAR RENTALS WITHIN CITY********************/
 app.get("/rentals", (req, res) => {
   // May need to be altered based on front end inputs
-  const { latitude, longitude } = req.query;
+  const { lat, lng } = req.query;
 
   client
     .textSearch({
       params: {
         query: "car_rental",
         location: {
-          lat: latitude,
-          lng: longitude,
+          lat: lat,
+          lng: lng,
         },
         key: GOOGLE_API_KEY,
       },
@@ -79,12 +98,12 @@ app.get("/rentals", (req, res) => {
  *                           'long': -89.764714
  */
 app.get("/latLongNearestAirport", (req, res) => {
-  const { latitude, longitude } = req.query;
+  const { lat, lng } = req.query;
 
   amadeus.referenceData.locations.airports
     .get({
-      longitude: longitude,
-      latitude: latitude,
+      longitude: lat,
+      latitude: lng,
       radius: 500,
       "page[limit]": 10,
       sort: "distance",
@@ -148,11 +167,11 @@ app.get("/cityNameAirport", (req, res) => {
  *                           'long': -89.764714
  */
 app.get("/POI", (req, res) => {
-  const { latitude, longitude } = req.query;
+  const { lat, lng } = req.query;
   amadeus.referenceData.locations.pointsOfInterest
     .get({
-      latitude: latitude,
-      longitude: longitude,
+      latitude: lat,
+      longitude: lng,
       radius: 20,
     })
     .then(function (response) {
