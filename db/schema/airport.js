@@ -34,3 +34,24 @@ const airportSchema = new Schema({
 });
 
 const Airport = mongoose.model("Airport", airportSchema);
+let get = () => {
+  return Airport.find({});
+};
+
+let save = (airportData) => {
+  var airport = new Airport(airportData);
+  return airport.save();
+};
+
+let update = (id, change) => {
+  return Airport.findByIdAndUpdate(id, change).exec();
+};
+
+let deleteById = (id) => {
+  return Airport.deleteOne({ _id: id }).exec();
+};
+
+exports.saveAirport = save;
+exports.getAirport = get;
+exports.updateAirport = update;
+exports.deleteAirport = deleteById;

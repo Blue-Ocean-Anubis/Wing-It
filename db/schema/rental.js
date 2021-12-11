@@ -4,31 +4,54 @@ const { Schema } = mongoose;
 const rentalSchema = new Schema({
   city: {
     type: String,
-    required: true
+    required: true,
   },
   state: String,
   country: {
     type: String,
-    required: true
+    required: true,
   },
-  coordinates: [{
-    latitude: {
-      type: Number,
-      required: true
+  coordinates: [
+    {
+      latitude: {
+        type: Number,
+        required: true,
+      },
+      longitude: {
+        type: Number,
+        required: true,
+      },
     },
-    longitude: {
-      type: Number,
-      required: true
-    },
-  }]
+  ],
   dataAdded: {
     type: Date,
-    required: true
+    required: true,
   },
   apiResult: {
     type: String,
-    required: true
+    required: true,
   },
 });
 
 const Rental = mongoose.model("Rental", rentalSchema);
+let get = () => {
+  return Rental.find({});
+};
+
+let save = (rentalData) => {
+  var rental = new Rental(rentalData);
+  return rental.save();
+};
+
+let update = (id, change) => {
+  return Rental.findByIdAndUpdate(id, change).exec();
+};
+
+let deleteById = (id) => {
+  return Rental.deleteOne({ _id: id }).exec();
+};
+
+exports.saveRental = save;
+exports.getRental = get;
+exports.updateRental = update;
+exports.deleteRental = deleteById;
