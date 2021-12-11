@@ -2,7 +2,7 @@
   "name": "anubis",
   "version": "1.0.0",
   "description": "Batbook ",
-  "main": "index.tsx",
+  "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
     "build": "webpack --config webpack.config.js",
