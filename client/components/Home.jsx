@@ -86,7 +86,6 @@ const Home = () => {
         onLocationChange={onLocationChange}
       />
       <List list={['a', 'b', 'C', 'D']} />
-      {/* <InfoList /> */}
     </div>
   );
 };
