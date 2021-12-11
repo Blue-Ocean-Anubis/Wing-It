@@ -1,5 +1,15 @@
 import React from 'react';
 
+
+
+
+//this is just a simple search bar I made before
+//implementing the autocomplete search, left it in just in case,
+//but we probably won't need it
+
+
+
+
 export default class SimpleSearchBar extends React.Component{
   constructor(props){
     super(props);
