@@ -33,6 +33,7 @@ export default class AutoCompleteMapSearch extends React.Component {
         onChange={this.handleChange}
         onSelect={this.handleSelect}
         searchOptions={searchOptions}
+        className='autocomplete'
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className='search-container'>

@@ -23,7 +23,8 @@ const GoogleMap = (props) => {
 
     return (
       <div style={{ height: '80vh', width: '90%', margin: '10vh auto 10vh auto'}}>
-        <AutoCompleteMapSearch></AutoCompleteMapSearch>
+        <AutoCompleteMapSearch>
+        </AutoCompleteMapSearch>
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
           center={userLocation}
