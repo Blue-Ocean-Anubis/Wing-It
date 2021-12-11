@@ -23,6 +23,7 @@ app.use(express.static("dist"));
 /******************RESTAURANTS WITHIN CITY********************/
 app.get('/restaurants', (req, res) => {
   // May need to be altered based on front end inputs
+  console.log('req')
   let latitude = req.query.latitude;
   let longitude = req.query.longitude;
 
