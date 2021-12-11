@@ -6,6 +6,8 @@ Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
 import List from './List.jsx';
 import AirportDetails from './AirportDetails.jsx';
+import RentalDetails from './RentalDetails.jsx';
+import RestaurantDetails from './RestaurantDetails.jsx';
 import axios from 'axios';
 
 const Home = () => {
@@ -116,6 +118,8 @@ const Home = () => {
         onLocationChange={onLocationChange}
       />
       <AirportDetails airports={airportData} />
+      <RentalDetails rentals={state.rentalData} />
+      <RestaurantDetails restaurants={state.restaurantData} />
     </div>
   );
 };
