@@ -5,8 +5,7 @@ export function Registration(props) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const [error, setError] = useState("");
-  const { currentUserContext, signup } = useContext(AuthContext);
+  const { user, signup } = useContext(AuthContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -14,7 +13,9 @@ export function Registration(props) {
       console.error("Invalid Passwords");
       return;
     }
-    signup(emailRef.current.value, passwordRef.current.value);
+    signup(emailRef.current.value, passwordRef.current.value)
+      .then((results) => console.log(results, user)) // send user info to db
+      .catch(console.error); // TODO: handle email already in use
   }
 
   return (
