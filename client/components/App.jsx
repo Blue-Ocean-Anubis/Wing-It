@@ -1,32 +1,36 @@
-// import SimpleSearchBar from './SimpleSearchBar.jsx'; //saved just in case, likely won't need this component
 import React, {useState, useEffect} from 'react';
+import Geocode from 'react-geocode';
+import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from '../../config.js';
+Geocode.setApiKey(GOOGLE_API_KEY)
+Geocode.setLocationType("ROOFTOP")
 import GoogleMap from './GoogleMap.jsx';
-import SearchBox from './SearchBox.jsx';
-import Autocomplete from "react-google-autocomplete";
-import GoogleMaps from 'google-maps';
+import List from './List.jsx';
+
 
 const App = () => {
   const [state, setState] = useState ({
-    location: {lat: 39, lng: -94},
+    searchedLocation: {},
+    userLocation: {},
+    userAddressLocation: {},
+    userAddress: TEST_USER_ADDRESS, // placeholder - will have to insert user address here
     searchBoxText: 'Search a City!'
   })
 
-  const onPlacesChanged = (input) => {
-    // console.log(input);
-  }
-
   const onLocationChange = (lat, lng) => {
-    setState((prevState) => {return {...prevState, location: {lat: lat, lng: lng}}})
+    setState((prevState) => {return {...prevState, searchedLocation: {lat: lat, lng: lng}}})
   }
 
-  const showCurrentLocation = () => {
-    // console.log('finding user position', navigator.geolocation);
+  // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED WITH UPDATED COORDINATES (state.searchedLocation)
+  useEffect(() => {
+    console.log('new place clicked', state.searchedLocation)
+  }, [state.searchedLocation])
+
+  const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          // console.log('position: ', position);
-          setState((prevState) =>  { return {
-            location: {
+          setState((prevState) =>  { return {...prevState,
+            userLocation: {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             }
@@ -35,22 +39,32 @@ const App = () => {
         }, (err) => {console.log(err)}
       )
     } else {
-      error => console.log(error)
+      err => console.log(err)
     }
   }
 
-  useEffect(() => {
-    // console.log(' initial load: ', state)
-    showCurrentLocation();
-  }, [])
+  const convertAddressToCoords = (address) => {
+    Geocode.fromAddress(address)
+      .then((response) => {
+        setState((prevState) => { return {...prevState, userAddressLocation: response.results[0].geometry.location}})
+      })
+      .catch((err) => {console.log(err)})
+  }
 
+  // on component mount, find userLocation and coords for their address
   useEffect(() => {
-    // console.log('updating App state: ', state)
-  })
+    getUserLocation();
+    convertAddressToCoords(state.userAddress);
+  }, [])
 
   return (
     <div>
-      <GoogleMap location={state.location} onLocationChange={onLocationChange}/>
+      <div key='MapComponent' className='map'>
+      <GoogleMap searchedLocation={state.searchedLocation} userLocation={state.userLocation} userAddressLocation={state.userAddressLocation} onLocationChange={onLocationChange}/>
+      </div>
+      <div key='ListComponent' className='list'>
+    <List list={['a', 'b', 'C', 'D']} />
+      </div>
     </div>
   )
 }
