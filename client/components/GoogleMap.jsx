@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import SearchBox from './SearchBox.jsx';
 import { GOOGLE_API_KEY } from '../../config.js';
+import AutoCompleteMapSearch from './AutoCompleteMapSearch.jsx';
 // require('dotenv').config();
 
 const Marker = () => <div><FontAwesomeIcon icon={faMapMarkerAlt} size="2x"/></div>;
@@ -17,15 +18,16 @@ const GoogleMap = (props) => {
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation
 
   useEffect(() => {
-
+    // console.log('userlocation: ', userLocation);
   })
 
     return (
-      <div style={{ height: '80vh', width: '90%', margin: '10vh auto 10vh auto'}}>
+      <div style={{ height: '80vh', width: '90%', margin: '3vh auto 10vh auto'}}>
+        <AutoCompleteMapSearch></AutoCompleteMapSearch>
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
           center={userLocation}
-          defaultZoom={10}
+          defaultZoom={12}
           onClick={handleMapClik}
         >
           <Marker lat={props.searchedLocation.lat} lng={props.searchedLocation.lng} />
@@ -35,5 +37,4 @@ const GoogleMap = (props) => {
     );
 
 }
-
 export default GoogleMap;
