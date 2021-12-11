@@ -10,5 +10,5 @@ const fb = {
   appId: REACT_APP_FIREBASE_APP_ID,
 };
 
-export const app = app.auth();
+export const auth = app.auth();
 export default fb;
