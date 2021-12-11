@@ -25,6 +25,7 @@ app.get('/restaurants', (req, res) => {
   // May need to be altered based on front end inputs
   let latitude = req.query.latitude;
   let longitude = req.query.longitude;
+
   client.textSearch({
     params: {
       query: 'restaurant',
@@ -43,6 +44,31 @@ app.get('/restaurants', (req, res) => {
   .catch((e) => {
     console.log('ERROR: ', e);
     res.send('Error loading restaurants.')
+  });
+})
+
+/******************CAR RENTALS WITHIN CITY********************/
+app.get('/rentals', (req, res) => {
+  // May need to be altered based on front end inputs
+  let latitude = req.query.latitude;
+  let longitude = req.query.longitude;
+
+  client.textSearch({
+    params: {
+      query: 'car_rental',
+      location: {
+        lat: latitude,
+        lng: longitude
+      },
+      key: GOOGLE_API_KEY,
+    },
+  })
+  .then((r) => {
+    res.send(r.data)
+  })
+  .catch((e) => {
+    console.log('ERROR: ', e);
+    res.send('Error loading vehicle rentals.')
   });
 })
 
