@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import GoogleMapReact from 'google-map-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
@@ -10,22 +10,25 @@ const Marker = () => <div><FontAwesomeIcon icon={faMapMarkerAlt} size="2x"/></di
 
 const GoogleMap = (props) => {
 
-  const mapClick = (event) => {
-    // console.log(event);
+  const handleMapClik = (event) => {
     props.onLocationChange(event.lat, event.lng)
   }
 
-    return (
+  let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation
 
-      // Important! Always set the container height explicitly
+  useEffect(() => {
+
+  })
+
+    return (
       <div style={{ height: '80vh', width: '90%', margin: '10vh auto 10vh auto'}}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
-          defaultCenter={{lat: 39, lng: -94}}
-          defaultZoom={8}
-          onClick={mapClick}
+          center={userLocation}
+          defaultZoom={10}
+          onClick={handleMapClik}
         >
-          <Marker lat={props.location.lat} lng={props.location.lng} />
+          <Marker lat={props.searchedLocation.lat} lng={props.searchedLocation.lng} />
         </GoogleMapReact>
 
       </div>
