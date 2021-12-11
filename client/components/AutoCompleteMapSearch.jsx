@@ -3,7 +3,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-
+//test
 export default class AutoCompleteMapSearch extends React.Component {
   constructor(props) {
     super(props);
