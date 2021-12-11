@@ -1,22 +1,9 @@
 import React, { useState } from "react";
-import Form from "./form.jsx";
 import Login from "./login.jsx";
 import Registration from "./registration.jsx";
 
 const Auth = (props) => {
   let [hasUser, setLogin] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const isEmail = (type) => type === "email";
-
-  const handleChange = (e) => {
-    if (isEmail(e.target.name)) {
-      setEmail(e.target.value);
-    } else {
-      setPassword(e.target.value);
-    }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +11,7 @@ const Auth = (props) => {
   };
 
   return (
-    <Form handleSubmit={handleSubmit}>
+    <div className="auth-container">
       {hasUser ? (
         <>
           <Login handleChange={handleChange} />
@@ -40,7 +27,7 @@ const Auth = (props) => {
           </div>
         </>
       )}
-    </Form>
+    </div>
   );
 };
 
