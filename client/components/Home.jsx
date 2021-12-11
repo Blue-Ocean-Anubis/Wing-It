@@ -111,8 +111,8 @@ const Home = () => {
         onLocationChange={onLocationChange}
       />
       <AirportDetails airports={airportData} />
-      <RentalDetails rentals={state.rentalData} />
-      <RestaurantDetails restaurants={state.restaurantData} />
+      <RentalDetails rentals={rentalData} />
+      <RestaurantDetails restaurants={restaurantData} />
     </div>
   );
 };
