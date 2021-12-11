@@ -6,6 +6,7 @@ Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
 import List from './List.jsx';
 import AirportDetails from './AirportDetails.jsx';
+import PointsOfInterest from './PointsOfInterest.jsx';
 import axios from 'axios';
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
     rentalData: []
   });
   const [airportData, setAirportData] = useState([]);
+  const [points, setPoints] = useState([]);
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
@@ -64,6 +66,9 @@ const Home = () => {
     const airportParams = {lat: state.searchedLocation.lat,long: state.searchedLocation.lng};
     axios.get('/latLongNearestAirport', {params: airportParams})
       .then((airports) => {setAirportData(airports.data);})
+      .catch((err) => {console.log(error)})
+    axios.get('/POI', {params: airportParams})
+      .then((points) => {setPoints(points.data);})
       .catch((err) => {console.log(error)})
   }, [state.searchedLocation])
 
@@ -116,6 +121,7 @@ const Home = () => {
         onLocationChange={onLocationChange}
       />
       <AirportDetails airports={airportData} />
+      <PointsOfInterest points={points} />
     </div>
   );
 };
