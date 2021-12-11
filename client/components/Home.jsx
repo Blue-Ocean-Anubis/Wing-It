@@ -5,6 +5,7 @@ Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
 import List from './List.jsx';
+import AirportDetails from './AirportDetails.jsx';
 import axios from 'axios';
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
     restaurantData: [],
     rentalData: []
   });
+  const [airportData, setAirportData] = useState([]);
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
@@ -55,6 +57,15 @@ const Home = () => {
         })
         .catch((err) => {console.log('AxiosError: ', err)})
   }, [state.searchedLocation, state.searchedLocationCity]);
+
+  // Makes server request for nearest airport when searched location changes
+  useEffect(() => {
+    console.log('new place clicked', state.searchedLocation)
+    const airportParams = {lat: state.searchedLocation.lat,long: state.searchedLocation.lng};
+    axios.get('/latLongNearestAirport', {params: airportParams})
+      .then((airports) => {setAirportData(airports.data);})
+      .catch((err) => {console.log(error)})
+  }, [state.searchedLocation])
 
   // GET USER LOCATION DATA
   const getUserLocation = () => {
@@ -104,7 +115,7 @@ const Home = () => {
         userAddressLocation={state.userAddressLocation}
         onLocationChange={onLocationChange}
       />
-      <List list={['a', 'b', 'C', 'D']} />
+      <AirportDetails airports={airportData} />
     </div>
   );
 };
