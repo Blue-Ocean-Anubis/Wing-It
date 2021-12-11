@@ -1,14 +1,21 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
+import { AuthContext } from "./contexts/AuthContext.jsx";
 
-const Registration = (props) => {
+export function Registration(props) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const [error, setError] = useState("");
+  const { currentUserContext, signup } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log("clicked");
-  };
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      console.error("Invalid Passwords");
+      return;
+    }
+    signup(emailRef.current.value, passwordRef.current.value);
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -26,5 +33,4 @@ const Registration = (props) => {
       <button>Register</button>
     </form>
   );
-};
-export default Registration;
+}
