@@ -4,7 +4,6 @@ import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from '../../config.js';
 Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
-import InfoList from './InfoList.jsx';
 import List from './List.jsx';
 
 const Home = () => {
