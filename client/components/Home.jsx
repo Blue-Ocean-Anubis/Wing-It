@@ -5,6 +5,8 @@ Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
 import List from './List.jsx';
+import AirportDetails from './AirportDetails.jsx';
+import axios from 'axios';
 
 const Home = () => {
   const [state, setState] = useState({
@@ -14,7 +16,10 @@ const Home = () => {
     userAddressLocation: {},
     userAddress: TEST_USER_ADDRESS, // placeholder - will have to insert user address here
     searchBoxText: 'Search a City!',
+    restaurantData: [],
+    rentalData: []
   });
+  const [airportData, setAirportData] = useState([]);
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
@@ -34,7 +39,33 @@ const Home = () => {
   // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED
   useEffect(() => {
     console.log('new place clicked', state.searchedLocation, state.searchedLocationCity);
+      const coordinates = {lat: state.searchedLocation.lat,lng: state.searchedLocation.lng};
+      axios.get('/restaurants', {params: coordinates})
+        .then((restaurants) => {
+          setState((prevState) => ({
+          ...prevState,
+          restaurantData: restaurants.data
+          }))
+        })
+        .catch((err) => {console.log('AxiosError: ', err)})
+      axios.get('/rentals', {params: coordinates})
+        .then((rentals) => {
+          setState((prevState) => ({
+          ...prevState,
+          rentalData: rentals.data
+          }))
+        })
+        .catch((err) => {console.log('AxiosError: ', err)})
   }, [state.searchedLocation, state.searchedLocationCity]);
+
+  // Makes server request for nearest airport when searched location changes
+  useEffect(() => {
+    console.log('new place clicked', state.searchedLocation)
+    const airportParams = {lat: state.searchedLocation.lat,long: state.searchedLocation.lng};
+    axios.get('/latLongNearestAirport', {params: airportParams})
+      .then((airports) => {setAirportData(airports.data);})
+      .catch((err) => {console.log(error)})
+  }, [state.searchedLocation])
 
   // GET USER LOCATION DATA
   const getUserLocation = () => {
@@ -84,7 +115,7 @@ const Home = () => {
         userAddressLocation={state.userAddressLocation}
         onLocationChange={onLocationChange}
       />
-      <List list={['a', 'b', 'C', 'D']} />
+      <AirportDetails airports={airportData} />
     </div>
   );
 };

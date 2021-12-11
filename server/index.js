@@ -22,9 +22,8 @@ app.use(express.static("dist"));
 
 /******************RESTAURANTS WITHIN CITY********************/
 app.get('/restaurants', (req, res) => {
-  // May need to be altered based on front end inputs
-  let latitude = req.query.latitude;
-  let longitude = req.query.longitude;
+  let latitude = req.query.lat;
+  let longitude = req.query.lng;
 
   client.textSearch({
     params: {
@@ -34,24 +33,23 @@ app.get('/restaurants', (req, res) => {
         lng: longitude
       },
       maxprice: 4,
-      minprice: 4,
+      minprice: 3,
       key: GOOGLE_API_KEY,
     },
   })
   .then((r) => {
-    res.send(r.data)
+    res.send(r.data.results)
   })
   .catch((e) => {
-    console.log('ERROR: ', e);
+    console.log('ERROR IN RESTAURANTS');
     res.send('Error loading restaurants.')
   });
 })
 
 /******************CAR RENTALS WITHIN CITY********************/
 app.get('/rentals', (req, res) => {
-  // May need to be altered based on front end inputs
-  let latitude = req.query.latitude;
-  let longitude = req.query.longitude;
+  let latitude = req.query.lat;
+  let longitude = req.query.lng;
 
   client.textSearch({
     params: {
@@ -64,10 +62,10 @@ app.get('/rentals', (req, res) => {
     },
   })
   .then((r) => {
-    res.send(r.data)
+    res.send(r.data.results)
   })
   .catch((e) => {
-    console.log('ERROR: ', e);
+    console.log('ERROR IN RENTALS');
     res.send('Error loading vehicle rentals.')
   });
 })
@@ -81,6 +79,9 @@ app.get('/rentals', (req, res) => {
 app.get("/latLongNearestAirport", (req, res) => {
   let lat = req.query.lat;
   let long = req.query.long;
+  if (lat === undefined || long === undefined) {
+    return res.send([]);
+  }
 amadeus.referenceData.locations.airports.get({
   longitude: long,
   latitude: lat,
@@ -96,7 +97,8 @@ amadeus.referenceData.locations.airports.get({
       'location': airport.geoCode,
       'city': airport.address.cityName,
       'country': airport.address.countryName,
-      'name': airport.name
+      'name': airport.name,
+      'code': airport.iataCode
     }
     responseData.push(airportDetail);
   })
