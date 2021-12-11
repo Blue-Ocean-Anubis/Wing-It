@@ -5,26 +5,27 @@ Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
 import List from './List.jsx';
+import AirportDetails from './AirportDetails.jsx';
+import axios from 'axios';
 
 const Home = () => {
-  const [state, setState] = useState({
-    searchedLocationCity: '',
-    searchedLocation: {},
-    userLocation: {},
-    userAddressLocation: {},
-    userAddress: TEST_USER_ADDRESS, // placeholder - will have to insert user address here
-    searchBoxText: 'Search a City!',
-  });
+
+  const [userLocation, setUserLocation] = useState({});
+  const [userAddress, setUserAddress] = useState({string: TEST_USER_ADDRESS, coordinates: {}})
+  // TEST_USER_ADDRESS is placeholder - will have to insert user address here
+  const [searchedLocation, setSearchedLocation] = useState({city: '', coordinates: {}});
+  const [restaurantData, setRestaurantData] = useState([]);
+  const [rentalData, setRentalData] = useState([]);
+  const [airportData, setAirportData] = useState([]);
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
     Geocode.fromLatLng(lat.toString(), lng.toString())
       .then((response) => {
-        setState((prevState) => ({
-          ...prevState,
-          searchedLocationCity: (response.plus_code.compound_code).substring(9),
-          searchedLocation: { lat: lat, lng: lng },
-        }));
+        setSearchedLocation({
+          city: (response.plus_code.compound_code).substring(9),
+          coordinates: { lat: lat, lng: lng }
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -33,21 +34,40 @@ const Home = () => {
 
   // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED
   useEffect(() => {
-    console.log('new place clicked', state.searchedLocation, state.searchedLocationCity);
-  }, [state.searchedLocation, state.searchedLocationCity]);
+    console.log('new place clicked', searchedLocation);
+
+    let noState = false;
+    let cityData = searchedLocation.city.split(', ');
+    if (cityData.length < 3) { noState = true }
+    let location = {
+      lat: searchedLocation.coordinates.lat,
+      lng: searchedLocation.coordinates.lng,
+      city: cityData[0],
+      state: (noState ? '' : cityData[1]),
+      country: (noState? cityData[1] : cityData[2])
+    };
+
+    axios.get('/restaurants', {params: location})
+      .then((restaurants) => {setRestaurantData(restaurants.data)})
+      .catch((err) => {console.log('AxiosError: ', err)})
+
+    axios.get('/rentals', {params: location})
+      .then((rentals) => {setRentalData(rentals.data)})
+      .catch((err) => {console.log('AxiosError: ', err)})
+
+    axios.get('/latLongNearestAirport', {params: location})
+      .then((airports) => {setAirportData(airports.data);})
+      .catch((err) => {console.log('AxiosError: ', err)})
+
+  }, [searchedLocation]);
+
 
   // GET USER LOCATION DATA
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setState((prevState) => ({
-            ...prevState,
-            userLocation: {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            },
-          }));
+          setUserLocation({lat: position.coords.latitude, lng: position.coords.longitude})
         },
         (err) => {
           console.log(err);
@@ -58,11 +78,11 @@ const Home = () => {
     }
   };
 
-  // TURN USER ADDRESS IN TO COORDINATES
+  // TURN USER ADDRESS INTO COORDINATES
   const convertAddressToCoords = (address) => {
     Geocode.fromAddress(address)
       .then((response) => {
-        setState((prevState) => ({ ...prevState, userAddressLocation: response.results[0].geometry.location }));
+        setUserAddress({string: TEST_USER_ADDRESS, coordinates: response.results[0].geometry.location})
       })
       .catch((err) => {
         console.log(err);
@@ -72,19 +92,23 @@ const Home = () => {
   // ON COMPONENT MOUNT, FIND USERLOCATION AND COORDS FOR THEIR ADDRESS
   useEffect(() => {
     getUserLocation();
-    convertAddressToCoords(state.userAddress);
+    convertAddressToCoords(userAddress.string);
   }, []);
+
+  useEffect(() => {
+    // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData)
+  })
 
   return (
     <div>
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
       <GoogleMap
-        searchedLocation={state.searchedLocation}
-        userLocation={state.userLocation}
-        userAddressLocation={state.userAddressLocation}
+        searchedLocation={searchedLocation}
+        userLocation={userLocation}
+        userAddressLocation={userAddress.coordinates}
         onLocationChange={onLocationChange}
       />
-      <List list={['a', 'b', 'C', 'D']} />
+      <AirportDetails airports={airportData} />
     </div>
   );
 };

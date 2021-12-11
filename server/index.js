@@ -56,6 +56,10 @@ app.get("/restaurants", async (req, res) => {
           latitude: lat,
           longitude: lng,
         },
+<<<<<<< HEAD
+=======
+        dateAdded:
+>>>>>>> dev
       });
       res.send(r.data);
     })
