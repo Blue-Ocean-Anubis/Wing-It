@@ -106,7 +106,7 @@ const Home = () => {
   })
 
   return (
-    <div>
+    <div className='page'>
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
       <GoogleMap
         searchedLocation={searchedLocation}

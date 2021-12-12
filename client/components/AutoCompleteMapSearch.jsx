@@ -3,7 +3,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-
+//test
 export default class AutoCompleteMapSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -33,13 +33,18 @@ export default class AutoCompleteMapSearch extends React.Component {
         onChange={this.handleChange}
         onSelect={this.handleSelect}
         searchOptions={searchOptions}
+        className='autocomplete'
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className='search-container'>
             <input
               {...getInputProps({
                 placeholder: 'What city would you like to visit?',
-                className: 'location-search-input',
+                className: 'location-search-input'
+                //need to figure out how to change value here so
+                //what the user types will stay on screen after clicking
+                //from drop down menu (or rather update what is in searchbar
+                //to reflect the option chosen)
               })}
             />
             <div className="autocomplete-dropdown-container">
