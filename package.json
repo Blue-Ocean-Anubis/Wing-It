@@ -32,6 +32,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
+    "framer-motion": "^5.4.5",
     "google-map-react": "^2.1.10",
     "mongoose": "^6.1.0",
     "morgan": "^1.10.0",
@@ -44,8 +45,10 @@
     "react-bootstrap": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-geocode": "^0.2.3",
-    "react-router-dom": "^5.3.0",
     "react-places-autocomplete": "^7.3.0",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "^4.0.3",
+    "react-transition-group": "^4.4.2",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
