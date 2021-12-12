@@ -1,4 +1,5 @@
 import React, { useState, useRef, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "./contexts/AuthContext";
 
 const Login = (props) => {
@@ -15,13 +16,25 @@ const Login = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">email: </label>
-      <input name="email" type="email" ref={emailRef} required />
-      <label htmlFor="password">password: </label>
-      <input name="password" type="password" ref={passwordRef} required />
-      <button>Login</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">email: </label>
+        <input name="email" type="email" ref={emailRef} required />
+        <label htmlFor="password">password: </label>
+        <input
+          name="password"
+          type="password"
+          autoComplete="on"
+          ref={passwordRef}
+          required
+        />
+        <button>Login</button>
+      </form>
+      <div>
+        Don't have an account?
+        <Link to="/register">Register for an account</Link>
+      </div>
+    </>
   );
 };
 
