@@ -153,8 +153,10 @@ app.get('/cityNameAirport', (req, res) => {
  */
 app.get('/POI', (req, res) => {
   let lat = req.query.lat;
-  let long = req.query.long;
-
+  let long = req.query.lng;
+  if (lat === undefined || long === undefined) {
+    return res.send([]);
+  }
   amadeus.referenceData.locations.pointsOfInterest.get({
     latitude: lat,
     longitude: long,
