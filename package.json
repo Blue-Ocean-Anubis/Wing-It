@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "build": "webpack --config webpack.config.js",
-    "watch": "webpack -d –watch",
+    "watch": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
+    "firebase": "^9.6.1",
     "mongoose": "^6.1.0",
     "morgan": "^1.10.0",
     "node-cache": "^5.1.2",
@@ -33,6 +34,8 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.3",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^6.1.1",
+    "source-map-loader": "^3.0.0",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
