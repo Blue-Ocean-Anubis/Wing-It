@@ -62,7 +62,7 @@ const Home = () => {
     axios.get('/latLongNearestAirport', {params: location})
       .then((airports) => {setAirportData(airports.data);})
       .catch((err) => {console.log(error)})
-    axios.get('/POI', {params: airportParams})
+    axios.get('/POI', {params: location})
       .then((points) => {setPoints(points.data);})
       .catch((err) => {console.log('Axios Error: ', err)})
   }, [searchedLocation])
