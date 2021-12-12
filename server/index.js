@@ -24,27 +24,19 @@ app.use(express.json());
 app.use(express.static("dist"));
 
 /******************RESTAURANTS WITHIN CITY********************/
-app.get("/restaurants", async (req, res) => {
-  // May need to be altered based on front end inputs
-  const { lat, lng, city, state = "N/A", country } = req.query;
+app.get('/restaurants', (req, res) => {
+  let latitude = req.query.lat;
+  let longitude = req.query.lng;
+  if (latitude === undefined || longitude === undefined) {
+    return res.send([]);
+  }
 
-  // const restaurants = await restaurant.getRestaurant({
-  //   city: city,
-  //   state: state,
-  //   country: country,
-  // });
-
-  client
-    .textSearch({
-      params: {
-        query: "restaurant",
-        location: {
-          lat: lat,
-          lng: lng,
-        },
-        maxprice: 4,
-        minprice: 4,
-        key: GOOGLE_API_KEY,
+  client.textSearch({
+    params: {
+      query: 'restaurant',
+      location: {
+        lat: latitude,
+        lng: longitude
       },
     })
     .then(async (r) => {
@@ -67,19 +59,19 @@ app.get("/restaurants", async (req, res) => {
 });
 
 /******************CAR RENTALS WITHIN CITY********************/
-app.get("/rentals", (req, res) => {
-  // May need to be altered based on front end inputs
-  const { lat, lng } = req.query;
+app.get('/rentals', (req, res) => {
+  let latitude = req.query.lat;
+  let longitude = req.query.lng;
+  if (latitude === undefined || longitude === undefined) {
+    return res.send([]);
+  }
 
-  client
-    .textSearch({
-      params: {
-        query: "car_rental",
-        location: {
-          lat: lat,
-          lng: lng,
-        },
-        key: GOOGLE_API_KEY,
+  client.textSearch({
+    params: {
+      query: 'car_rental',
+      location: {
+        lat: latitude,
+        lng: longitude
       },
     })
     .then((r) => {
