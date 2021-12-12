@@ -1,27 +1,21 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import Login from "./Login.jsx";
-import Registration from "./Registration.jsx";
+import { Registration } from "./Registration.jsx";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 
 const Auth = (props) => {
-  const [hasUser, setLogin] = useState(false);
-
   return (
     <div className="auth-container">
-      {hasUser ? (
-        <>
-          <Login />
-          <div className="redirect">
-            Don't have an account? <a href="#">Sign up!</a>
-          </div>
-        </>
-      ) : (
-        <>
-          <Registration />
-          <div>
-            Already have an Account? <a href="#">Sign in</a>
-          </div>
-        </>
-      )}
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
     </div>
   );
 };
