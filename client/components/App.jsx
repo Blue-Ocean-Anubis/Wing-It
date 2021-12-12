@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import Auth from "./auth/Index.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -6,12 +7,8 @@ class App extends React.Component {
     this.state = {};
   }
 
-  render () {
-    return (
-      <div>
-        Hello There!
-      </div>
-    )
+  render() {
+    return <Auth />;
   }
 }
 
