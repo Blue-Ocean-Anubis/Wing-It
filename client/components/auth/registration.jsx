@@ -5,7 +5,7 @@ export function Registration(props) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { user, signup } = useContext(AuthContext);
+  const { signup } = useContext(AuthContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -14,8 +14,8 @@ export function Registration(props) {
       return;
     }
     signup(emailRef.current.value, passwordRef.current.value)
-      .then((results) => console.log(results, user)) // send user info to db
-      .catch(console.error); // TODO: handle email already in use
+      .then((results) => console.log(results))
+      .catch(console.error);
   }
 
   return (
