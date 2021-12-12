@@ -1,12 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
+import { AuthContext } from "./contexts/AuthContext";
 
 const Login = (props) => {
   let emailRef = useRef();
   let passwordRef = useRef();
+  const [error, setError] = useState("");
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("clicked");
+    login(emailRef.current.value, passwordRef.current.value)
+      .then(console.log)
+      .catch(console.error);
   };
 
   return (
