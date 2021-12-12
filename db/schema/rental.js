@@ -23,7 +23,7 @@ const rentalSchema = new Schema({
       },
     },
   ],
-  dataAdded: {
+  dateAdded: {
     type: Date,
     required: true,
   },
@@ -34,8 +34,9 @@ const rentalSchema = new Schema({
 });
 
 const Rental = mongoose.model("Rental", rentalSchema);
-let get = () => {
-  return Rental.find({});
+let get = ({ query }) => {
+  query = query ? query : {};
+  return Rental.findOne(query);
 };
 
 let save = (rentalData) => {

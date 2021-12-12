@@ -28,12 +28,15 @@ app.get("/restaurants", async (req, res) => {
   // May need to be altered based on front end inputs
   const { lat, lng, city, state = "N/A", country } = req.query;
 
-  // const restaurants = await restaurant.getRestaurant({
-  //   city: city,
-  //   state: state,
-  //   country: country,
-  // });
-
+  const { apiResult } = await restaurant.getRestaurant({
+    city: city,
+    state: state,
+    country: country,
+  });
+  if (apiResult !== undefined) {
+    res.send(JSON.parse(apiResult));
+    return;
+  }
   client
     .textSearch({
       params: {
@@ -56,10 +59,8 @@ app.get("/restaurants", async (req, res) => {
           latitude: lat,
           longitude: lng,
         },
-<<<<<<< HEAD
-=======
-        dateAdded:
->>>>>>> dev
+        dateAdded: Date.now(),
+        apiResult: JSON.stringify(r.data),
       });
       res.send(r.data);
     })
@@ -70,9 +71,20 @@ app.get("/restaurants", async (req, res) => {
 });
 
 /******************CAR RENTALS WITHIN CITY********************/
-app.get("/rentals", (req, res) => {
+app.get("/rentals", async (req, res) => {
   // May need to be altered based on front end inputs
-  const { lat, lng } = req.query;
+  const { lat, lng, city, state = "N/A", country } = req.query;
+
+  const { apiResult } = await rental.getRental({
+    city: city,
+    state: state,
+    country: country,
+  });
+  if (apiResult !== undefined) {
+    console.log("pulled from database");
+    res.send(JSON.parse(apiResult));
+    return;
+  }
 
   client
     .textSearch({
@@ -85,7 +97,18 @@ app.get("/rentals", (req, res) => {
         key: GOOGLE_API_KEY,
       },
     })
-    .then((r) => {
+    .then(async (r) => {
+      await rental.saveRental({
+        city: city,
+        state: state,
+        country: country,
+        coordinates: {
+          latitude: lat,
+          longitude: lng,
+        },
+        dateAdded: Date.now(),
+        apiResult: JSON.stringify(r.data),
+      });
       res.send(r.data);
     })
     .catch((e) => {
@@ -100,8 +123,21 @@ app.get("/rentals", (req, res) => {
  * example query parameters: 'lat': 38.407524
  *                           'long': -89.764714
  */
-app.get("/latLongNearestAirport", (req, res) => {
-  const { lat, lng } = req.query;
+app.get("/latLongNearestAirport", async (req, res) => {
+  const { lat, lng, city, state = "N/A", country } = req.query;
+
+  // const { apiResult } = await airport.getAirport({
+  //   city: city,
+  //   state: state,
+  //   country: country,
+  // });
+  // if (apiResult !== undefined) {
+  //   console.log("pulled from database");
+  //   res.send(JSON.parse(apiResult));
+  //   return;
+  // }
+
+  console.log(lat, lng);
 
   amadeus.referenceData.locations.airports
     .get({
@@ -111,7 +147,7 @@ app.get("/latLongNearestAirport", (req, res) => {
       "page[limit]": 10,
       sort: "distance",
     })
-    .then(function (response) {
+    .then(async function (response) {
       /**lat long and airport name */
       let airportData = JSON.parse(response.body);
       let responseData = [];
@@ -124,6 +160,18 @@ app.get("/latLongNearestAirport", (req, res) => {
         };
         responseData.push(airportDetail);
       });
+      // await rental.saveRental({
+      //   city: city,
+      //   state: state,
+      //   country: country,
+      //   coordinates: {
+      //     latitude: lat,
+      //     longitude: lng,
+      //   },
+      //   dateAdded: Date.now(),
+      //   apiResult: JSON.stringify(responseData),
+      // });
+      // console.log("saved to database");
       res.send(responseData);
     })
     .catch(function (response) {

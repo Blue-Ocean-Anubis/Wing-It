@@ -23,7 +23,7 @@ const airportSchema = new Schema({
       },
     },
   ],
-  dataAdded: {
+  dateAdded: {
     type: Date,
     required: true,
   },
@@ -34,8 +34,9 @@ const airportSchema = new Schema({
 });
 
 const Airport = mongoose.model("Airport", airportSchema);
-let get = () => {
-  return Airport.find({});
+let get = (query) => {
+  query = query ? query : {};
+  return Airport.findOne(query);
 };
 
 let save = (airportData) => {

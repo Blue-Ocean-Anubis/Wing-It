@@ -23,7 +23,7 @@ const restaurantSchema = new Schema({
       },
     },
   ],
-  dataAdded: {
+  dateAdded: {
     type: Date,
     required: true,
   },
