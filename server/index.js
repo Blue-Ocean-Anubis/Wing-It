@@ -158,6 +158,7 @@ app.get("/cityNameAirport", (req, res) => {
  * example query parameters: 'lat': 38.407524
  *                           'long': -89.764714
  */
+<<<<<<< HEAD
 app.get("/POI", (req, res) => {
   const { lat, lng } = req.query;
   amadeus.referenceData.locations.pointsOfInterest
@@ -165,6 +166,30 @@ app.get("/POI", (req, res) => {
       latitude: lat,
       longitude: lng,
       radius: 20,
+=======
+app.get('/POI', (req, res) => {
+  let lat = req.query.lat;
+  let long = req.query.lng;
+  if (lat === undefined || long === undefined) {
+    return res.send([]);
+  }
+  amadeus.referenceData.locations.pointsOfInterest.get({
+    latitude: lat,
+    longitude: long,
+    radius: 20
+  }).then(function (response) {
+    let poiData = JSON.parse(response.body);
+    let poiResponse = [];
+    poiData.data.map((poi) => {
+      let poiDetail = {
+        'location': poi.geoCode,
+        'name': poi.name,
+        'category': poi.category,
+        'rank': poi.rank,
+        'tags': poi.tags
+      }
+      poiResponse.push(poiDetail);
+>>>>>>> c8ccbf8bd4bc9c3b4340cfbe8a2515430c75f122
     })
     .then(function (response) {
       let poiData = JSON.parse(response.body);

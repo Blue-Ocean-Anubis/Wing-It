@@ -83,6 +83,11 @@
   margin-bottom: 2px;
   /* margin: '10vh auto 10vh auto' */
 }
+.point-card{
+  border-style: solid;
+  display: flex;
+  justify-content: space-between;
+}
 
 .page {
   position: absolute;
