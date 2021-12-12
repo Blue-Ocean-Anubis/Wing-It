@@ -24,6 +24,9 @@ app.use(express.static("dist"));
 app.get('/restaurants', (req, res) => {
   let latitude = req.query.lat;
   let longitude = req.query.lng;
+  if (latitude === undefined || longitude === undefined) {
+    return res.send([]);
+  }
 
   client.textSearch({
     params: {
@@ -50,6 +53,9 @@ app.get('/restaurants', (req, res) => {
 app.get('/rentals', (req, res) => {
   let latitude = req.query.lat;
   let longitude = req.query.lng;
+  if (latitude === undefined || longitude === undefined) {
+    return res.send([]);
+  }
 
   client.textSearch({
     params: {
@@ -78,7 +84,7 @@ app.get('/rentals', (req, res) => {
 */
 app.get("/latLongNearestAirport", (req, res) => {
   let lat = req.query.lat;
-  let long = req.query.long;
+  let long = req.query.lng;
   if (lat === undefined || long === undefined) {
     return res.send([]);
   }
