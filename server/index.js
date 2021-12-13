@@ -31,12 +31,17 @@ app.get("/restaurants", async (req, res) => {
   if (lat === undefined || lng === undefined) {
     return res.send([]);
   }
-
-  const restaurants = await restaurant.getRestaurant({
-    city: city,
-    state: state,
-    country: country,
-  });
+  let restaurants;
+  try {
+    restaurants = await restaurant.getRestaurant({
+      city: city,
+      state: state,
+      country: country,
+    });
+  } catch (err) {
+    restaurants = null;
+    console.log(err);
+  }
 
   if (restaurants !== null) {
     res.send(JSON.parse(restaurants.apiResult));
@@ -57,17 +62,21 @@ app.get("/restaurants", async (req, res) => {
       },
     })
     .then(async (r) => {
-      await restaurant.saveRestaurant({
-        city: city,
-        state: state,
-        country: country,
-        coordinates: {
-          latitude: lat,
-          longitude: lng,
-        },
-        dateAdded: Date.now(),
-        apiResult: JSON.stringify(r.data.results),
-      });
+      try {
+        await restaurant.saveRestaurant({
+          city: city,
+          state: state,
+          country: country,
+          coordinates: {
+            latitude: lat,
+            longitude: lng,
+          },
+          dateAdded: Date.now(),
+          apiResult: JSON.stringify(r.data.results),
+        });
+      } catch (err) {
+        console.log(err);
+      }
       res.send(r.data.results);
     })
     .catch((e) => {
@@ -85,11 +94,18 @@ app.get("/rentals", async (req, res) => {
     return res.send([]);
   }
 
-  const rentals = await rental.getRental({
-    city: city,
-    state: state,
-    country: country,
-  });
+  let rentals;
+
+  try {
+    rentals = await rental.getRental({
+      city: city,
+      state: state,
+      country: country,
+    });
+  } catch (err) {
+    rentals = null;
+    console.log(err);
+  }
 
   if (rentals !== null) {
     res.send(JSON.parse(rentals.apiResult));
@@ -108,17 +124,21 @@ app.get("/rentals", async (req, res) => {
       },
     })
     .then(async (r) => {
-      await rental.saveRental({
-        city: city,
-        state: state,
-        country: country,
-        coordinates: {
-          latitude: lat,
-          longitude: lng,
-        },
-        dateAdded: Date.now(),
-        apiResult: JSON.stringify(r.data.results),
-      });
+      try {
+        await rental.saveRental({
+          city: city,
+          state: state,
+          country: country,
+          coordinates: {
+            latitude: lat,
+            longitude: lng,
+          },
+          dateAdded: Date.now(),
+          apiResult: JSON.stringify(r.data.results),
+        });
+      } catch (err) {
+        console.log(err);
+      }
       res.send(r.data.results);
     })
     .catch((e) => {
@@ -140,11 +160,17 @@ app.get("/latLongNearestAirport", async (req, res) => {
     return res.send([]);
   }
 
-  const airports = await airport.getAirport({
-    city: city,
-    state: state,
-    country: country,
-  });
+  let airports;
+  try {
+    airports = await airport.getAirport({
+      city: city,
+      state: state,
+      country: country,
+    });
+  } catch (err) {
+    airports = null;
+    console.log(err);
+  }
 
   if (airports !== null) {
     res.send(JSON.parse(airports.apiResult));
@@ -172,17 +198,21 @@ app.get("/latLongNearestAirport", async (req, res) => {
         };
         responseData.push(airportDetail);
       });
-      await airport.saveAirport({
-        city: city,
-        state: state,
-        country: country,
-        coordinates: {
-          latitude: lat,
-          longitude: lng,
-        },
-        dateAdded: Date.now(),
-        apiResult: JSON.stringify(responseData),
-      });
+      try {
+        await airport.saveAirport({
+          city: city,
+          state: state,
+          country: country,
+          coordinates: {
+            latitude: lat,
+            longitude: lng,
+          },
+          dateAdded: Date.now(),
+          apiResult: JSON.stringify(responseData),
+        });
+      } catch (err) {
+        console.log(err);
+      }
       res.send(responseData);
     })
     .catch(function (response) {
@@ -234,12 +264,17 @@ app.get("/POI", async (req, res) => {
   if (lat === undefined || lng === undefined) {
     return res.send([]);
   }
-
-  const poi = await pointsOfInterest.getPointsOfInterest({
-    city: city,
-    state: state,
-    country: country,
-  });
+  let poi;
+  try {
+    poi = await pointsOfInterest.getPointsOfInterest({
+      city: city,
+      state: state,
+      country: country,
+    });
+  } catch (err) {
+    poi = null;
+    console.log(err);
+  }
 
   if (poi !== null) {
     res.send(JSON.parse(poi.apiResult));
@@ -257,17 +292,21 @@ app.get("/POI", async (req, res) => {
       },
     })
     .then(async (r) => {
-      await pointsOfInterest.savePointsOfInterest({
-        city: city,
-        state: state,
-        country: country,
-        coordinates: {
-          latitude: lat,
-          longitude: lng,
-        },
-        dateAdded: Date.now(),
-        apiResult: JSON.stringify(r.data.results),
-      });
+      try {
+        await pointsOfInterest.savePointsOfInterest({
+          city: city,
+          state: state,
+          country: country,
+          coordinates: {
+            latitude: lat,
+            longitude: lng,
+          },
+          dateAdded: Date.now(),
+          apiResult: JSON.stringify(r.data.results),
+        });
+      } catch (err) {
+        console.log(err);
+      }
       res.send(r.data.results);
     })
     .catch((e) => {
@@ -326,6 +365,45 @@ app.get("/POI", async (req, res) => {
 //     });
 // });
 
+// setTimeout(dbRefresher, 1000);
+
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+// async function dbRefresher() {
+//   const now = Date.now();
+//   const airports = await airport.getAirports();
+//   airports.forEach((airport) => {
+//     if (now - airport.dateAdded > 86400000) {
+//       console.log("updated over a day ago");
+//       amadeus.referenceData.locations.airports
+//         .get({
+//           longitude: airport.coordinates[0].longitude,
+//           latitude: airport.coordinates[0].latitude,
+//           radius: 500,
+//           "page[limit]": 10,
+//           sort: "distance",
+//         })
+//         .then(async function (response) {
+//           /**lat long and airport name */
+//           let airportData = JSON.parse(response.body);
+//           let responseData = [];
+//           airportData.data.map((airport) => {
+//             let airportDetail = {
+//               location: airport.geoCode,
+//               city: airport.address.cityName,
+//               country: airport.address.countryName,
+//               name: airport.name,
+//             };
+//             responseData.push(airportDetail);
+//           });
+//           airport.UpdateAirport({ _id: airport._id,
+//         })
+//         .catch(function (response) {
+//           console.log(response);
+//         });
+//     }
+//   });
+//   setTimeout(dbRefresher, 60000);
+// }
