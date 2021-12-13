@@ -1,22 +1,30 @@
 import React, { useState, useRef, useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "./contexts/AuthContext";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import { AuthContext } from "./../contexts/AuthContext.jsx";
 
 const Login = (props) => {
+  const history = useHistory();
   let emailRef = useRef();
   let passwordRef = useRef();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { login } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     login(emailRef.current.value, passwordRef.current.value)
-      .then(console.log)
-      .catch(console.error);
+      .then(() => {
+        history.push("/");
+      })
+      .catch((e) => {
+        setError(e.message);
+        console.log(e.message, e.code);
+      });
   };
 
   return (
-    <>
+    <div className="login">
+      {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">email: </label>
         <input name="email" type="email" ref={emailRef} required />
@@ -34,7 +42,7 @@ const Login = (props) => {
         Don't have an account?
         <Link to="/register">Register for an account</Link>
       </div>
-    </>
+    </div>
   );
 };
 
