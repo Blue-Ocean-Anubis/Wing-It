@@ -117,6 +117,9 @@ const Home = () => {
         userLocation={userLocation}
         userAddressLocation={userAddress.coordinates}
         onLocationChange={onLocationChange}
+        restaurants={restaurantData}
+        rentals={rentalData}
+        airports={airportData}
       />
       <Container className="border">
         <Tabs defaultActiveKey="airport" id="uncontrolled-tab-example" className="mb-3">
