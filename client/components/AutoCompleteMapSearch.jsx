@@ -3,7 +3,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-//test
+
 export default class AutoCompleteMapSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -17,8 +17,11 @@ export default class AutoCompleteMapSearch extends React.Component {
   handleSelect = address => {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
+      .then(latLng => {
+        // Updating location based on selected search dropdown. Will trigger axios call to populate data.
+        this.props.onLocationChange(latLng.lat, latLng.lng);
+      })
+      .catch(error => console.error('Searchbar geocode address error: ', error));
   };
 
   render() {
@@ -59,11 +62,11 @@ export default class AutoCompleteMapSearch extends React.Component {
                   : { backgroundColor: '#ffffff', cursor: 'pointer' };
                 return (
                   <div
-
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style
-                    })}
+                  {...getSuggestionItemProps(suggestion, {
+                    className,
+                    style
+                  })}
+                  key={suggestion.placeId}
                   >
                     <span>{suggestion.description}</span>
                   </div>
