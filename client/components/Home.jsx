@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, componentDidMount } from 'react';
 import Geocode from 'react-geocode';
 import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from '../../config.js';
 Geocode.setApiKey(GOOGLE_API_KEY);
@@ -105,24 +105,24 @@ const Home = () => {
     // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData)
   })
 
-  return (
-    <div className='page'>
-      {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
-      <GoogleMap
-        searchedLocation={searchedLocation}
-        userLocation={userLocation}
-        userAddressLocation={userAddress.coordinates}
-        onLocationChange={onLocationChange}
-        restaurants={restaurantData}
-        rentals={rentalData}
-        airports={airportData}
-      />
-      <AirportDetails airports={airportData} />
-      <PointsOfInterest points={points} />
-      <RentalDetails rentals={rentalData} />
-      <RestaurantDetails restaurants={restaurantData} />
-    </div>
-  );
+    return (
+      <div className='page'>
+        {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
+        <GoogleMap
+          searchedLocation={searchedLocation}
+          userLocation={userLocation}
+          userAddressLocation={userAddress.coordinates}
+          onLocationChange={onLocationChange}
+          restaurants={restaurantData}
+          rentals={rentalData}
+          airports={airportData}
+        />
+        <AirportDetails airports={airportData} />
+        <PointsOfInterest points={points} />
+        <RentalDetails rentals={rentalData} />
+        <RestaurantDetails restaurants={restaurantData} />
+      </div>
+    );
 };
 
 export default Home;

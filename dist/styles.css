@@ -162,3 +162,67 @@
     transform: translateY(-10px);
     transition: opacity 150ms linear, transform 150ms ease-in;
 } */
+
+
+html, body {
+  margin:0px;
+  height:100vh;
+}
+
+
+
+.welcome-container{
+  height: 100vh;
+  /* width: 100%; */
+  background-color: #090909;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.batwing-logo{
+  animation: rotation 3s infinite linear;
+  margin: 7rem;
+
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.welcome-text{
+  color: white;
+  font-weight: bolder;
+  font-size: x-large;
+
+  position: relative;
+  font-family: Impact, sans-serif;
+  font-size: 45px;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, rgba(189, 189, 189, 0), rgb(255, 255, 255), rgba(189, 189, 189, 0));
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 3s infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
+
+
+
+
