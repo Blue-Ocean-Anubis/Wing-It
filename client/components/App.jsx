@@ -1,3 +1,5 @@
+
+import Auth from "./auth/Index.jsx";
 import React from 'react';
 import {BrowserRouter, Route, Routes, Switch, Link, useLocation, useHistory} from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
@@ -49,7 +51,7 @@ const App = () => {
           </TransitionGroup>
         )} />
 
-       </div>
+      </div>
   );
 }
 
