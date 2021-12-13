@@ -113,6 +113,9 @@ const Home = () => {
         userLocation={userLocation}
         userAddressLocation={userAddress.coordinates}
         onLocationChange={onLocationChange}
+        restaurants={restaurantData}
+        rentals={rentalData}
+        airports={airportData}
       />
       <AirportDetails airports={airportData} />
       <PointsOfInterest points={points} />

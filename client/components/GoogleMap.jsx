@@ -17,22 +17,45 @@ const GoogleMap = (props) => {
 
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation;
 
+  let setMarkers = (business) => {
+    // console.log('busiess', business)
+
+    if (Array.isArray(business) && business.length > 0) { // CHECK THAT BUSINESS DATA HAS ARRIVED
+
+      if (business[0].geometry) { // RENTAL AND RESTAURANT CASE
+        return business.map((each, key) => {
+          return <Marker lat={each.geometry.location.lat} lng={each.geometry.location.lng} key={key}/>
+        })
+      } else { // AIRPORT CASE
+        return business.map((each, key) => {
+          return <Marker lat={each.location.latitude} lng={each.location.longitude} key={key}/>
+        })
+      }
+    }
+  }
+
+
   useEffect(() => {
-    // console.log('userlocation: ', userLocation);
+    // console.log('maps props: ', props);
+
   })
+
 
     return (
       <div style={{ height: '80vh', width: '90%', margin: '3vh auto 10vh auto'}}>
-        <AutoCompleteMapSearch></AutoCompleteMapSearch>
+        <AutoCompleteMapSearch onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
-          center={userLocation}
+          center={props.searchedLocation.city ? props.searchedLocation.coordinates : userLocation}
           defaultZoom={12}
           onClick={handleMapClik}
         >
-          <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng} />
+          <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
+          {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
+          {setMarkers(props.airports)}
+          {setMarkers(props.restaurants)}
+          {setMarkers(props.rentals)}
         </GoogleMapReact>
-
       </div>
     );
 
