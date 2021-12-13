@@ -53,15 +53,16 @@ const Home = () => {
 
     axios.get('/restaurants', {params: location})
       .then((restaurants) => {setRestaurantData(restaurants.data)})
-      .catch((err) => {console.log('AxiosError: ', err)})
+      .catch((err) => {console.log('Axios Error: ', err)})
 
     axios.get('/rentals', {params: location})
       .then((rentals) => {setRentalData(rentals.data)})
-      .catch((err) => {console.log('AxiosError: ', err)})
+      .catch((err) => {console.log('Axios Error: ', err)})
 
     axios.get('/latLongNearestAirport', {params: location})
       .then((airports) => {setAirportData(airports.data);})
-      .catch((err) => {console.log(error)})
+      .catch((err) => {console.log('Axios Error: ', err)})
+
     axios.get('/POI', {params: location})
       .then((points) => {setPoints(points.data);})
       .catch((err) => {console.log('Axios Error: ', err)})
