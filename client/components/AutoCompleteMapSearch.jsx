@@ -63,11 +63,11 @@ export default class AutoCompleteMapSearch extends React.Component {
                   : { backgroundColor: '#ffffff', cursor: 'pointer' };
                 return (
                   <div
-
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style
-                    })}
+                  {...getSuggestionItemProps(suggestion, {
+                    className,
+                    style
+                  })}
+                  key={suggestion.placeId}
                   >
                     <span>{suggestion.description}</span>
                   </div>
