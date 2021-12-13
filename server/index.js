@@ -39,6 +39,7 @@ app.get("/restaurants", async (req, res) => {
   });
 
   if (restaurants !== null) {
+    console.log(JSON.parse(restaurants.apiResult));
     res.send(JSON.parse(restaurants.apiResult));
     return;
   }
@@ -51,6 +52,9 @@ app.get("/restaurants", async (req, res) => {
           lat: lat,
           lng: lng,
         },
+        maxprice: 4,
+        minprice: 3,
+        key: GOOGLE_API_KEY,
       },
     })
     .then(async (r) => {
@@ -63,9 +67,9 @@ app.get("/restaurants", async (req, res) => {
           longitude: lng,
         },
         dateAdded: Date.now(),
-        apiResult: JSON.stringify(r.data),
+        apiResult: JSON.stringify(r.data.results),
       });
-      res.send(r.data);
+      res.send(r.data.results);
     })
     .catch((e) => {
       console.log("ERROR: ", e);
@@ -101,6 +105,7 @@ app.get("/rentals", async (req, res) => {
           lat: lat,
           lng: lng,
         },
+        key: GOOGLE_API_KEY,
       },
     })
     .then(async (r) => {
@@ -113,9 +118,9 @@ app.get("/rentals", async (req, res) => {
           longitude: lng,
         },
         dateAdded: Date.now(),
-        apiResult: JSON.stringify(r.data),
+        apiResult: JSON.stringify(r.data.results),
       });
-      res.send(r.data);
+      res.send(r.data.results);
     })
     .catch((e) => {
       console.log("ERROR: ", e);
