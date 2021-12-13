@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./client/src/index.js",
+  entry: './client/src/index.js',
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
@@ -28,12 +28,12 @@ module.exports = {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         loader: "url-loader",
         options: {
-          limit: 10000,
-        },
+          limit: 10000
+        }
       },
-    ],
+    ]
   },
   resolve: {
-    extensions: [".js", ".jsx"],
-  },
+    extensions: [".js", ".jsx"]
+  }
 };
