@@ -39,6 +39,10 @@ let get = (query) => {
   return Airport.findOne(query);
 };
 
+let getAll = () => {
+  return Airport.find({});
+};
+
 let save = (airportData) => {
   var airport = new Airport(airportData);
   return airport.save();
@@ -54,5 +58,6 @@ let deleteById = (id) => {
 
 exports.saveAirport = save;
 exports.getAirport = get;
+exports.getAirports = getAll;
 exports.updateAirport = update;
 exports.deleteAirport = deleteById;
