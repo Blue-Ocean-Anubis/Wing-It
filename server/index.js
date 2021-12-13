@@ -9,9 +9,9 @@ const app = express();
 const morgan = require("morgan");
 const axios = require("axios");
 var Amadeus = require("amadeus");
-const { airport, restaurant, pointsOfInterest, rental, user } =
+
+const { restaurant, airport, pointsOfInterest, rental, user } =
   require("../db/schema").module;
-const { saveRestaurant } = require("../db/schema/restaurant.js");
 
 var amadeus = new Amadeus({
   clientId: process.env.AMADEUS_KEY,
@@ -28,15 +28,21 @@ app.get("/restaurants", async (req, res) => {
   // May need to be altered based on front end inputs
   const { lat, lng, city, state = "N/A", country } = req.query;
 
-  const { apiResult } = await restaurant.getRestaurant({
+  if (lat === undefined || lng === undefined) {
+    return res.send([]);
+  }
+
+  const restaurants = await restaurant.getRestaurant({
     city: city,
     state: state,
     country: country,
   });
-  if (apiResult !== undefined) {
-    res.send(JSON.parse(apiResult));
+
+  if (restaurants !== null) {
+    res.send(JSON.parse(restaurants.apiResult));
     return;
   }
+
   client
     .textSearch({
       params: {
@@ -45,9 +51,6 @@ app.get("/restaurants", async (req, res) => {
           lat: lat,
           lng: lng,
         },
-        maxprice: 4,
-        minprice: 4,
-        key: GOOGLE_API_KEY,
       },
     })
     .then(async (r) => {
@@ -75,14 +78,18 @@ app.get("/rentals", async (req, res) => {
   // May need to be altered based on front end inputs
   const { lat, lng, city, state = "N/A", country } = req.query;
 
-  const { apiResult } = await rental.getRental({
+  if (lat === undefined || lng === undefined) {
+    return res.send([]);
+  }
+
+  const rentals = await rental.getRental({
     city: city,
     state: state,
     country: country,
   });
-  if (apiResult !== undefined) {
-    console.log("pulled from database");
-    res.send(JSON.parse(apiResult));
+
+  if (rentals !== null) {
+    res.send(JSON.parse(rentals.apiResult));
     return;
   }
 
@@ -94,7 +101,6 @@ app.get("/rentals", async (req, res) => {
           lat: lat,
           lng: lng,
         },
-        key: GOOGLE_API_KEY,
       },
     })
     .then(async (r) => {
@@ -126,18 +132,20 @@ app.get("/rentals", async (req, res) => {
 app.get("/latLongNearestAirport", async (req, res) => {
   const { lat, lng, city, state = "N/A", country } = req.query;
 
-  // const { apiResult } = await airport.getAirport({
-  //   city: city,
-  //   state: state,
-  //   country: country,
-  // });
-  // if (apiResult !== undefined) {
-  //   console.log("pulled from database");
-  //   res.send(JSON.parse(apiResult));
-  //   return;
-  // }
+  if (lat === undefined || lng === undefined) {
+    return res.send([]);
+  }
 
-  console.log(lat, lng);
+  const airports = await airport.getAirport({
+    city: city,
+    state: state,
+    country: country,
+  });
+
+  if (airports !== null) {
+    res.send(JSON.parse(airports.apiResult));
+    return;
+  }
 
   amadeus.referenceData.locations.airports
     .get({
@@ -160,18 +168,17 @@ app.get("/latLongNearestAirport", async (req, res) => {
         };
         responseData.push(airportDetail);
       });
-      // await rental.saveRental({
-      //   city: city,
-      //   state: state,
-      //   country: country,
-      //   coordinates: {
-      //     latitude: lat,
-      //     longitude: lng,
-      //   },
-      //   dateAdded: Date.now(),
-      //   apiResult: JSON.stringify(responseData),
-      // });
-      // console.log("saved to database");
+      await airport.saveAirport({
+        city: city,
+        state: state,
+        country: country,
+        coordinates: {
+          latitude: lat,
+          longitude: lng,
+        },
+        dateAdded: Date.now(),
+        apiResult: JSON.stringify(responseData),
+      });
       res.send(responseData);
     })
     .catch(function (response) {
@@ -217,8 +224,23 @@ app.get("/cityNameAirport", (req, res) => {
  * example query parameters: 'lat': 38.407524
  *                           'long': -89.764714
  */
-app.get("/POI", (req, res) => {
-  const { lat, lng } = req.query;
+app.get("/POI", async (req, res) => {
+  const { lat, lng, city, state = "N/A", country } = req.query;
+
+  if (lat === undefined || lng === undefined) {
+    return res.send([]);
+  }
+
+  const poi = await pointsOfInterest.getPointsOfInterest({
+    city: city,
+    state: state,
+    country: country,
+  });
+
+  if (poi !== null) {
+    res.send(JSON.parse(poi.apiResult));
+    return;
+  }
   amadeus.referenceData.locations.pointsOfInterest
     .get({
       latitude: lat,
@@ -237,6 +259,31 @@ app.get("/POI", (req, res) => {
           tags: poi.tags,
         };
         poiResponse.push(poiDetail);
+      });
+    })
+    .then(async function (response) {
+      let poiData = JSON.parse(response.body);
+      let poiResponse = [];
+      poiData.data.map((poi) => {
+        let poiDetail = {
+          location: poi.geoCode,
+          name: poi.name,
+          category: poi.category,
+          rank: poi.rank,
+          tags: poi.tags,
+        };
+        poiResponse.push(poiDetail);
+      });
+      await pointsOfInterest.savePointsOfInterest({
+        city: city,
+        state: state,
+        country: country,
+        coordinates: {
+          latitude: lat,
+          longitude: lng,
+        },
+        dateAdded: Date.now(),
+        apiResult: JSON.stringify(poiResponse),
       });
       res.send(poiResponse);
     })

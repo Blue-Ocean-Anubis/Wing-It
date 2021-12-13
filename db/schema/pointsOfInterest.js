@@ -38,8 +38,9 @@ const PointsOfInterest = mongoose.model(
   pointsOfInterestSchema
 );
 
-let get = () => {
-  return PointsOfInterest.find({});
+let get = (query) => {
+  query = query ? query : {};
+  return PointsOfInterest.findOne(query);
 };
 
 let save = (pointsOfInterestData) => {
