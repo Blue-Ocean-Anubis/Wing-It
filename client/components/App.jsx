@@ -9,6 +9,8 @@ import { faUser, faHome, faSearch, faShoppingCart} from '@fortawesome/free-solid
 import Home from './Home.jsx';
 import UserProfile from './UserProfile.jsx';
 import Cart from './Cart.jsx';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import Button from 'react-bootstrap/Button';
 
 const App = () => {
   const location = useLocation();
