@@ -1,17 +1,20 @@
+
+import Auth from "./auth/Index.jsx";
 import React from 'react';
-import {BrowserRouter, Route, Routes, Switch, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Routes, Switch, Link, useLocation, useHistory} from 'react-router-dom';
+import { motion, AnimatePresence } from "framer-motion";
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faHome, faSearch, faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 import Home from './Home.jsx';
 import UserProfile from './UserProfile.jsx';
 import Cart from './Cart.jsx';
 
-
 const App = () => {
+  const location = useLocation();
 
   return (
-    <BrowserRouter>
-      <div>
+      <div className='app'>
         <nav className="navigation">
               <Link to="/">
                 <FontAwesomeIcon icon={faHome} size="3x"/>
@@ -27,23 +30,28 @@ const App = () => {
               </Link>
         </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
+        <Route render={({location}) => (
+          <TransitionGroup>
+          <CSSTransition
+          key={location.key}
+            timeout={300}
+            classNames="fade"
+            >
+              <Switch location={location} key={location.pathname}>
+                <Route path="/user" component={UserProfile}>
+                </Route>
+                <Route path="/cart" component={Cart}>
+                </Route>
+                <Route exact path="/" component={Home}>
+                </Route>
+                <Route exact path="/search" component={Home}>
+                </Route>
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )} />
 
-          <Route path="/user">
-            <UserProfile />
-          </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-
-        </Switch>
       </div>
-    </BrowserRouter>
   );
 }
 

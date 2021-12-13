@@ -6,6 +6,9 @@ Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
 import List from './List.jsx';
 import AirportDetails from './AirportDetails.jsx';
+import PointsOfInterest from './PointsOfInterest.jsx';
+import RentalDetails from './RentalDetails.jsx';
+import RestaurantDetails from './RestaurantDetails.jsx';
 import axios from 'axios';
 
 const Home = () => {
@@ -17,6 +20,7 @@ const Home = () => {
   const [restaurantData, setRestaurantData] = useState([]);
   const [rentalData, setRentalData] = useState([]);
   const [airportData, setAirportData] = useState([]);
+  const [points, setPoints] = useState([]);
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
@@ -57,9 +61,11 @@ const Home = () => {
 
     axios.get('/latLongNearestAirport', {params: location})
       .then((airports) => {setAirportData(airports.data);})
-      .catch((err) => {console.log('AxiosError: ', err)})
-
-  }, [searchedLocation]);
+      .catch((err) => {console.log(error)})
+    axios.get('/POI', {params: location})
+      .then((points) => {setPoints(points.data);})
+      .catch((err) => {console.log('Axios Error: ', err)})
+  }, [searchedLocation])
 
 
   // GET USER LOCATION DATA
@@ -100,7 +106,7 @@ const Home = () => {
   })
 
   return (
-    <div>
+    <div className='page'>
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
       <GoogleMap
         searchedLocation={searchedLocation}
@@ -112,6 +118,9 @@ const Home = () => {
         airports={airportData}
       />
       <AirportDetails airports={airportData} />
+      <PointsOfInterest points={points} />
+      <RentalDetails rentals={rentalData} />
+      <RestaurantDetails restaurants={restaurantData} />
     </div>
   );
 };
