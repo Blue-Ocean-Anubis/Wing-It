@@ -1,35 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import Geocode from 'react-geocode';
-import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from '../../config.js';
+import React, { useState, useEffect, useContext } from "react";
+import Geocode from "react-geocode";
+import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from "../../config.js";
 Geocode.setApiKey(GOOGLE_API_KEY);
-Geocode.setLocationType('ROOFTOP');
-import GoogleMap from './GoogleMap.jsx';
-import List from './List.jsx';
-import AirportDetails from './AirportDetails.jsx';
-import PointsOfInterest from './PointsOfInterest.jsx';
-import RentalDetails from './RentalDetails.jsx';
-import RestaurantDetails from './RestaurantDetails.jsx';
-import axios from 'axios';
+Geocode.setLocationType("ROOFTOP");
+import GoogleMap from "./GoogleMap.jsx";
+import List from "./List.jsx";
+import AirportDetails from "./AirportDetails.jsx";
+import PointsOfInterest from "./PointsOfInterest.jsx";
+import RentalDetails from "./RentalDetails.jsx";
+import RestaurantDetails from "./RestaurantDetails.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useHistory } from "react-router-dom";
+import {
+  faUser,
+  faHome,
+  faSearch,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "./contexts/AuthContext.jsx";
+import axios from "axios";
 
 const Home = () => {
-
   const [userLocation, setUserLocation] = useState({});
-  const [userAddress, setUserAddress] = useState({string: TEST_USER_ADDRESS, coordinates: {}})
+  const [userAddress, setUserAddress] = useState({
+    string: TEST_USER_ADDRESS,
+    coordinates: {},
+  });
   // TEST_USER_ADDRESS is placeholder - will have to insert user address here
-  const [searchedLocation, setSearchedLocation] = useState({city: '', coordinates: {}});
+  const [searchedLocation, setSearchedLocation] = useState({
+    city: "",
+    coordinates: {},
+  });
   const [restaurantData, setRestaurantData] = useState([]);
   const [rentalData, setRentalData] = useState([]);
   const [airportData, setAirportData] = useState([]);
   const [points, setPoints] = useState([]);
+  const { logout } = useContext(AuthContext);
+  const history = useHistory();
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
     Geocode.fromLatLng(lat.toString(), lng.toString())
       .then((response) => {
         setSearchedLocation({
-          city: (response.plus_code.compound_code).substring(9),
-          coordinates: { lat: lat, lng: lng }
-        })
+          city: response.plus_code.compound_code.substring(9),
+          coordinates: { lat: lat, lng: lng },
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -38,42 +54,66 @@ const Home = () => {
 
   // MAKE YOUR SERVER REQUESTS HERE, WILL EXECUTE WHEN NEW LOCATION IS CLICKED
   useEffect(() => {
-    console.log('new place clicked', searchedLocation);
+    console.log("new place clicked", searchedLocation);
 
     let noState = false;
-    let cityData = searchedLocation.city.split(', ');
-    if (cityData.length < 3) { noState = true }
+    let cityData = searchedLocation.city.split(", ");
+    if (cityData.length < 3) {
+      noState = true;
+    }
     let location = {
       lat: searchedLocation.coordinates.lat,
       lng: searchedLocation.coordinates.lng,
       city: cityData[0],
-      state: (noState ? '' : cityData[1]),
-      country: (noState? cityData[1] : cityData[2])
+      state: noState ? "" : cityData[1],
+      country: noState ? cityData[1] : cityData[2],
     };
 
-    axios.get('/restaurants', {params: location})
-      .then((restaurants) => {setRestaurantData(restaurants.data)})
-      .catch((err) => {console.log('AxiosError: ', err)})
+    axios
+      .get("/restaurants", { params: location })
+      .then((restaurants) => {
+        setRestaurantData(restaurants.data);
+      })
+      .catch((err) => {
+        console.log("AxiosError: ", err);
+      });
 
-    axios.get('/rentals', {params: location})
-      .then((rentals) => {setRentalData(rentals.data)})
-      .catch((err) => {console.log('AxiosError: ', err)})
+    axios
+      .get("/rentals", { params: location })
+      .then((rentals) => {
+        setRentalData(rentals.data);
+      })
+      .catch((err) => {
+        console.log("AxiosError: ", err);
+      });
 
-    axios.get('/latLongNearestAirport', {params: location})
-      .then((airports) => {setAirportData(airports.data);})
-      .catch((err) => {console.log(error)})
-    axios.get('/POI', {params: location})
-      .then((points) => {setPoints(points.data);})
-      .catch((err) => {console.log('Axios Error: ', err)})
-  }, [searchedLocation])
-
+    axios
+      .get("/latLongNearestAirport", { params: location })
+      .then((airports) => {
+        setAirportData(airports.data);
+      })
+      .catch((err) => {
+        console.log(error);
+      });
+    axios
+      .get("/POI", { params: location })
+      .then((points) => {
+        setPoints(points.data);
+      })
+      .catch((err) => {
+        console.log("Axios Error: ", err);
+      });
+  }, [searchedLocation]);
 
   // GET USER LOCATION DATA
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setUserLocation({lat: position.coords.latitude, lng: position.coords.longitude})
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
         },
         (err) => {
           console.log(err);
@@ -88,11 +128,22 @@ const Home = () => {
   const convertAddressToCoords = (address) => {
     Geocode.fromAddress(address)
       .then((response) => {
-        setUserAddress({string: TEST_USER_ADDRESS, coordinates: response.results[0].geometry.location})
+        setUserAddress({
+          string: TEST_USER_ADDRESS,
+          coordinates: response.results[0].geometry.location,
+        });
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+
+    logout()
+      .then(() => history.push("/login"))
+      .catch(console.error);
   };
 
   // ON COMPONENT MOUNT, FIND USERLOCATION AND COORDS FOR THEIR ADDRESS
@@ -103,11 +154,28 @@ const Home = () => {
 
   useEffect(() => {
     // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData)
-  })
+  });
 
   return (
-    <div className='page'>
+    <div className="page">
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
+      <nav className="navigation">
+        <Link to="/">
+          <FontAwesomeIcon icon={faHome} size="3x" />
+        </Link>
+        <Link to="/user">
+          <FontAwesomeIcon icon={faUser} size="3x" />
+        </Link>
+        <Link to="/search">
+          <FontAwesomeIcon icon={faSearch} size="3x" />
+        </Link>
+        <Link to="/cart">
+          <FontAwesomeIcon icon={faShoppingCart} size="3x" />
+        </Link>
+        <Link to="/login">
+          <button onClick={(e) => handleLogout(e)}>Logout</button>
+        </Link>
+      </nav>
       <GoogleMap
         searchedLocation={searchedLocation}
         userLocation={userLocation}
@@ -123,4 +191,3 @@ const Home = () => {
 };
 
 export default Home;
-
