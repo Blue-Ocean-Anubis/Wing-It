@@ -5,6 +5,7 @@
 }
 .airport-list-container {
   justify-content: center;
+  min-height: 330px;
 }
 .airport-card {
   border-style: solid;
