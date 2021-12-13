@@ -1,7 +1,7 @@
 
 import Auth from "./auth/Index.jsx";
 import React from 'react';
-import {BrowserRouter, Route, Routes, Switch, Link, useLocation, useHistory} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Link, useLocation, useHistory} from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
