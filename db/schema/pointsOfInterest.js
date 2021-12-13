@@ -23,7 +23,7 @@ const pointsOfInterestSchema = new Schema({
       },
     },
   ],
-  dataAdded: {
+  dateAdded: {
     type: Date,
     required: true,
   },

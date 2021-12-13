@@ -39,7 +39,6 @@ app.get("/restaurants", async (req, res) => {
   });
 
   if (restaurants !== null) {
-    console.log(JSON.parse(restaurants.apiResult));
     res.send(JSON.parse(restaurants.apiResult));
     return;
   }
@@ -154,8 +153,8 @@ app.get("/latLongNearestAirport", async (req, res) => {
 
   amadeus.referenceData.locations.airports
     .get({
-      longitude: lat,
-      latitude: lng,
+      longitude: lng,
+      latitude: lat,
       radius: 500,
       "page[limit]": 10,
       sort: "distance",
@@ -246,39 +245,18 @@ app.get("/POI", async (req, res) => {
     res.send(JSON.parse(poi.apiResult));
     return;
   }
-  amadeus.referenceData.locations.pointsOfInterest
-    .get({
-      latitude: lat,
-      longitude: lng,
-      radius: 20,
+  client
+    .textSearch({
+      params: {
+        query: "point_of_interest",
+        location: {
+          lat: lat,
+          lng: lng,
+        },
+        key: GOOGLE_API_KEY,
+      },
     })
-    .then(function (response) {
-      let poiData = JSON.parse(response.body);
-      let poiResponse = [];
-      poiData.data.map((poi) => {
-        let poiDetail = {
-          location: poi.geoCode,
-          name: poi.name,
-          category: poi.category,
-          rank: poi.rank,
-          tags: poi.tags,
-        };
-        poiResponse.push(poiDetail);
-      });
-    })
-    .then(async function (response) {
-      let poiData = JSON.parse(response.body);
-      let poiResponse = [];
-      poiData.data.map((poi) => {
-        let poiDetail = {
-          location: poi.geoCode,
-          name: poi.name,
-          category: poi.category,
-          rank: poi.rank,
-          tags: poi.tags,
-        };
-        poiResponse.push(poiDetail);
-      });
+    .then(async (r) => {
       await pointsOfInterest.savePointsOfInterest({
         city: city,
         state: state,
@@ -288,14 +266,65 @@ app.get("/POI", async (req, res) => {
           longitude: lng,
         },
         dateAdded: Date.now(),
-        apiResult: JSON.stringify(poiResponse),
+        apiResult: JSON.stringify(r.data.results),
       });
-      res.send(poiResponse);
+      res.send(r.data.results);
     })
-    .catch(function (response) {
-      res.status(404).send(response);
+    .catch((e) => {
+      console.log("ERROR: ", e);
+      res.send("Error loading POIs.");
     });
 });
+//   amadeus.referenceData.locations.pointsOfInterest
+//     .get({
+//       latitude: lat,
+//       longitude: lng,
+//       radius: 20,
+//     })
+//     .then(function (response) {
+//       let poiData = JSON.parse(response.body);
+//       let poiResponse = [];
+//       poiData.data.map((poi) => {
+//         let poiDetail = {
+//           location: poi.geoCode,
+//           name: poi.name,
+//           category: poi.category,
+//           rank: poi.rank,
+//           tags: poi.tags,
+//         };
+//         poiResponse.push(poiDetail);
+//       });
+//     })
+//     .then(async function (response) {
+//       let poiData = JSON.parse(response.body);
+//       let poiResponse = [];
+//       poiData.data.map((poi) => {
+//         let poiDetail = {
+//           location: poi.geoCode,
+//           name: poi.name,
+//           category: poi.category,
+//           rank: poi.rank,
+//           tags: poi.tags,
+//         };
+//         poiResponse.push(poiDetail);
+//       });
+//       await pointsOfInterest.savePointsOfInterest({
+//         city: city,
+//         state: state,
+//         country: country,
+//         coordinates: {
+//           latitude: lat,
+//           longitude: lng,
+//         },
+//         dateAdded: Date.now(),
+//         apiResult: JSON.stringify(poiResponse),
+//       });
+//       res.send(poiResponse);
+//     })
+//     .catch(function (response) {
+//       res.status(404).send(response);
+//     });
+// });
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);

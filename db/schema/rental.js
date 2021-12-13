@@ -34,7 +34,7 @@ const rentalSchema = new Schema({
 });
 
 const Rental = mongoose.model("Rental", rentalSchema);
-let get = ({ query }) => {
+let get = (query) => {
   query = query ? query : {};
   return Rental.findOne(query);
 };
