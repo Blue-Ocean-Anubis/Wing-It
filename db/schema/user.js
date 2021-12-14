@@ -2,49 +2,52 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  email: {
+  _id: {
     type: String,
     required: true,
   },
-  password: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email: {
     type: String,
     required: true,
   },
   phoneNumber: String,
   address: {
-    type: String,
-    required: true,
-  },
-  searchHistory: [
-    {
-      city: {
-        type: String,
-        required: true,
-      },
-      state: String,
-      country: {
-        type: String,
-        required: true,
-      },
-      coordinates: [
-        {
-          latitude: {
-            type: Number,
-            required: true,
-          },
-          longitude: {
-            type: Number,
-            required: true,
-          },
-        },
-      ],
+    streetInformation: {
+      type: String,
+      required: true,
     },
-  ],
+    city: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    zipCode: {
+      type: Number,
+      required: true,
+    },
+  },
+  cart: [String],
 });
 
 const User = mongoose.model("User", userSchema);
-let get = () => {
-  return User.find({});
+let get = (query) => {
+  query = query ? query : {};
+  return User.findOne(query);
 };
 
 let save = (userData) => {
