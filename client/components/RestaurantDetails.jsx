@@ -1,13 +1,13 @@
 import React from 'react';
 
 const RestaurantDetails = (props) => (
-    <div className="airport-details">
+    <div className="details">
     <h3>Restaurant Information</h3>
-      <div className="airport-list-container">
+      <div className="list-container">
       {props.restaurants.map((restaurant) => (
-        <div key={restaurant.place_id} className="airport-card" onClick={() => {console.log('restaurant Location: ', restaurant.geometry.location)}}>
-          {<span>{restaurant.name}</span>}
-          {<span>{restaurant.formatted_address}</span>}
+        <div key={restaurant.place_id} className="card" onClick={() => {console.log('restaurant Location: ', restaurant.geometry.location)}}>
+          {<span className="name">{restaurant.name}</span>}
+          {<span className="address">{restaurant.formatted_address}</span>}
         </div>
         ))}
       </div>
