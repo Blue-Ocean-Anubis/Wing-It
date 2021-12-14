@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CardButton from './CardButton.jsx';
 
 const PointsOfInterestCard = ({ point }) => (
   <div className="card">
@@ -6,6 +7,7 @@ const PointsOfInterestCard = ({ point }) => (
     {<span>{point.rating} of 5</span>}
     {<span>{point.category}</span>}
     {<span>{point.types.filter(type => type !== 'point_of_interest' && type !== 'establishment')}</span>}
+    <CardButton point={point}/>
   </div>
 )
 
