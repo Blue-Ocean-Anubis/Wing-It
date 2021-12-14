@@ -50,23 +50,28 @@ const GoogleMap = (props) => {
     // console.log(props.currentTab);
   }, [props.currentTab]);
 
-    return (
-      <div style={{ height: '80vh', width: '90%', margin: '3vh auto 10vh auto'}}>
-        <AutoCompleteMapSearch className='autocomplete' onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
-          center={props.searchedLocation.city ? props.searchedLocation.coordinates : userLocation}
-          defaultZoom={12}
-          onClick={handleMapClik}
-        >
-          <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
-          {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
-          {setMarkers(props.airports)}
-          {setMarkers(props.restaurants)}
-          {setMarkers(props.rentals)}
-        </GoogleMapReact>
-      </div>
-    );
+  return (
+    <div style={{ height: '70vh', width: '85%', margin: '3vh auto 10vh auto' }}>
+      <Offcanvas show={props.show} onHide={props.handleClose} placement='top'>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>City Search</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Search a place that you would like to visit
+        <AutoCompleteMapSearch canvasClose={props.handleClose} onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
+        </Offcanvas.Body>
+      </Offcanvas>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
+        center={props.searchedLocation.city ? props.searchedLocation.coordinates : userLocation}
+        defaultZoom={12}
+        onClick={handleMapClik}
+        hoverDistance={1}
+        options={{
+          styles: MapStyling,
+      }}
+      >
+        <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
 
 }
 export default GoogleMap;

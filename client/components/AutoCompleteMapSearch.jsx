@@ -25,6 +25,7 @@ export default class AutoCompleteMapSearch extends React.Component {
       .then(latLng => {
         // Updating location based on selected search dropdown. Will trigger axios call to populate data.
         this.props.onLocationChange(latLng.lat, latLng.lng);
+        this.props.canvasClose();
       })
       .catch(error => console.error('Searchbar geocode address error: ', error));
   };
