@@ -121,8 +121,8 @@ const Home = () => {
         rentals={rentalData}
         airports={airportData}
       />
-      <Container className="border">
-        <Tabs defaultActiveKey="airport" id="uncontrolled-tab-example" className="mb-3">
+      <Container className="border bg-dark text-warning">
+        <Tabs defaultActiveKey="airport" id="uncontrolled-tab-example" className="mb-3 bg-dark text-warning">
           <Tab eventKey="airport" title="Airports">
             <AirportDetails airports={airportData} />
           </Tab>

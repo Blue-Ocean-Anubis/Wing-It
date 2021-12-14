@@ -4,7 +4,7 @@ import React from 'react';
 const PointsOfInterest = (props) => (
     <div className="poi-details">
     <h3>Points Of Interest</h3>
-      <div className="poi-list-container">
+      <div className="airport-list-container">
       {props.points.map((point) => (
         <div key={point.name} className="point-card" onClick={() => {console.log(point.location)}}>
           {<span key={point.name}>{point.name}</span>}
