@@ -2,6 +2,7 @@ require("dotenv").config();
 const { GOOGLE_API_KEY } = require("../config.js");
 const { Client } = require("@googlemaps/google-maps-services-js");
 const client = new Client({});
+const Promise = require("bluebird");
 
 require("../db");
 const express = require("express");
@@ -22,6 +23,44 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static("dist"));
+
+const getDetails = (placeId) => {
+  return client.placeDetails({
+    params: {
+      place_id: placeId,
+      fields: [
+        "name",
+        "rating",
+        "price_level",
+        "rating",
+        "international_phone_number",
+        "website",
+      ],
+      key: GOOGLE_API_KEY,
+    },
+  });
+};
+
+const detailDecorator = async (resultsArray) => {
+  let details = [];
+
+  resultsArray.forEach((result, i) => {
+    if (i < 4) {
+      details.push(getDetails(result.place_id));
+    }
+  });
+
+  details = await Promise.all(details);
+  details = details.map((response) => {
+    return response.data.result;
+  });
+
+  for (let i = 0; i < resultsArray.length; i++) {
+    resultsArray[i]["details"] = details[i];
+  }
+
+  return resultsArray;
+};
 
 /******************RESTAURANTS WITHIN CITY********************/
 app.get("/restaurants", async (req, res) => {
@@ -63,6 +102,7 @@ app.get("/restaurants", async (req, res) => {
     })
     .then(async (r) => {
       try {
+        const results = await detailDecorator(r.data.results);
         await restaurant.saveRestaurant({
           city: city,
           state: state,
@@ -72,12 +112,12 @@ app.get("/restaurants", async (req, res) => {
             longitude: lng,
           },
           dateAdded: Date.now(),
-          apiResult: JSON.stringify(r.data.results),
+          apiResult: JSON.stringify(results),
         });
+        res.send(results);
       } catch (err) {
         console.log(err);
       }
-      res.send(r.data.results);
     })
     .catch((e) => {
       console.log("ERROR: ", e);
@@ -125,6 +165,7 @@ app.get("/rentals", async (req, res) => {
     })
     .then(async (r) => {
       try {
+        const results = await detailDecorator(r.data.results);
         await rental.saveRental({
           city: city,
           state: state,
@@ -134,12 +175,12 @@ app.get("/rentals", async (req, res) => {
             longitude: lng,
           },
           dateAdded: Date.now(),
-          apiResult: JSON.stringify(r.data.results),
+          apiResult: JSON.stringify(results),
         });
+        res.send(results);
       } catch (err) {
         console.log(err);
       }
-      res.send(r.data.results);
     })
     .catch((e) => {
       console.log("ERROR: ", e);
@@ -210,10 +251,10 @@ app.get("/latLongNearestAirport", async (req, res) => {
           dateAdded: Date.now(),
           apiResult: JSON.stringify(responseData),
         });
+        res.send(responseData);
       } catch (err) {
         console.log(err);
       }
-      res.send(responseData);
     })
     .catch(function (response) {
       res.status(404).send(response);
@@ -293,6 +334,7 @@ app.get("/POI", async (req, res) => {
     })
     .then(async (r) => {
       try {
+        const results = await detailDecorator(r.data.results);
         await pointsOfInterest.savePointsOfInterest({
           city: city,
           state: state,
@@ -302,12 +344,12 @@ app.get("/POI", async (req, res) => {
             longitude: lng,
           },
           dateAdded: Date.now(),
-          apiResult: JSON.stringify(r.data.results),
+          apiResult: JSON.stringify(results),
         });
+        res.send(results);
       } catch (err) {
         console.log(err);
       }
-      res.send(r.data.results);
     })
     .catch((e) => {
       console.log("ERROR: ", e);
@@ -370,40 +412,3 @@ app.get("/POI", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
-
-// async function dbRefresher() {
-//   const now = Date.now();
-//   const airports = await airport.getAirports();
-//   airports.forEach((airport) => {
-//     if (now - airport.dateAdded > 86400000) {
-//       console.log("updated over a day ago");
-//       amadeus.referenceData.locations.airports
-//         .get({
-//           longitude: airport.coordinates[0].longitude,
-//           latitude: airport.coordinates[0].latitude,
-//           radius: 500,
-//           "page[limit]": 10,
-//           sort: "distance",
-//         })
-//         .then(async function (response) {
-//           /**lat long and airport name */
-//           let airportData = JSON.parse(response.body);
-//           let responseData = [];
-//           airportData.data.map((airport) => {
-//             let airportDetail = {
-//               location: airport.geoCode,
-//               city: airport.address.cityName,
-//               country: airport.address.countryName,
-//               name: airport.name,
-//             };
-//             responseData.push(airportDetail);
-//           });
-//           airport.UpdateAirport({ _id: airport._id,
-//         })
-//         .catch(function (response) {
-//           console.log(response);
-//         });
-//     }
-//   });
-//   setTimeout(dbRefresher, 60000);
-// }
