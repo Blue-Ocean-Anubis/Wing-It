@@ -6,6 +6,7 @@ import {
   faHome,
   faSearch,
   faShoppingCart,
+  faSignOutAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -22,19 +23,19 @@ const Nav = () => {
   return (
     <nav className="navigation">
       <Link to="/">
-        <FontAwesomeIcon icon={faHome} size="3x" />
+        <FontAwesomeIcon icon={faHome} size="2x" color="black"/>
       </Link>
       <Link to="/user">
-        <FontAwesomeIcon icon={faUser} size="3x" />
+        <FontAwesomeIcon icon={faUser} size="2x" color="black"/>
       </Link>
       <Link to="/search">
-        <FontAwesomeIcon icon={faSearch} size="3x" />
+        <FontAwesomeIcon icon={faSearch} size="2x" color="black"/>
       </Link>
       <Link to="/cart">
-        <FontAwesomeIcon icon={faShoppingCart} size="3x" />
+        <FontAwesomeIcon icon={faShoppingCart} size="2x" color="black"/>
       </Link>
       <Link to="/login">
-        <button onClick={handleLogout}>Logout</button>
+        <FontAwesomeIcon icon={faSignOutAlt} onClick={handleLogout} size="2x" color="black" />
       </Link>
     </nav>
   );
