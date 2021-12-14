@@ -7,14 +7,19 @@ import PlacesAutocomplete, {
 export default class AutoCompleteMapSearch extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: '' };
+    this.state = {
+      address: '',
+      text: ''
+    };
   }
 
   handleChange = address => {
-    this.setState({ address });
+    this.setState({address});
   };
 
   handleSelect = address => {
+    this.setState({address});
+ 
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
@@ -24,10 +29,12 @@ export default class AutoCompleteMapSearch extends React.Component {
       .catch(error => console.error('Searchbar geocode address error: ', error));
   };
 
+  handleTextChange=text=>{
+    this.setState({text});
+  };
+
   render() {
     const searchOptions = {
-      // location: new google.maps.LatLng(-34, 151),
-      // radius: 2000,
       types: ['(cities)']
     }
     return (
@@ -36,18 +43,14 @@ export default class AutoCompleteMapSearch extends React.Component {
         onChange={this.handleChange}
         onSelect={this.handleSelect}
         searchOptions={searchOptions}
-        className='autocomplete'
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className='search-container'>
             <input
+              onChange={this.handleTextChange}
               {...getInputProps({
                 placeholder: 'What city would you like to visit?',
                 className: 'location-search-input'
-                //need to figure out how to change value here so
-                //what the user types will stay on screen after clicking
-                //from drop down menu (or rather update what is in searchbar
-                //to reflect the option chosen)
               })}
             />
             <div className="autocomplete-dropdown-container">
@@ -56,7 +59,6 @@ export default class AutoCompleteMapSearch extends React.Component {
                 const className = suggestion.active
                   ? 'suggestion-item--active'
                   : 'suggestion-item';
-                // inline style for demonstration purpose
                 const style = suggestion.active
                   ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                   : { backgroundColor: '#ffffff', cursor: 'pointer' };
