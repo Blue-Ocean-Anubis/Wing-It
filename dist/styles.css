@@ -1,3 +1,8 @@
+.page {
+  font-family: 'Roboto Slab', serif;
+  background-color: #505c7c;
+}
+
 .airport-list-component {
   width: 50vw;
   display: flex;
@@ -18,11 +23,11 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  margin: auto;
+  margin: 0rem auto;
   display: flex;
   padding: 1rem;
-  justify-content: space-evenly;
-  background-color: aliceblue;
+  justify-content: space-around;
+  background-color: rgb(199, 199, 199);
   border-radius: 1rem;
   border: 4px solid grey;
 }
@@ -118,6 +123,94 @@
   opacity: 0;
   transition: opacity 150ms linear;
 }
+
+.marker {
+  cursor:pointer;
+}
+
+.marker-info {
+  /* height: 8rem;
+  width: 16rem; */
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  background-color: rgb(206, 206, 206);
+  border: 2px solid black;
+  border-radius: 0.5rem;
+}
+
+.marker-name {
+  font-family: 'Roboto Slab', serif;
+  white-space: nowrap;
+  font-size: 2rem;
+}
+
+.marker-address {
+  font-size: 1.5rem;
+}
+
+.tab-content {
+  height: 150vh
+}
+
+.nav-link.active {
+  color: black !important;
+  background-color: rgb(197, 197, 197) !important;
+  border: 0.2rem inset grey !important;
+
+}
+
+.nav-link {
+  color: black !important;
+  background-color: rgb(143, 143, 143) !important;
+  margin-right: 0.5vw;
+  border: 0.2rem outset grey !important;
+  border-top-right-radius: 0.5rem !important;
+  border-top-left-radius: 0.5rem !important;
+}
+
+.tab-content {
+  color: grey;
+  background-color: black;
+}
+
+.tabs-container {
+  background-color: black;
+  border-radius: 1rem;
+  border: 0.25rem outset grey;
+  padding: 1rem;
+}
+
+.details {
+  color: rgb(180, 180, 180);
+  background-color: rgb(0, 0, 0);
+  border-radius: 1rem;;
+  /* border: 2px solid rgb(248, 240, 121); */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  margin: 1vh auto;
+  width: 90%;
+  border-radius: 1vh;
+  color: rgb(0, 0, 0);
+  background-color: rgb(143, 143, 143) !important;
+}
+
+.name {
+  margin: 0.25vh;
+  font-size: 2vh;
+}
+
+.address {
+  margin: 0.25vh;
+  font-size: 1.5vh;
+}
+
 
 /*enter transition 800ms, exit 150ms */
 /* .fade-appear,
