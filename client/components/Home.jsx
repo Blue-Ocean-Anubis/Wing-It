@@ -4,7 +4,6 @@ import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from '../../config.js';
 Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.setLocationType('ROOFTOP');
 import GoogleMap from './GoogleMap.jsx';
-import List from './List.jsx';
 import AirportDetails from './AirportDetails.jsx';
 import PointsOfInterest from './PointsOfInterest.jsx';
 import RentalDetails from './RentalDetails.jsx';
@@ -25,6 +24,7 @@ const Home = () => {
   const [rentalData, setRentalData] = useState([]);
   const [airportData, setAirportData] = useState([]);
   const [points, setPoints] = useState([]);
+  const [currentTab, setCurrentTab] = useState('');
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
@@ -53,7 +53,6 @@ const Home = () => {
       country: (cityData[2] ? cityData[2] : cityData[1])
     };
 
-    console.log('test location: ', location);
     axios.get('/restaurants', {params: location})
       .then((restaurants) => {setRestaurantData(restaurants.data)})
       .catch((err) => {console.log('AxiosError: ', err)})
@@ -108,6 +107,11 @@ const Home = () => {
     // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData)
   })
 
+  const handleTabSelect = (event) => {
+    // console.log(event)
+    setCurrentTab(event);
+  }
+
   return (
     <div className='page'>
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
@@ -119,19 +123,20 @@ const Home = () => {
         restaurants={restaurantData}
         rentals={rentalData}
         airports={airportData}
+        currentTab={currentTab}
       />
       <Container className="border">
-        <Tabs defaultActiveKey="airport" id="uncontrolled-tab-example" className="mb-3">
-          <Tab eventKey="airport" title="Airports">
+        <Tabs defaultActiveKey="airport" id="uncontrolled-tab-example" className="mb-3" onSelect={handleTabSelect}>
+          <Tab eventKey="airports" title="Airports" >
             <AirportDetails airports={airportData} />
           </Tab>
-          <Tab eventKey="POI" title="Points of Interest">
+          <Tab eventKey="POI" title="Points of Interest" >
             <PointsOfInterest points={points} />
           </Tab>
-          <Tab eventKey="rental-details" title="Rentals">
+          <Tab eventKey="rentals" title="Rentals" >
             <RentalDetails rentals={rentalData} />
           </Tab>
-          <Tab eventKey="restaurants" title="Restaurants">
+          <Tab eventKey="restaurants" title="Restaurants" >
             <RestaurantDetails restaurants={restaurantData} />
           </Tab>
         </Tabs>

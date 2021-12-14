@@ -1,4 +1,7 @@
-
+.page {
+  font-family: 'Roboto Slab', serif;
+  background-color: #505c7c;
+}
 
 .airport-list-component {
   width: 50vw;
@@ -23,7 +26,7 @@
   margin: auto;
   display: flex;
   padding: 1rem;
-  justify-content: space-evenly;
+  justify-content: space-around;
   background-color: rgb(199, 199, 199);
   border-radius: 1rem;
   border: 4px solid grey;
@@ -125,16 +128,88 @@
   cursor:pointer;
 }
 
-.info-window {
+.marker-info {
   /* height: 8rem;
   width: 16rem; */
   width: fit-content;
-  block-size: fit-content;
-  font-size: 2rem;
-  text-align: center;
-  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  background-color: rgb(206, 206, 206);
   border: 2px solid black;
   border-radius: 0.5rem;
+}
+
+.marker-name {
+  font-family: 'Roboto Slab', serif;
+  white-space: nowrap;
+  font-size: 2rem;
+}
+
+.marker-address {
+  font-size: 1.5rem;
+}
+
+.tab-content {
+  height: 150vh
+}
+
+.rental-details {
+
+}
+
+.rental-list-container {
+
+}
+
+.nav-tabs {
+
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #e9a39c;
+  font-weight: bold;
+  background-color: #d4d4d4 !important;
+  /* NEW ADDED PART (START) */
+  color: #000000 !important;
+  font-family: YOUR-FONT FAMILY !important;
+  /* NEW ADDED PART (END) */
+
+ }
+
+ .nav-tabs>li>a {
+  color: #000000 !important;
+  font-family: YOUR-FONT FAMILY !important;
+ }
+
+.nav-item {
+  background-color: grey;
+  color: black;
+}
+.nav-link {
+  color: black;
+}
+
+button {}
+
+.rental-card {
+  height: 10vh;
+  margin: 1vh auto;
+  width: 90%;
+  border-radius: 1vh;
+  background-color: rgb(168, 168, 168);
+}
+
+.rental-name {
+  margin: 0.5vh;
+  font-size: 2vh;
+}
+
+.rental-address {
+  font-size: 1.5vh;
 }
 
 
