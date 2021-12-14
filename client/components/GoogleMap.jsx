@@ -58,7 +58,7 @@ const GoogleMap = (props) => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           Search a place that you would like to visit
-        <AutoCompleteMapSearch onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
+        <AutoCompleteMapSearch canvasClose={props.handleClose} onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
         </Offcanvas.Body>
       </Offcanvas>
       <GoogleMapReact
