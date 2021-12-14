@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, componentDidMount } from 'react';
 import Geocode from 'react-geocode';
 import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from '../../config.js';
 Geocode.setApiKey(GOOGLE_API_KEY);
