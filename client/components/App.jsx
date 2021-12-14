@@ -17,6 +17,8 @@ import {
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 import Home from "./Home.jsx";
+import WelcomePage from "./WelcomePage.jsx";
+import WelcomeBackPage from "./WelcomeBackPage.jsx";
 import UserProfile from "./UserProfile.jsx";
 import Cart from "./Cart.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
@@ -24,24 +26,17 @@ import Registration from "./auth/Registration.jsx";
 import Login from "./auth/Login.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import batwing from "./batwing.png";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import Button from 'react-bootstrap/Button';
 
 const App = () => {
-  // Set loading state to true initially (WELCOME PAGE STUFF)
   const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
-    // Wait for two second
-    await new Promise((r) => setTimeout(r, 250));
-
-    // Toggle loading state
+    await new Promise((r) => setTimeout(r, 1500));
     setLoading((loading) => !loading);
   };
   useEffect(() => {
     loadData();
   }, []);
-  ////////////////
 
   const location = useLocation();
 
@@ -73,6 +68,16 @@ const App = () => {
                         exact
                         path="/"
                         component={Home}
+                      ></PrivateRoute>
+                      <PrivateRoute
+                        exact
+                        path="/welcome"
+                        component={WelcomePage}
+                      ></PrivateRoute>
+                      <PrivateRoute
+                        exact
+                        path="/welcomeBack"
+                        component={WelcomeBackPage}
                       ></PrivateRoute>
                       <Route exact path="/search" component={Home}></Route>
                       <Route path="/register" component={Registration}></Route>

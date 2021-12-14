@@ -1,8 +1,7 @@
 import axios from "axios";
-import { errorMonitor } from "node-cache";
-import React, { useState, useRef, useContext, useEffect } from "react";
+
+import React, { useState, useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { RuntimeGlobals } from "webpack";
 import { AuthContext } from "./../contexts/AuthContext.jsx";
 
 const Registration = (props) => {
@@ -22,35 +21,34 @@ const Registration = (props) => {
   const [errorMessage, setError] = useState("");
   const history = useHistory();
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
     }
 
-    try {
-      const result = await signup(
-        emailRef.current.value,
-        passwordRef.current.value
-      );
-      setError("");
-      history.push("/");
-      await axios.post("/register", {
-        uid: result.user.uid,
-        firstName: firstNameRef.current.value,
-        lastName: lastNameRef.current.value,
-        email: emailRef.current.value,
-        street: streetRef.current.value,
-        city: cityRef.current.value,
-        state: stateRef.current.value,
-        country: countryRef.current.value,
-        zipCode: zipcodeRef.current.value,
-        phone: telRef.current.value,
+    signup(emailRef.current.value, passwordRef.current.value)
+      .then((results) => {
+        return axios.post("/register", {
+          uid: results.user.uid,
+          firstName: firstNameRef.current.value,
+          lastName: lastNameRef.current.value,
+          email: emailRef.current.value,
+          street: streetRef.current.value,
+          city: cityRef.current.value,
+          state: stateRef.current.value,
+          country: countryRef.current.value,
+          zipCode: zipcodeRef.current.value,
+          phone: telRef.current.value,
+        });
+      })
+      .then(() => {
+        history.push("/welcome");
+      })
+      .catch((e) => {
+        console.log(e);
+        setError("Failed to create account");
       });
-    } catch (error) {
-      setError(error.errorMessage);
-      console.error(error);
-    }
   }
 
   return (

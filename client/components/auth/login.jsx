@@ -11,23 +11,20 @@ const Login = (props) => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    try {
-      const result = await login(
-        emailRef.current.value,
-        passwordRef.current.value
-      );
-      setError("");
-      history.push("/");
-    } catch (error) {
-      setError(error);
-    }
+    login(emailRef.current.value, passwordRef.current.value)
+      .then(() => {
+        history.push("/welcomeBack");
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
   }
 
   async function handleLoginWithGoogle(e) {
     e.preventDefault();
     try {
       await loginWithGoogle();
-      history.push("/");
+      history.push("/welcomeBack");
     } catch (error) {
       setError(error);
     }

@@ -15,6 +15,10 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Container from "react-bootstrap/Container";
 import Nav from "./Nav.jsx";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader';
+import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle';
+import OffcanvasBody from 'react-bootstrap/OffcanvasBody';
 
 const Home = () => {
   const [userLocation, setUserLocation] = useState({});
@@ -31,6 +35,14 @@ const Home = () => {
   const [rentalData, setRentalData] = useState([]);
   const [airportData, setAirportData] = useState([]);
   const [points, setPoints] = useState([]);
+  const [show, setShow] = useState(false);
+
+  //SEARCH BAR OFFCANVAS CLICK HANDLER
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+
   const [currentTab, setCurrentTab] = useState('');
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
@@ -147,8 +159,10 @@ const Home = () => {
   return (
     <div className="page">
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
-      <Nav />
+      <Nav handleShow={handleShow} show={show}/>
       <GoogleMap
+        handleClose={handleClose}
+        show={show}
         searchedLocation={searchedLocation}
         userLocation={userLocation}
         userAddressLocation={userAddress.coordinates}
@@ -160,7 +174,7 @@ const Home = () => {
       />
       <Container className="tabs-container container">
         <Tabs
-          defaultActiveKey="airport"
+          defaultActiveKey="airports"
           id="uncontrolled-tab-example"
           className="mb-3"
           onSelect={handleTabSelect}
