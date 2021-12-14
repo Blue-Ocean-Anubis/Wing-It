@@ -25,7 +25,6 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    console.log("pls log out");
     return signOut(auth);
   };
 
