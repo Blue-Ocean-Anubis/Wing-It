@@ -9,7 +9,7 @@ const Login = (props) => {
   const [error, setError] = useState("");
   const { login, loginWithGoogle } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     login(emailRef.current.value, passwordRef.current.value)
       .then(() => {
@@ -18,18 +18,17 @@ const Login = (props) => {
       .catch((e) => {
         setError(e.message);
       });
-  };
+  }
 
-  const handleLoginWithGoogle = (e) => {
+  async function handleLoginWithGoogle(e) {
     e.preventDefault();
-    loginWithGoogle()
-      .then(() => {
-        history.push("/");
-      })
-      .catch((e) => {
-        setError(e.message);
-      });
-  };
+    try {
+      await loginWithGoogle();
+      history.push("/welcomeBack");
+    } catch (error) {
+      setError(error);
+    }
+  }
 
   return (
     <div className="login">
