@@ -1,3 +1,8 @@
+.page {
+  font-family: 'Roboto Slab', serif;
+  background-color: #505c7c;
+}
+
 .airport-list-component {
   width: 50vw;
   display: flex;
@@ -18,11 +23,11 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  margin: auto;
+  margin: 0rem auto;
   display: flex;
   padding: 1rem;
-  justify-content: space-evenly;
-  background-color: aliceblue;
+  justify-content: space-around;
+  background-color: rgb(199, 199, 199);
   border-radius: 1rem;
   border: 4px solid grey;
 }
@@ -79,12 +84,14 @@
   justify-content: center;
 }
 
-.location-search-input {
-  /* height: '80vh'; */
-  width: auto;
-  margin-bottom: 2px;
-  /* margin: '10vh auto 10vh auto' */
+.location-search-input{
+  width: 100%;
+  margin-bottom: 0.25rem;
+  background-color: aliceblue;
+  border-radius: 1rem;
+  border: 4px solid grey;
 }
+
 .point-card {
   border-style: solid;
   display: flex;
@@ -93,17 +100,17 @@
 
 .page {
   position: absolute;
-  top: 100px;
+  top: 0;
   left: 0;
   right: 0;
 }
 
-/*enter transition 300ms, exit 150ms */
 .fade-appear,
 .fade-enter {
   opacity: 0;
   z-index: 1;
 }
+
 .fade-appear-active,
 .fade-enter.fade-enter-active {
   opacity: 1;
@@ -119,50 +126,93 @@
   transition: opacity 150ms linear;
 }
 
-/*enter transition 800ms, exit 150ms */
-/* .fade-appear,
-.fade-enter {
-    opacity: 0;
-    z-index: 1;
-    transform: translateY(-10px);
+.marker {
+  cursor:pointer;
 }
-.fade-appear p,
-.fade-enter p {
-  transform: translateY(-5px);
-  opacity: 0;
+
+.marker-info {
+  /* height: 8rem;
+  width: 16rem; */
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  background-color: rgb(206, 206, 206);
+  border: 2px solid black;
+  border-radius: 0.5rem;
 }
-.fade-appear-active,
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms linear 150ms, transform 300ms ease-out 150ms;
+
+.marker-name {
+  font-family: 'Roboto Slab', serif;
+  white-space: nowrap;
+  font-size: 2rem;
 }
-.fade-appear-active p,
-.fade-enter.fade-enter-active p {
-  transform: translateY(0);
-  opacity: 1;
+
+.marker-address {
+  font-size: 1.5rem;
 }
-.fade-appear-active p:nth-child(2),
-.fade-enter.fade-enter-active p:nth-child(2) {
-  transition: opacity 300ms linear 300ms, transform 300ms ease-out 300ms;
+
+.tab-content {
+  height: 150vh
 }
-.fade-appear-active p:nth-child(3),
-.fade-enter.fade-enter-active p:nth-child(3) {
-  transition: opacity 300ms linear 400ms, transform 300ms ease-out 400ms;
+
+.nav-link.active {
+  color: black !important;
+  background-color: rgb(197, 197, 197) !important;
+  border: 0.2rem inset grey !important;
+
 }
-.fade-appear-active p:nth-child(4),
-.fade-enter.fade-enter-active p:nth-child(4) {
-  transition: opacity 300ms linear 500ms, transform 300ms ease-out 500ms;
+
+.nav-link {
+  color: black !important;
+  background-color: rgb(143, 143, 143) !important;
+  margin-right: 0.5vw;
+  border: 0.2rem outset grey !important;
+  border-top-right-radius: 0.5rem !important;
+  border-top-left-radius: 0.5rem !important;
 }
-.fade-exit {
-    opacity: 1;
-    transform: translateY(0);
+
+.tab-content {
+  color: grey;
+  background-color: black;
 }
-.fade-exit.fade-exit-active {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 150ms linear, transform 150ms ease-in;
-} */
+
+.tabs-container {
+  background-color: black;
+  border-radius: 1rem;
+  border: 0.25rem outset grey;
+  padding: 1rem;
+}
+
+.details {
+  color: rgb(180, 180, 180);
+  background-color: rgb(0, 0, 0);
+  border-radius: 1rem;;
+  /* border: 2px solid rgb(248, 240, 121); */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  margin: 1vh auto;
+  width: 90%;
+  border-radius: 1vh;
+  color: rgb(0, 0, 0);
+  background-color: rgb(143, 143, 143) !important;
+}
+
+.name {
+  margin: 0.25vh;
+  font-size: 2vh;
+}
+
+.address {
+  margin: 0.25vh;
+  font-size: 1.5vh;
+}
+
 
 
 html, body {
@@ -170,11 +220,8 @@ html, body {
   height:100vh;
 }
 
-
-
 .welcome-container{
   height: 100vh;
-  /* width: 100%; */
   background-color: #090909;
   display: flex;
   flex-direction: column;
@@ -183,9 +230,8 @@ html, body {
 }
 
 .batwing-logo{
-  animation: rotation 3s infinite linear;
+  animation: rotation 1.5s infinite linear;
   margin: 7rem;
-
 }
 
 @keyframes rotation {
@@ -201,7 +247,6 @@ html, body {
   color: white;
   font-weight: bolder;
   font-size: x-large;
-
   position: relative;
   font-family: Impact, sans-serif;
   font-size: 45px;
@@ -209,7 +254,8 @@ html, body {
   background: linear-gradient(90deg, rgba(189, 189, 189, 0), rgb(255, 255, 255), rgba(189, 189, 189, 0));
   background-repeat: no-repeat;
   background-size: 80%;
-  animation: animate 3s infinite;
+  animation: animate 2.5s infinite;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
 
@@ -224,6 +270,12 @@ html, body {
   }
 }
 
+.autocomplete{
+  width: 100%;
+}
 
+.autocomplete-dropdown-container{
+  width: 100%;
+}
 
 
