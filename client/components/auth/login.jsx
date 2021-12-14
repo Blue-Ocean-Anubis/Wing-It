@@ -13,7 +13,7 @@ const Login = (props) => {
     e.preventDefault();
     login(emailRef.current.value, passwordRef.current.value)
       .then(() => {
-        history.push("/");
+        history.push("/welcomeBack");
       })
       .catch((e) => {
         setError(e.message);

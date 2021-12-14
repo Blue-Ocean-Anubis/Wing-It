@@ -14,6 +14,16 @@ const Registration = (props) => {
   const [errorMessage, setError] = useState("");
   const history = useHistory();
 
+  ////
+  // const [userName, setUserName] = useState("");
+
+  // function handleUserName(userName){
+  //   // e.preventDefault();
+  //   props.handleUserNameSubmit(userName);
+  // }
+  /////
+  // console.log(props);
+
   function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
@@ -22,7 +32,10 @@ const Registration = (props) => {
     signup(emailRef.current.value, passwordRef.current.value)
       .then((results) => {
         setError("");
-        history.push("/");
+        // var splitEmail=emailRef.current.value.split('@');
+        // var userName=splitEmail[0];
+        // handleUserName(userName);
+        history.push("/welcome");
       })
       .catch((e) => {
         console.log(e);
