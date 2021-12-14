@@ -64,24 +64,6 @@ const Home = () => {
       country: noState ? cityData[1] : cityData[2],
     };
 
-<<<<<<< HEAD
-    axios.get('/restaurants', {params: location})
-      .then((restaurants) => {setRestaurantData(restaurants.data)})
-      .catch((err) => {console.log('Axios Error: ', err)})
-
-    axios.get('/rentals', {params: location})
-      .then((rentals) => {setRentalData(rentals.data)})
-      .catch((err) => {console.log('Axios Error: ', err)})
-
-    axios.get('/latLongNearestAirport', {params: location})
-      .then((airports) => {setAirportData(airports.data);})
-      .catch((err) => {console.log('Axios Error: ', err)})
-
-    axios.get('/POI', {params: location})
-      .then((points) => {setPoints(points.data);})
-      .catch((err) => {console.log('Axios Error: ', err)})
-  }, [searchedLocation])
-=======
     axios
       .get("/restaurants", { params: location })
       .then((restaurants) => {
@@ -99,7 +81,6 @@ const Home = () => {
       .catch((err) => {
         console.log("AxiosError: ", err);
       });
->>>>>>> cbf2e62100b6c9ee1ec676f767f68e7c4552b98d
 
     axios
       .get("/latLongNearestAirport", { params: location })
