@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CardButton from './CardButton.jsx';
 
 const RestaurantCard = ({ restaurant }) => {
   const [cardInfo, toggleCard] = useState(true);
@@ -9,6 +10,7 @@ const RestaurantCard = ({ restaurant }) => {
     }}>
       {<span className="name">{restaurant.name}</span>}
       {<span className="address">{restaurant.formatted_address}</span>}
+      <CardButton />
     </div>
   )
 }
