@@ -72,6 +72,11 @@ const GoogleMap = (props) => {
       }}
       >
         <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
-
+        {props.currentTab === 'airports' || props.currentTab === '' ? setMarkers(props.airports) : ''}
+        {props.currentTab === 'restaurants' ? setMarkers(props.restaurants) : ''}
+        {props.currentTab === 'rentals' ? setMarkers(props.rentals) : ''}
+      </GoogleMapReact>
+    </div>
+  );
 }
 export default GoogleMap;
