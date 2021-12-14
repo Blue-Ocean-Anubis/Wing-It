@@ -4,6 +4,13 @@ import { GOOGLE_API_KEY } from '../../config.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import AutoCompleteMapSearch from './AutoCompleteMapSearch.jsx';
+// require('dotenv').config();
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader';
+import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle';
+import OffcanvasBody from 'react-bootstrap/OffcanvasBody';
+
+// const Marker = () => <div><FontAwesomeIcon icon={faMapMarkerAlt} size="2x"/></div>;
 import Marker from './Marker.jsx';
 import MapStyling from './MapStyling.js'
 
@@ -12,6 +19,7 @@ const GoogleMap = (props) => {
   const handleMapClick = (event) => {
     props.onLocationChange(event.lat, event.lng);
   };
+
 
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation;
 
@@ -43,8 +51,16 @@ const GoogleMap = (props) => {
   }, [props.currentTab]);
 
   return (
-    <div style={{ height: '70vh', width: '85%', margin: '3vh auto 10vh auto' }}>
-      <AutoCompleteMapSearch onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
+    <div style={{ height: '70vh', width: '85%', margin: '2vh auto 2vh auto' }}>
+      <Offcanvas show={props.show} onHide={props.handleClose} placement='top'>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>City Search</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Search a place that you would like to visit
+        <AutoCompleteMapSearch canvasClose={props.handleClose} onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
+        </Offcanvas.Body>
+      </Offcanvas>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
         center={props.searchedLocation.city ? props.searchedLocation.coordinates : userLocation}
@@ -54,8 +70,6 @@ const GoogleMap = (props) => {
         options={{
           styles: MapStyling,
           clickableIcons: false,
-          // gestureHandling: 'cooperative',
-          disableDoubleClickZoom: true
       }}
       >
         {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/> */}
@@ -68,5 +82,5 @@ const GoogleMap = (props) => {
       </GoogleMapReact>
     </div>
   );
-};
+}
 export default GoogleMap;
