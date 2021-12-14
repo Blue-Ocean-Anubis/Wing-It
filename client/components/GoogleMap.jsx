@@ -35,11 +35,11 @@ const GoogleMap = (props) => {
   };
 
   useEffect(() => {
-    console.log('maps props: ', props);
+    // console.log('maps props: ', props);
   });
 
   useEffect(() => {
-    console.log(props.currentTab);
+    // console.log(props.currentTab);
   }, [props.currentTab]);
 
   return (
