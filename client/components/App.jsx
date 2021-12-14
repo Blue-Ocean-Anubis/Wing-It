@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
