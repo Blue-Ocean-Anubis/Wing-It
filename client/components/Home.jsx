@@ -174,7 +174,7 @@ const Home = () => {
       />
       <Container className="tabs-container container">
         <Tabs
-          defaultActiveKey="airport"
+          defaultActiveKey="airports"
           id="uncontrolled-tab-example"
           className="mb-3"
           onSelect={handleTabSelect}
