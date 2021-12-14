@@ -9,7 +9,7 @@ import MapStyling from './MapStyling.js'
 
 const GoogleMap = (props) => {
 
-  const handleMapClik = (event) => {
+  const handleMapClick = (event) => {
     props.onLocationChange(event.lat, event.lng);
   };
 
@@ -35,7 +35,7 @@ const GoogleMap = (props) => {
   };
 
   useEffect(() => {
-    console.log('maps props: ', props);
+    // console.log('maps props: ', props);
   });
 
   useEffect(() => {
@@ -49,18 +49,22 @@ const GoogleMap = (props) => {
         bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
         center={props.searchedLocation.city ? props.searchedLocation.coordinates : userLocation}
         defaultZoom={12}
-        onClick={handleMapClik}
+        onClick={handleMapClick}
         hoverDistance={1}
         options={{
           styles: MapStyling,
+          clickableIcons: false,
+          // gestureHandling: 'cooperative',
+          disableDoubleClickZoom: true
       }}
       >
-        <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
+        {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/> */}
 
-        {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
+        <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} />
         {props.currentTab === 'airports' || props.currentTab === '' ? setMarkers(props.airports) : ''}
         {props.currentTab === 'restaurants' ? setMarkers(props.restaurants) : ''}
         {props.currentTab === 'rentals' ? setMarkers(props.rentals) : ''}
+        {props.currentTab === 'POIs' ? setMarkers(props.POIs) : ''}
       </GoogleMapReact>
     </div>
   );

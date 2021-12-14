@@ -144,6 +144,10 @@
   border-radius: 0.5rem;
 }
 
+.exit-marker-info {
+  margin: 0.2rem;
+}
+
 .marker-name {
   font-family: 'Roboto Slab', serif;
   white-space: nowrap;
@@ -181,8 +185,7 @@
 
 .tabs-container {
   background-color: black;
-  border-radius: 1rem;
-  border: 0.25rem outset grey;
+  border: 0.1rem solid grey;
   padding: 1rem;
 }
 

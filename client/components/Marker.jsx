@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt, faMapPin, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 const Marker = (props) => {
 
@@ -14,11 +14,17 @@ const Marker = (props) => {
     setMouseOver(false);
   }
 
+  useEffect(() => {
+    // console.log(props.$hover)
+  })
+
   // console.log('props of each: ', props)
   return (
     <div className="marker">
-      <FontAwesomeIcon icon={faMapMarkerAlt} size='4x' color={props.name ? "DarkOrange" : "grey"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
-      {mouseOn ? <div className="marker-info" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <FontAwesomeIcon icon={faMapPin} size='3x' color={props.name ? "DarkOrange" : "grey"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMouseEnter}/>
+      {/* <img src={'https://maps.gstatic.com/mapfiles/place_api/icons/airport-71.png'}/> */}
+      {mouseOn ? <div className="marker-info" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMouseLeave}>
+        <FontAwesomeIcon icon={faTimes} size='sm' className="exit-marker-info" onClick={handleMouseLeave}/>
         <span className="marker-name">
           {props.name}
         </span>
