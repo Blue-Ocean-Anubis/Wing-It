@@ -9,20 +9,13 @@ import AirportDetails from "./AirportDetails.jsx";
 import PointsOfInterest from "./PointsOfInterest.jsx";
 import RentalDetails from "./RentalDetails.jsx";
 import RestaurantDetails from "./RestaurantDetails.jsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, useHistory } from "react-router-dom";
-import {
-  faUser,
-  faHome,
-  faSearch,
-  faShoppingCart,
-} from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Container from "react-bootstrap/Container";
+import Nav from "./Nav.jsx";
 
 const Home = () => {
   const [userLocation, setUserLocation] = useState({});
@@ -39,8 +32,6 @@ const Home = () => {
   const [rentalData, setRentalData] = useState([]);
   const [airportData, setAirportData] = useState([]);
   const [points, setPoints] = useState([]);
-  const { logout } = useContext(AuthContext);
-  const history = useHistory();
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
@@ -142,13 +133,6 @@ const Home = () => {
       });
   };
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    logout()
-      .then(() => history.push("/login"))
-      .catch(console.error);
-  };
-
   // ON COMPONENT MOUNT, FIND USERLOCATION AND COORDS FOR THEIR ADDRESS
   useEffect(() => {
     getUserLocation();
@@ -162,23 +146,7 @@ const Home = () => {
   return (
     <div className="page">
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
-      <nav className="navigation">
-        <Link to="/">
-          <FontAwesomeIcon icon={faHome} size="3x" />
-        </Link>
-        <Link to="/user">
-          <FontAwesomeIcon icon={faUser} size="3x" />
-        </Link>
-        <Link to="/search">
-          <FontAwesomeIcon icon={faSearch} size="3x" />
-        </Link>
-        <Link to="/cart">
-          <FontAwesomeIcon icon={faShoppingCart} size="3x" />
-        </Link>
-        <Link to="/login">
-          <button onClick={handleLogout}>Logout</button>
-        </Link>
-      </nav>
+      <Nav />
       <GoogleMap
         searchedLocation={searchedLocation}
         userLocation={userLocation}
