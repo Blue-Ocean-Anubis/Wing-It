@@ -44,13 +44,13 @@
   width: 1px;
 }
 
-.submission-form-container{
+.submission-form-container {
   position: relative;
   display: flex;
   min-width: 100px;
 }
 
-.search-bar{
+.search-bar {
   border: 1px solid grey;
   border-radius: 5px;
   height: 20px;
@@ -60,17 +60,18 @@
   background-color: #f5f5f5;
 }
 
-.search-button{
+.search-button {
   border: 1px solid grey;
   border-radius: 5px;
 }
 
-.search-bar:hover, .search-bar:focus {
+.search-bar:hover,
+.search-bar:focus {
   border: 1.5px solid #009688;
   background-color: white;
 }
 
-.search-container{
+.search-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -78,13 +79,13 @@
   justify-content: center;
 }
 
-.location-search-input{
+.location-search-input {
   /* height: '80vh'; */
   width: auto;
   margin-bottom: 2px;
   /* margin: '10vh auto 10vh auto' */
 }
-.point-card{
+.point-card {
   border-style: solid;
   display: flex;
   justify-content: space-between;
@@ -100,24 +101,23 @@
 /*enter transition 300ms, exit 150ms */
 .fade-appear,
 .fade-enter {
-    opacity: 0;
-    z-index: 1;
+  opacity: 0;
+  z-index: 1;
 }
 .fade-appear-active,
 .fade-enter.fade-enter-active {
-    opacity: 1;
-    transition: opacity 300ms linear 150ms;
+  opacity: 1;
+  transition: opacity 300ms linear 150ms;
 }
 
 .fade-exit {
-    opacity: 1;
+  opacity: 1;
 }
 
 .fade-exit.fade-exit-active {
-    opacity: 0;
-    transition: opacity 150ms linear;
+  opacity: 0;
+  transition: opacity 150ms linear;
 }
-
 
 /*enter transition 800ms, exit 150ms */
 /* .fade-appear,
