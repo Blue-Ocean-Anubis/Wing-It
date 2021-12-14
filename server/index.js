@@ -76,22 +76,22 @@ app.get("/restaurants", async (req, res) => {
   if (lat === undefined || lng === undefined) {
     return res.send([]);
   }
-  // let restaurants;
-  // try {
-  //   restaurants = await restaurant.getRestaurant({
-  //     city: city,
-  //     state: state,
-  //     country: country,
-  //   });
-  // } catch (err) {
-  //   restaurants = null;
-  //   console.log(err);
-  // }
+  let restaurants;
+  try {
+    restaurants = await restaurant.getRestaurant({
+      city: city,
+      state: state,
+      country: country,
+    });
+  } catch (err) {
+    restaurants = null;
+    console.log(err);
+  }
 
-  // if (restaurants !== null) {
-  //   res.send(JSON.parse(restaurants.apiResult));
-  //   return;
-  // }
+  if (restaurants !== null) {
+    res.send(JSON.parse(restaurants.apiResult));
+    return;
+  }
 
   client
     .textSearch({
@@ -237,11 +237,13 @@ app.get("/latLongNearestAirport", async (req, res) => {
       let airportData = JSON.parse(response.body);
       let responseData = [];
       airportData.data.map((airport) => {
+        console.log(airport);
         let airportDetail = {
           location: airport.geoCode,
           city: airport.address.cityName,
           country: airport.address.countryName,
           name: airport.name,
+          code: airport.iataCode,
         };
         responseData.push(airportDetail);
       });
