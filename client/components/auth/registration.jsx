@@ -1,26 +1,47 @@
 import React, { useState, useRef, useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "./contexts/AuthContext.jsx";
+import { Link, useHistory } from "react-router-dom";
+import { AuthContext } from "./../contexts/AuthContext.jsx";
 
-export function Registration(props) {
+const Registration = (props) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useContext(AuthContext);
+  const [errorMessage, setError] = useState("");
+  const history = useHistory();
+
+  ////
+  // const [userName, setUserName] = useState("");
+
+  // function handleUserName(userName){
+  //   // e.preventDefault();
+  //   props.handleUserNameSubmit(userName);
+  // }
+  /////
+  // console.log(props);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      console.error("Invalid Passwords");
-      return;
+      return setError("Passwords do not match");
     }
     signup(emailRef.current.value, passwordRef.current.value)
-      .then((results) => console.log(results))
-      .catch(console.error);
+      .then((results) => {
+        setError("");
+        // var splitEmail=emailRef.current.value.split('@');
+        // var userName=splitEmail[0];
+        // handleUserName(userName);
+        history.push("/welcome");
+      })
+      .catch((e) => {
+        console.log(e);
+        setError("Failed to create account");
+      });
   }
 
   return (
-    <>
+    <div className="registration-form">
+      {errorMessage && <div>{errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">email: </label>
         <input id="email" type="email" ref={emailRef} required />
@@ -38,6 +59,8 @@ export function Registration(props) {
       <div>
         Already have an account? <Link to="/login">Login</Link>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default Registration;
