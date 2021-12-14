@@ -1,18 +1,13 @@
 import React from 'react';
-
+import PointsOfInterestCard from './PointsOfInterestCard.jsx';
 
 const PointsOfInterest = (props) => (
     <div className="details">
     <h3>Points Of Interest</h3>
       <div className="list-container">
       {props.points.map((point) => (
-        <div key={point.name} className="card" onClick={() => {console.log(point.location)}}>
-          {<span key={point.name} className="name">{point.name}</span>}
-          {<span key={point.rank}>Ranked {point.rank} of 5</span>}
-          {<span key={point.category}>{point.category}</span>}
-          {<span key='poi-tags' onClick={() => {alert(point.tags)}}>Click Me to See Tags</span>}
-        </div>
-        ))}
+        <PointsOfInterestCard key={point.place_id} point={point} />
+      ))}
       </div>
     </div>
 )
