@@ -5,7 +5,7 @@ const RestaurantCard = ({ restaurant }) => (
   <div className="card">
     {<span className="name">{restaurant.name}</span>}
     {<span className="address">{restaurant.formatted_address}</span>}
-    <CardButton />
+    <CardButton restaurant={restaurant}/>
   </div>
 )
 
