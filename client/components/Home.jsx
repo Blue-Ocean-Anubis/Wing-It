@@ -9,6 +9,10 @@ import AirportDetails from './AirportDetails.jsx';
 import PointsOfInterest from './PointsOfInterest.jsx';
 import RentalDetails from './RentalDetails.jsx';
 import RestaurantDetails from './RestaurantDetails.jsx';
+import { Button } from 'react-bootstrap';
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab';
+import Container from 'react-bootstrap/Container';
 import axios from 'axios';
 
 const Home = () => {
@@ -118,10 +122,22 @@ const Home = () => {
         rentals={rentalData}
         airports={airportData}
       />
-      <AirportDetails airports={airportData} />
-      <PointsOfInterest points={points} />
-      <RentalDetails rentals={rentalData} />
-      <RestaurantDetails restaurants={restaurantData} />
+      <Container className="border">
+        <Tabs defaultActiveKey="airport" id="uncontrolled-tab-example" className="mb-3">
+          <Tab eventKey="airport" title="Airports">
+            <AirportDetails airports={airportData} />
+          </Tab>
+          <Tab eventKey="POI" title="Points of Interest">
+            <PointsOfInterest points={points} />
+          </Tab>
+          <Tab eventKey="rental-details" title="Rentals">
+            <RentalDetails rentals={rentalData} />
+          </Tab>
+          <Tab eventKey="restaurants" title="Restaurants">
+            <RestaurantDetails restaurants={restaurantData} />
+          </Tab>
+        </Tabs>
+      </Container>
     </div>
   );
 };
