@@ -15,11 +15,6 @@ import Marker from './Marker.jsx';
 import MapStyling from './MapStyling.js'
 
 const GoogleMap = (props) => {
-  // const [show, setShow] = useState(false);
-
-  // // search bar offcanvas handlers
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
 
   const handleMapClik = (event) => {
     props.onLocationChange(event.lat, event.lng);
