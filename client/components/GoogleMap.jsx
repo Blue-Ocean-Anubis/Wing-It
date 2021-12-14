@@ -6,14 +6,24 @@ import SearchBox from './SearchBox.jsx';
 import { GOOGLE_API_KEY } from '../../config.js';
 import AutoCompleteMapSearch from './AutoCompleteMapSearch.jsx';
 // require('dotenv').config();
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader';
+import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle';
+import OffcanvasBody from 'react-bootstrap/OffcanvasBody';
 
 const Marker = () => <div><FontAwesomeIcon icon={faMapMarkerAlt} size="2x"/></div>;
 
 const GoogleMap = (props) => {
+  // const [show, setShow] = useState(false);
+
+  // // search bar offcanvas handlers
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   const handleMapClik = (event) => {
     props.onLocationChange(event.lat, event.lng)
   }
+
 
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation;
 
@@ -43,7 +53,15 @@ const GoogleMap = (props) => {
 
     return (
       <div style={{ height: '80vh', width: '90%', margin: '3vh auto 10vh auto'}}>
+        <Offcanvas show={props.show} onHide={props.handleClose} placement='top'>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>City Search</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Search a place that you would like to visit
         <AutoCompleteMapSearch onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
+        </Offcanvas.Body>
+      </Offcanvas>
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
           center={props.searchedLocation.city ? props.searchedLocation.coordinates : userLocation}
