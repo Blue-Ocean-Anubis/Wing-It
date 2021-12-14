@@ -1,4 +1,6 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import axios from "axios";
+
+import React, { useState, useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "./../contexts/AuthContext.jsx";
 
@@ -8,33 +10,39 @@ const Registration = (props) => {
   const passwordConfirmRef = useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
-  const addressRef = useRef();
+  const streetRef = useRef();
+  const cityRef = useRef();
+  const stateRef = useRef();
+  const countryRef = useRef();
+  const zipcodeRef = useRef();
+
   const telRef = useRef();
   const { signup } = useContext(AuthContext);
   const [errorMessage, setError] = useState("");
   const history = useHistory();
-
-  ////
-  // const [userName, setUserName] = useState("");
-
-  // function handleUserName(userName){
-  //   // e.preventDefault();
-  //   props.handleUserNameSubmit(userName);
-  // }
-  /////
-  // console.log(props);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
     }
+
     signup(emailRef.current.value, passwordRef.current.value)
       .then((results) => {
-        setError("");
-        // var splitEmail=emailRef.current.value.split('@');
-        // var userName=splitEmail[0];
-        // handleUserName(userName);
+        return axios.post("/register", {
+          uid: results.user.uid,
+          firstName: firstNameRef.current.value,
+          lastName: lastNameRef.current.value,
+          email: emailRef.current.value,
+          street: streetRef.current.value,
+          city: cityRef.current.value,
+          state: stateRef.current.value,
+          country: countryRef.current.value,
+          zipCode: zipcodeRef.current.value,
+          phone: telRef.current.value,
+        });
+      })
+      .then(() => {
         history.push("/welcome");
       })
       .catch((e) => {
@@ -71,13 +79,50 @@ const Registration = (props) => {
           placeholder="email"
           required
         />
-        <label htmlFor="address">address</label>
+        <label htmlFor="street">Street</label>
         <input
-          id="address"
+          id="street"
           type="text"
           autoComplete="on"
-          ref={addressRef}
-          placeholder="Address"
+          ref={streetRef}
+          placeholder="street"
+          required
+        />
+        <label htmlFor="city">City</label>
+        <input
+          id="city"
+          type="text"
+          ref={cityRef}
+          autoComplete="on"
+          placeholder="City"
+          required
+        />
+        <label htmlFor="state">State</label>
+        <input
+          id="state"
+          type="text"
+          ref={stateRef}
+          autoComplete="on"
+          placeholder="State"
+          required
+        />
+        <label htmlFor="city">Country</label>
+        <input
+          id="country"
+          type="text"
+          ref={countryRef}
+          autoComplete="on"
+          placeholder="Country"
+          required
+        />
+        <label htmlFor="zip-code">Zip Code</label>
+        <input
+          id="zip-code"
+          type="number"
+          maxLength="10"
+          ref={zipcodeRef}
+          autoComplete="on"
+          placeholder="12345"
           required
         />
         <label htmlFor="phone">Phone number</label>
