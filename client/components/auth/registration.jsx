@@ -33,10 +33,17 @@ const Registration = (props) => {
         <label htmlFor="email">email: </label>
         <input id="email" type="email" ref={emailRef} required />
         <label htmlFor="password">Password: </label>
-        <input id="password" type="password" ref={passwordRef} required />
+        <input
+          id="password"
+          type="password"
+          autoComplete="on"
+          ref={passwordRef}
+          required
+        />
         <label htmlFor="confim-password">Confirm password: </label>
         <input
           id="confirm-password"
+          autoComplete="on"
           type="password"
           ref={passwordConfirmRef}
           required
