@@ -35,7 +35,7 @@ const GoogleMap = (props) => {
   };
 
   useEffect(() => {
-    // console.log('maps props: ', props);
+    console.log('maps props: ', props);
   });
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const GoogleMap = (props) => {
   }, [props.currentTab]);
 
   return (
-    <div style={{ height: '80vh', width: '90%', margin: '3vh auto 10vh auto' }}>
+    <div style={{ height: '70vh', width: '90%', margin: '3vh auto 10vh auto' }}>
       <AutoCompleteMapSearch onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_API_KEY }}

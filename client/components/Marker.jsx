@@ -17,8 +17,8 @@ const Marker = (props) => {
   // console.log('props of each: ', props)
   return (
     <div className="marker">
-      <FontAwesomeIcon icon={faMapMarkerAlt} size='4x' color={props.name ? "DarkOrange" : "grey"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
-      {mouseOn ? <div className="marker-info" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <FontAwesomeIcon icon={faMapMarkerAlt} size='4x' color={props.name ? "DarkOrange" : "grey"} onClick={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
+      {mouseOn ? <div className="marker-info" onMouseEononnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <span className="marker-name">
           {props.name}
         </span>
