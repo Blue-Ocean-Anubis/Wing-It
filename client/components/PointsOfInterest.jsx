@@ -2,19 +2,20 @@ import React from 'react';
 
 
 const PointsOfInterest = (props) => (
-    <div className="poi-details">
-    <h3>Points Of Interest</h3>
-      <div className="poi-list-container">
+  <div className="poi-details">
+  <h3>Points Of Interest</h3>
+    <div className="poi-list-container">
       {props.points.map((point) => (
-        <div key={point.name} className="point-card" onClick={() => {console.log(point.location)}}>
-          {<span key={point.name}>{point.name}</span>}
-          {<span key={point.rank}>Ranked {point.rank} of 5</span>}
-          {<span key={point.category}>{point.category}</span>}
-          {<span key='poi-tags' onClick={() => {alert(point.tags)}}>Click Me to See Tags</span>}
+        <div key={point.place_id} className="point-card" onClick={() => {console.log(point.geometry.location)}}>
+          {<span>{point.name}</span>}
+          {<span>{point.rating} of 5</span>}
+          {<span>{point.category}</span>}
+          {<span>{point.types.filter(type => type !== 'point_of_interest' && type !== 'establishment')}
+          </span>}
         </div>
-        ))}
-      </div>
+      ))}
     </div>
+  </div>
 )
 
 export default PointsOfInterest;
