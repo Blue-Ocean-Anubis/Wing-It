@@ -17,16 +17,16 @@ const App = () => {
       <div className='app'>
         <nav className="navigation">
               <Link to="/">
-                <FontAwesomeIcon icon={faHome} size="3x" color="black"/>
+                <FontAwesomeIcon icon={faHome} size="2x" color="black"/>
               </Link>
               <Link to="/user">
-                <FontAwesomeIcon icon={faUser} size="3x" color="black"/>
+                <FontAwesomeIcon icon={faUser} size="2x" color="black"/>
               </Link>
               <Link to="/search">
-                <FontAwesomeIcon icon={faSearch} size="3x" color="black"/>
+                <FontAwesomeIcon icon={faSearch} size="2x" color="black"/>
               </Link>
               <Link to="/cart">
-                <FontAwesomeIcon icon={faShoppingCart} size="3x" color="black"/>
+                <FontAwesomeIcon icon={faShoppingCart} size="2x" color="black"/>
               </Link>
         </nav>
 

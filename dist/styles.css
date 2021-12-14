@@ -23,7 +23,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  margin: auto;
+  margin: 0rem auto;
   display: flex;
   padding: 1rem;
   justify-content: space-around;
@@ -163,39 +163,21 @@
 
 }
 
-.nav-tabs {
-
+.nav-link.active {
+  color: black !important;
+  background-color: rgb(197, 197, 197) !important;
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 3px solid #e9a39c;
-  font-weight: bold;
-  background-color: #d4d4d4 !important;
-  /* NEW ADDED PART (START) */
-  color: #000000 !important;
-  font-family: YOUR-FONT FAMILY !important;
-  /* NEW ADDED PART (END) */
 
- }
-
- .nav-tabs>li>a {
-  color: #000000 !important;
-  font-family: YOUR-FONT FAMILY !important;
- }
-
-.nav-item {
-  background-color: grey;
-  color: black;
-}
 .nav-link {
-  color: black;
+  color: black !important;
+  background-color: rgb(143, 143, 143) !important;
 }
 
 button {}
 
 .rental-card {
+  display: flex;
+  flex-direction: column;
   height: 10vh;
   margin: 1vh auto;
   width: 90%;
@@ -204,11 +186,12 @@ button {}
 }
 
 .rental-name {
-  margin: 0.5vh;
+  margin: 0.25vh;
   font-size: 2vh;
 }
 
 .rental-address {
+  margin: 0.25vh;
   font-size: 1.5vh;
 }
 
