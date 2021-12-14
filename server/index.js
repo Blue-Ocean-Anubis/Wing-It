@@ -237,7 +237,6 @@ app.get("/latLongNearestAirport", async (req, res) => {
       let airportData = JSON.parse(response.body);
       let responseData = [];
       airportData.data.map((airport) => {
-        console.log(airport);
         let airportDetail = {
           location: airport.geoCode,
           city: airport.address.cityName,
@@ -290,6 +289,7 @@ app.get("/cityNameAirport", (req, res) => {
           city: airport.address.cityName,
           country: airport.address.countryName,
           name: airport.name,
+          code: airport.iataCode,
         };
         responseData.push(airportDetail);
       });
