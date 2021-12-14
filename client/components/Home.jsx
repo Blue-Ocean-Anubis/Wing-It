@@ -158,14 +158,14 @@ const Home = () => {
         airports={airportData}
         currentTab={currentTab}
       />
-      <Container className="border">
+      <Container className="tabs-container container">
         <Tabs
           defaultActiveKey="airport"
           id="uncontrolled-tab-example"
           className="mb-3"
           onSelect={handleTabSelect}
         >
-          <Tab eventKey="airport" title="Airports">
+          <Tab eventKey="airports" title="Airports">
             <AirportDetails airports={airportData} />
           </Tab>
           <Tab eventKey="POI" title="Points of Interest" >

@@ -43,7 +43,7 @@ const GoogleMap = (props) => {
   }, [props.currentTab]);
 
   return (
-    <div style={{ height: '70vh', width: '90%', margin: '3vh auto 10vh auto' }}>
+    <div style={{ height: '70vh', width: '85%', margin: '3vh auto 10vh auto' }}>
       <AutoCompleteMapSearch onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
@@ -58,7 +58,7 @@ const GoogleMap = (props) => {
         <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
 
         {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
-        {props.currentTab === 'airports' ? setMarkers(props.airports) : ''}
+        {props.currentTab === 'airports' || props.currentTab === '' ? setMarkers(props.airports) : ''}
         {props.currentTab === 'restaurants' ? setMarkers(props.restaurants) : ''}
         {props.currentTab === 'rentals' ? setMarkers(props.rentals) : ''}
       </GoogleMapReact>

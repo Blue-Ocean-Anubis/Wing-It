@@ -2,14 +2,14 @@ import React from 'react';
 
 
 const AirportDetails = (props) => (
-    <div className="airport-details bg-dark text-warning">
+    <div className="details">
     <h3>Airport Information</h3>
-      <div className="airport-list-container">
+      <div className="list-container">
       {props.airports.map((airport) => (
-        <div key={airport.name + airport.city} className="airport-card row justify-content-between" onClick={() => {console.log(airport.location)}}>
-          {<span className="col bg-dark" key={`code${airport.code}`}>{`${airport.name}(${airport.code})`}</span>}
-          {<span className="col bg-dark" key={airport.city}>{airport.city}</span>}
-          {<span className="col bg-dark" key={airport.country}>{airport.country}</span>}
+        <div key={airport.name + airport.city} className="card" onClick={() => {console.log(airport.location)}}>
+          {<span className="name" key={`code${airport.code}`}>{`${airport.name}(${airport.code})`}</span>}
+          {<span className="address" key={airport.city}>{airport.city + ', ' + airport.country}</span>}
+          {/* {<span className="address" key={airport.country}>{airport.country}</span>} */}
         </div>
         ))}
       </div>

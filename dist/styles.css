@@ -155,22 +155,20 @@
   height: 150vh
 }
 
-.rental-details {
-
-}
-
-.rental-list-container {
-
-}
-
 .nav-link.active {
   color: black !important;
   background-color: rgb(197, 197, 197) !important;
+  border: 0.2rem inset grey !important;
+
 }
 
 .nav-link {
   color: black !important;
   background-color: rgb(143, 143, 143) !important;
+  margin-right: 0.5vw;
+  border: 0.2rem outset grey !important;
+  border-top-right-radius: 0.5rem !important;
+  border-top-left-radius: 0.5rem !important;
 }
 
 .tab-content {
@@ -178,25 +176,37 @@
   background-color: black;
 }
 
-button {}
+.tabs-container {
+  background-color: black;
+  border-radius: 1rem;
+  border: 0.25rem outset grey;
+  padding: 1rem;
+}
 
-.rental-card {
+.details {
+  color: rgb(180, 180, 180);
+  background-color: rgb(0, 0, 0);
+  border-radius: 1rem;;
+  /* border: 2px solid rgb(248, 240, 121); */
+}
+
+.card {
   display: flex;
   flex-direction: column;
   height: 10vh;
   margin: 1vh auto;
   width: 90%;
   border-radius: 1vh;
-  color: black;
-  background-color: rgb(168, 168, 168);
+  color: rgb(0, 0, 0);
+  background-color: rgb(143, 143, 143) !important;
 }
 
-.rental-name {
+.name {
   margin: 0.25vh;
   font-size: 2vh;
 }
 
-.rental-address {
+.address {
   margin: 0.25vh;
   font-size: 1.5vh;
 }
