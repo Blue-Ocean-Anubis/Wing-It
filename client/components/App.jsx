@@ -33,7 +33,7 @@ const App = () => {
 
   const loadData = async () => {
     // Wait for two second
-    await new Promise((r) => setTimeout(r, 2500));
+    await new Promise((r) => setTimeout(r, 250));
 
     // Toggle loading state
     setLoading((loading) => !loading);
