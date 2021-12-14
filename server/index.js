@@ -44,6 +44,12 @@ const getDetails = (placeId) => {
 const detailDecorator = async (resultsArray) => {
   let details = [];
 
+  resultsArray = resultsArray
+    .sort(function (a, b) {
+      return a["user_ratings_total"] - b["user_ratings_total"];
+    })
+    .reverse();
+
   resultsArray.forEach((result, i) => {
     if (i < 4) {
       details.push(getDetails(result.place_id));
@@ -70,27 +76,27 @@ app.get("/restaurants", async (req, res) => {
   if (lat === undefined || lng === undefined) {
     return res.send([]);
   }
-  let restaurants;
-  try {
-    restaurants = await restaurant.getRestaurant({
-      city: city,
-      state: state,
-      country: country,
-    });
-  } catch (err) {
-    restaurants = null;
-    console.log(err);
-  }
+  // let restaurants;
+  // try {
+  //   restaurants = await restaurant.getRestaurant({
+  //     city: city,
+  //     state: state,
+  //     country: country,
+  //   });
+  // } catch (err) {
+  //   restaurants = null;
+  //   console.log(err);
+  // }
 
-  if (restaurants !== null) {
-    res.send(JSON.parse(restaurants.apiResult));
-    return;
-  }
+  // if (restaurants !== null) {
+  //   res.send(JSON.parse(restaurants.apiResult));
+  //   return;
+  // }
 
   client
     .textSearch({
       params: {
-        query: "restaurant",
+        query: `${city} fine dining`,
         location: {
           lat: lat,
           lng: lng,
@@ -155,7 +161,7 @@ app.get("/rentals", async (req, res) => {
   client
     .textSearch({
       params: {
-        query: "car_rental",
+        query: `${city} exotic car rental`,
         location: {
           lat: lat,
           lng: lng,
@@ -305,6 +311,7 @@ app.get("/POI", async (req, res) => {
   if (lat === undefined || lng === undefined) {
     return res.send([]);
   }
+
   let poi;
   try {
     poi = await pointsOfInterest.getPointsOfInterest({
@@ -321,10 +328,11 @@ app.get("/POI", async (req, res) => {
     res.send(JSON.parse(poi.apiResult));
     return;
   }
+
   client
     .textSearch({
       params: {
-        query: "point_of_interest",
+        query: `${city} point of interest`,
         location: {
           lat: lat,
           lng: lng,
