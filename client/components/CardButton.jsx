@@ -5,6 +5,7 @@ import { AuthContext } from './contexts/AuthContext.jsx';
 
 const CardButton = ({ restaurant }) => {
   const [isLoading, setLoading] = useState(false);
+  const [inDatabase, toggleDatabase] = useState(false);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const CardButton = ({ restaurant }) => {
       })
       .then(() => {
         setLoading(false);
+        inDatabase ? toggleDatabase(false) : toggleDatabase(true);
       })
       .catch(err => {
         console.log('Add Item Error: ', err);
@@ -30,7 +32,7 @@ const CardButton = ({ restaurant }) => {
       disabled={isLoading}
       onClick={!isLoading ? handleClick : null}
     >
-      {isLoading ? 'Loading…' : 'Add Item'}
+      {isLoading ? 'Loading…' : inDatabase ? 'Remove Item' : 'Add Item'}
     </Button>
   );
 }
