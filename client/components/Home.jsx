@@ -144,7 +144,6 @@ const Home = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-
     logout()
       .then(() => history.push("/login"))
       .catch(console.error);
@@ -177,7 +176,7 @@ const Home = () => {
           <FontAwesomeIcon icon={faShoppingCart} size="3x" />
         </Link>
         <Link to="/login">
-          <button onClick={(e) => handleLogout(e)}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         </Link>
       </nav>
       <GoogleMap
