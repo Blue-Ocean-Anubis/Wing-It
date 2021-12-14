@@ -7,8 +7,7 @@ const Login = (props) => {
   let emailRef = useRef();
   let passwordRef = useRef();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const { login } = useContext(AuthContext);
+  const { login, loginWithGoogle } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +17,17 @@ const Login = (props) => {
       })
       .catch((e) => {
         setError(e.message);
-        console.log(e.message, e.code);
+      });
+  };
+
+  const handleLoginWithGoogle = (e) => {
+    e.preventDefault();
+    loginWithGoogle()
+      .then(() => {
+        history.push("/");
+      })
+      .catch((e) => {
+        setError(e.message);
       });
   };
 
@@ -38,6 +47,9 @@ const Login = (props) => {
         />
         <button>Login</button>
       </form>
+      <div className="google-login">
+        <button onClick={handleLoginWithGoogle}>Login with Google</button>
+      </div>
       <div>
         Don't have an account?
         <Link to="/register">Register for an account</Link>

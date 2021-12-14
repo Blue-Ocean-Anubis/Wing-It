@@ -4,7 +4,6 @@ import { GOOGLE_API_KEY, TEST_USER_ADDRESS } from "../../config.js";
 Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.setLocationType("ROOFTOP");
 import GoogleMap from "./GoogleMap.jsx";
-import List from "./List.jsx";
 import AirportDetails from "./AirportDetails.jsx";
 import PointsOfInterest from "./PointsOfInterest.jsx";
 import RentalDetails from "./RentalDetails.jsx";
@@ -16,6 +15,10 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Container from "react-bootstrap/Container";
 import Nav from "./Nav.jsx";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader';
+import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle';
+import OffcanvasBody from 'react-bootstrap/OffcanvasBody';
 
 const Home = () => {
   const [userLocation, setUserLocation] = useState({});
@@ -32,6 +35,15 @@ const Home = () => {
   const [rentalData, setRentalData] = useState([]);
   const [airportData, setAirportData] = useState([]);
   const [points, setPoints] = useState([]);
+  const [show, setShow] = useState(false);
+
+  //SEARCH BAR OFFCANVAS CLICK HANDLER
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+
+  const [currentTab, setCurrentTab] = useState('');
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
@@ -51,17 +63,13 @@ const Home = () => {
   useEffect(() => {
     console.log("new place clicked", searchedLocation);
 
-    let noState = false;
-    let cityData = searchedLocation.city.split(", ");
-    if (cityData.length < 3) {
-      noState = true;
-    }
+    let cityData = searchedLocation.city.split(', ');
     let location = {
       lat: searchedLocation.coordinates.lat,
       lng: searchedLocation.coordinates.lng,
       city: cityData[0],
-      state: noState ? "" : cityData[1],
-      country: noState ? cityData[1] : cityData[2],
+      state: (cityData[2] ? cityData[1] : ''),
+      country: (cityData[2] ? cityData[2] : cityData[1])
     };
 
     axios
@@ -143,11 +151,18 @@ const Home = () => {
     // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData)
   });
 
+  const handleTabSelect = (event) => {
+    // console.log(event)
+    setCurrentTab(event);
+  }
+
   return (
     <div className="page">
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
-      <Nav />
+      <Nav handleShow={handleShow} show={show}/>
       <GoogleMap
+        handleClose={handleClose}
+        show={show}
         searchedLocation={searchedLocation}
         userLocation={userLocation}
         userAddressLocation={userAddress.coordinates}
@@ -155,23 +170,25 @@ const Home = () => {
         restaurants={restaurantData}
         rentals={rentalData}
         airports={airportData}
+        currentTab={currentTab}
       />
-      <Container className="border">
+      <Container className="tabs-container container">
         <Tabs
           defaultActiveKey="airport"
           id="uncontrolled-tab-example"
           className="mb-3"
+          onSelect={handleTabSelect}
         >
-          <Tab eventKey="airport" title="Airports">
+          <Tab eventKey="airports" title="Airports">
             <AirportDetails airports={airportData} />
           </Tab>
-          <Tab eventKey="POI" title="Points of Interest">
+          <Tab eventKey="POI" title="Points of Interest" >
             <PointsOfInterest points={points} />
           </Tab>
-          <Tab eventKey="rental-details" title="Rentals">
+          <Tab eventKey="rentals" title="Rentals" >
             <RentalDetails rentals={rentalData} />
           </Tab>
-          <Tab eventKey="restaurants" title="Restaurants">
+          <Tab eventKey="restaurants" title="Restaurants" >
             <RestaurantDetails restaurants={restaurantData} />
           </Tab>
         </Tabs>
