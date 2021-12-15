@@ -33,6 +33,7 @@ const GoogleMap = (props) => {
       if (business[0].geometry) {
         // RENTAL AND RESTAURANT CASE
         return business.map((each, key) => {
+          console.log(each)
           return (
             <Marker
               lat={each.geometry.location.lat}
@@ -40,6 +41,7 @@ const GoogleMap = (props) => {
               key={key}
               name={each.name}
               address={each.formatted_address}
+              details={each.details}
             />
           );
         });
@@ -53,7 +55,7 @@ const GoogleMap = (props) => {
   };
 
   useEffect(() => {
-    // console.log('maps props: ', props);
+    console.log('maps props: ', props);
   });
 
   useEffect(() => {
