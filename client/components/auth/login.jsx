@@ -1,5 +1,6 @@
+import axios from "axios";
 import React, { useState, useRef, useContext } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "./../contexts/AuthContext.jsx";
 
 const Login = (props) => {
@@ -7,7 +8,7 @@ const Login = (props) => {
   let emailRef = useRef();
   let passwordRef = useRef();
   const [error, setError] = useState("");
-  const { login, loginWithGoogle } = useContext(AuthContext);
+  const { login, loginWithGoogle, setUser } = useContext(AuthContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,8 +24,14 @@ const Login = (props) => {
   async function handleLoginWithGoogle(e) {
     e.preventDefault();
     try {
-      await loginWithGoogle();
-      history.push("/welcomeBack");
+      const result = await loginWithGoogle();
+      const id = await axios.get(`user/${result.user.uid}`);
+      if (id.data) {
+        history.push("/welcomeBack");
+      } else {
+        setUser(result);
+        history.push("/complete-signup");
+      }
     } catch (error) {
       setError(error);
     }

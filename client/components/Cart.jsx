@@ -1,7 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Nav from "./Nav.jsx";
+import axios from "axios";
+import { AuthContext } from "./contexts/AuthContext.jsx";
 
 const Cart = () => {
+  const [list, getList] = useState();
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    axios
+      .get("/cart", {
+        params: {
+          uid: user.uid,
+        },
+      })
+      .then((list) => {
+        console.log("Success: ", list);
+        getList(list);
+      })
+      .catch((err) => {
+        console.log("Error retrieving user list: >>>>", err);
+      });
+  }, []);
+
   return (
     <div className="page">
       <Nav />
