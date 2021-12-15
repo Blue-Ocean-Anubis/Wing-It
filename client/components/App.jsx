@@ -17,8 +17,8 @@ import {
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 import Home from "./Home.jsx";
-import WelcomePage from './WelcomePage.jsx';
-import WelcomeBackPage from './WelcomeBackPage.jsx';
+import WelcomePage from "./WelcomePage.jsx";
+import WelcomeBackPage from "./WelcomeBackPage.jsx";
 import UserProfile from "./UserProfile.jsx";
 import Cart from "./Cart.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
