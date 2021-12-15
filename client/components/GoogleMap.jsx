@@ -43,7 +43,7 @@ const GoogleMap = (props) => {
   };
 
   useEffect(() => {
-    console.log('maps props: ', props);
+    // console.log('maps props: ', props);
   });
 
   useEffect(() => {
@@ -73,9 +73,9 @@ const GoogleMap = (props) => {
           draggableCursor: "crosshair"
       }}
       >
-        {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/> */}
+        <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
 
-        <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} />
+        {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
         {props.currentTab === 'airports' || props.currentTab === '' ? setMarkers(props.airports) : ''}
         {props.currentTab === 'restaurants' ? setMarkers(props.restaurants) : ''}
         {props.currentTab === 'rentals' ? setMarkers(props.rentals) : ''}
