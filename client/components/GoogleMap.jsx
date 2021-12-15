@@ -46,15 +46,7 @@ const GoogleMap = (props) => {
       } else {
         // AIRPORT CASE
         return business.map((each, key) => {
-          return (
-            <Marker
-              lat={each.location.latitude}
-              lng={each.location.longitude}
-              key={key}
-              name={each.name}
-              address={each.city}
-            />
-          );
+          return <Marker lat={each.location.latitude} lng={each.location.longitude} key={key} name={each.name} address={each.city} code={each.code}/>
         });
       }
     }
@@ -97,22 +89,15 @@ const GoogleMap = (props) => {
         options={{
           styles: MapStyling,
           clickableIcons: false,
-        }}
+          draggableCursor: "crosshair"
+      }}
       >
-        {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/> */}
-
-        <Marker
-          lat={props.userAddressLocation.lat}
-          lng={props.userAddressLocation.lng}
-        />
-        {props.currentTab === "airports" || props.currentTab === ""
-          ? setMarkers(props.airports)
-          : ""}
-        {props.currentTab === "restaurants"
-          ? setMarkers(props.restaurants)
-          : ""}
-        {props.currentTab === "rentals" ? setMarkers(props.rentals) : ""}
-        {props.currentTab === "POIs" ? setMarkers(props.POIs) : ""}
+        <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
+        {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
+        {props.currentTab === 'airports' || props.currentTab === '' ? setMarkers(props.airports) : ''}
+        {props.currentTab === 'restaurants' ? setMarkers(props.restaurants) : ''}
+        {props.currentTab === 'rentals' ? setMarkers(props.rentals) : ''}
+        {props.currentTab === 'POIs' ? setMarkers(props.POIs) : ''}
       </GoogleMapReact>
     </div>
   );
