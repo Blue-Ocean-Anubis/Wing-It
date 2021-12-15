@@ -25,9 +25,7 @@ const Nav = (props) => {
       <Link to="/">
         <FontAwesomeIcon icon={faHome} size="2x" color="black"/>
       </Link>
-      <Link to="/user">
-        <FontAwesomeIcon icon={faUser} size="2x" color="black"/>
-      </Link>
+        <FontAwesomeIcon icon={faUser} size="2x" color="black" variant="primary" onClick={props.handleCartShow}/>
         <FontAwesomeIcon icon={faSearch} size="2x" color="black" variant="primary" onClick={props.handleShow}/>
       <Link to="/cart">
         <FontAwesomeIcon icon={faShoppingCart} size="2x" color="black"/>
