@@ -59,8 +59,10 @@ const Login = (props) => {
         <button className="google-login-btn" onClick={handleLoginWithGoogle}>Login with Google</button>
       </div>
       <div className='login-link-to-registration-container'>
-        Don't have an account?
-        <Link className='login-link-to-registration' to="/register">Register for an account</Link>
+        <div className='login-no-account-text'>Don't have an account?</div>
+        <div>
+          <Link className='login-link-to-registration' to="/register">Register</Link>
+        </div>
       </div>
     </div>
    </div>

@@ -19,7 +19,7 @@ const WelcomePage = () => {
 
     return(
       <div className="welcome-container">
-        <div className="welcome-text">welcome to batbook, {userName}</div>
+        <div className="welcome-text">welcome</div>
         <img className="batwing-logo" src={batwing} alt="" />
       </div>
     );
