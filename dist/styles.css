@@ -263,9 +263,11 @@ html, body {
 }
 
 .welcome-text{
+  margin-left: 5%;
+  margin-right: 5%;
   color: white;
   font-weight: bolder;
-  font-size: x-large;
+  font-size: large;
   position: relative;
   font-family: Impact, sans-serif;
   font-size: 45px;
@@ -273,7 +275,7 @@ html, body {
   background: linear-gradient(90deg, rgba(189, 189, 189, 0), rgb(255, 255, 255), rgba(189, 189, 189, 0));
   background-repeat: no-repeat;
   background-size: 80%;
-  animation: animate 2.5s infinite;
+  animation: animate 3s infinite;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
