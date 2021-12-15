@@ -17,8 +17,6 @@ const Registration = (props) => {
   const [errorMessage, setError] = useState("");
   const history = useHistory();
 
-  console.log(user, "<<");
-
   function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
