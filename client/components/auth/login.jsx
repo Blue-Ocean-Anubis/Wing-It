@@ -25,11 +25,11 @@ const Login = (props) => {
     e.preventDefault();
     try {
       const result = await loginWithGoogle();
-      const id = axios.get(`user/${result.user.uid}`);
-      if (id) {
-        setUser(result);
+      const id = await axios.get(`user/${result.user.uid}`);
+      if (id.data) {
         history.push("/welcomeBack");
       } else {
+        setUser(result);
         history.push("/complete-signup");
       }
     } catch (error) {
