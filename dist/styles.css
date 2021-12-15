@@ -330,6 +330,17 @@ html, body {
   }
 }
 
+.user-profile-offcanvas {
+  background-color: #505c7c;
+}
+
+.offcanvas-body {
+  background-color: #505c7c;
+}
+
+.offcanvas-header {
+  background-color: #505c7c;
+}
 /* registration form styling */
 .registration-form-container{
   height: 100vh;
