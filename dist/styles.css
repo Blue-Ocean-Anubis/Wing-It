@@ -1,5 +1,3 @@
-
-
 .page {
   font-family: 'Roboto Slab', serif;
   background-color: #505c7c;
@@ -333,9 +331,172 @@ html, body {
 .user-profile-offcanvas {
   background-color: #505c7c;
 }
+
 .offcanvas-body {
   background-color: #505c7c;
 }
+
 .offcanvas-header {
   background-color: #505c7c;
 }
+/* registration form styling */
+.registration-form-container{
+  height: 100vh;
+  /* width: 25rem; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #505c7c;
+}
+
+.registration-form{
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-content: center;
+  border: solid 2px black;
+  border-radius: 5px;
+
+  background-color: rgb(199, 199, 199);
+}
+
+.registration-form-inputs{
+ /* width:25rem; */
+ border-radius: 5px;
+ border-color: black;
+ margin-left:3px;
+ margin-right: 3px;
+}
+
+.registration-form-labels{
+  font-weight: bolder;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.registration-form-button{
+  /* width:25rem; */
+  border-radius: 5px;
+  border-color: black;
+  margin-top:5px;
+  font-weight: bolder;
+
+  margin-left:3px;
+  margin-right: 3px;
+}
+
+.registration-link-to-login{
+  margin-top: 3px;
+  margin-left:5px;
+  /* margin-right: 3px; */
+}
+/* end registration form styling */
+
+/* page backgournd color: */
+/* background-color: #505c7c; */
+
+/* navbar color: */
+/* rgb(199, 199, 199); */
+
+/* login form styling */
+.login-container{
+  height: 100vh;
+  /* width: 25rem; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #505c7c;
+}
+
+.login-wrapper{
+  width: 25rem;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-content: center;
+  /* border: solid 2px black;
+  border-radius: 5px; */
+
+  /* background-color: rgb(199, 199, 199); */
+}
+
+.login-form{
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-content: center;
+  border: solid 2px black;
+  border-radius: 5px;
+  background-color: rgb(199, 199, 199);
+}
+
+.login-form-inputs{
+ border-radius: 5px;
+ border-color: black;
+ margin-left:3px;
+ margin-right: 3px;
+}
+
+.login-form-labels{
+  font-weight: bolder;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.login-link-to-registration-container{
+  /* margin-top: 3px;
+  margin-left:5px; */
+  font-weight: bolder;
+  color: black;
+  margin-top: 3px;
+}
+
+.login-link-to-registration{
+ color: white;
+ text-decoration: none;
+ margin-left: 3px;
+ /* margin-top: 3px; */
+}
+
+.login-link-to-registration:hover{
+  color: rgb(225, 223, 223);
+  text-decoration: underline;
+ }
+
+.login-btn{
+  border-radius: 5px;
+  border-color: black;
+  margin-top:5px;
+  margin-bottom: 5px;
+  font-weight: bolder;
+
+  margin-left:3px;
+  margin-right: 3px;
+}
+
+.google-login-container{
+  /* border-radius: 5px; */
+  /* border-color: black; */
+  /* margin-top:5px; */
+  /* font-weight: bolder; */
+
+  /* margin-left:3px; */
+  /* margin-right: 3px; */
+}
+
+.google-login-btn{
+  border-radius: 5px;
+  border-color: black;
+  margin-top:5px;
+  font-weight: bolder;
+
+  /* margin-left:3px; */
+  /* margin-right: 3px; */
+}
+/* end login form styling */
