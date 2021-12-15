@@ -9,7 +9,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader';
 import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle';
 import OffcanvasBody from 'react-bootstrap/OffcanvasBody';
-
+import batarang from './batarang.png';
 // const Marker = () => <div><FontAwesomeIcon icon={faMapMarkerAlt} size="2x"/></div>;
 import Marker from './Marker.jsx';
 import MapStyling from './MapStyling.js'
@@ -19,7 +19,6 @@ const GoogleMap = (props) => {
   const handleMapClik = (event) => {
     props.onLocationChange(event.lat, event.lng);
   };
-
 
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation;
 
@@ -57,8 +56,11 @@ const GoogleMap = (props) => {
           <Offcanvas.Title>City Search</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Search a place that you would like to visit
+          {/* Search a place that you would like to visit */}
         <AutoCompleteMapSearch canvasClose={props.handleClose} onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
+        <div className="batarang-movement-container">
+            <img className="batarang" src={batarang} alt="" />
+        </div>
         </Offcanvas.Body>
       </Offcanvas>
       <GoogleMapReact

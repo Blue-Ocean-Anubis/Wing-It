@@ -41,6 +41,9 @@ const Home = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // useEffect(() => {
+
+  // }, [show])
 
 
   const [currentTab, setCurrentTab] = useState('');
@@ -156,45 +159,87 @@ const Home = () => {
     setCurrentTab(event);
   }
 
-  return (
-    <div className="page">
-      {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
-      <Nav handleShow={handleShow} show={show}/>
-      <GoogleMap
-        handleClose={handleClose}
-        show={show}
-        searchedLocation={searchedLocation}
-        userLocation={userLocation}
-        userAddressLocation={userAddress.coordinates}
-        onLocationChange={onLocationChange}
-        restaurants={restaurantData}
-        rentals={rentalData}
-        airports={airportData}
-        currentTab={currentTab}
-      />
-      <Container className="tabs-container container">
-        <Tabs
-          defaultActiveKey="airports"
-          id="uncontrolled-tab-example"
-          className="mb-3"
-          onSelect={handleTabSelect}
-        >
-          <Tab eventKey="airports" title="Airports">
-            <AirportDetails airports={airportData} />
-          </Tab>
-          <Tab eventKey="POI" title="Points of Interest" >
-            <PointsOfInterest points={points} />
-          </Tab>
-          <Tab eventKey="rentals" title="Rentals" >
-            <RentalDetails rentals={rentalData} />
-          </Tab>
-          <Tab eventKey="restaurants" title="Restaurants" >
-            <RestaurantDetails restaurants={restaurantData} />
-          </Tab>
-        </Tabs>
-      </Container>
-    </div>
-  );
+  if(!show){
+    return (
+      <div className="page">
+        {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
+        <Nav handleShow={handleShow} show={show}/>
+        <GoogleMap
+          handleClose={handleClose}
+          show={show}
+          searchedLocation={searchedLocation}
+          userLocation={userLocation}
+          userAddressLocation={userAddress.coordinates}
+          onLocationChange={onLocationChange}
+          restaurants={restaurantData}
+          rentals={rentalData}
+          airports={airportData}
+          currentTab={currentTab}
+        />
+        <Container className="tabs-container container">
+          <Tabs
+            defaultActiveKey="airports"
+            id="uncontrolled-tab-example"
+            className="mb-3"
+            onSelect={handleTabSelect}
+          >
+            <Tab eventKey="airports" title="Airports">
+              <AirportDetails airports={airportData} />
+            </Tab>
+            <Tab eventKey="POI" title="Points of Interest" >
+              <PointsOfInterest points={points} />
+            </Tab>
+            <Tab eventKey="rentals" title="Rentals" >
+              <RentalDetails rentals={rentalData} />
+            </Tab>
+            <Tab eventKey="restaurants" title="Restaurants" >
+              <RestaurantDetails restaurants={restaurantData} />
+            </Tab>
+          </Tabs>
+        </Container>
+      </div>
+    );
+  } else {
+    return (
+        <div className="page">
+          {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
+          <Nav handleShow={handleShow} show={show}/>
+          <GoogleMap
+            handleClose={handleClose}
+            show={show}
+            searchedLocation={searchedLocation}
+            userLocation={userLocation}
+            userAddressLocation={userAddress.coordinates}
+            onLocationChange={onLocationChange}
+            restaurants={restaurantData}
+            rentals={rentalData}
+            airports={airportData}
+            currentTab={currentTab}
+          />
+          <Container className="tabs-container container">
+            <Tabs
+              defaultActiveKey="airports"
+              id="uncontrolled-tab-example"
+              className="mb-3"
+              onSelect={handleTabSelect}
+            >
+              <Tab eventKey="airports" title="Airports">
+                <AirportDetails airports={airportData} />
+              </Tab>
+              <Tab eventKey="POI" title="Points of Interest" >
+                <PointsOfInterest points={points} />
+              </Tab>
+              <Tab eventKey="rentals" title="Rentals" >
+                <RentalDetails rentals={rentalData} />
+              </Tab>
+              <Tab eventKey="restaurants" title="Restaurants" >
+                <RestaurantDetails restaurants={restaurantData} />
+              </Tab>
+            </Tabs>
+          </Container>
+        </div>
+      );
+  }
 };
 
 export default Home;
