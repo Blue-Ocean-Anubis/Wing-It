@@ -3,6 +3,7 @@ const { GOOGLE_API_KEY } = require("../config.js");
 const { Client } = require("@googlemaps/google-maps-services-js");
 const client = new Client({});
 const Promise = require("bluebird");
+const path = require("path");
 
 require("../db");
 const express = require("express");
@@ -487,6 +488,13 @@ app.get("/cart", async (req, res) => {
 });
 
 // setTimeout(dbRefresher, 1000);
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./../dist/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
