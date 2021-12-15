@@ -42,8 +42,9 @@ const getDetails = (placeId) => {
   });
 };
 
-const detailDecorator = async (resultsArray) => {
+const detailDecorator = async (resultsArray, limit) => {
   let details = [];
+  limit = limit || 5;
 
   resultsArray = resultsArray
     .sort(function (a, b) {
@@ -52,7 +53,7 @@ const detailDecorator = async (resultsArray) => {
     .reverse();
 
   resultsArray.forEach((result, i) => {
-    if (i < 4) {
+    if (i < limit) {
       details.push(getDetails(result.place_id));
     }
   });
@@ -418,6 +419,74 @@ app.get("/POI", async (req, res) => {
 //     });
 // });
 
+app.post("/register", async (req, res) => {
+  const {
+    uid,
+    firstName,
+    lastName,
+    email,
+    street,
+    city,
+    state = "N/A",
+    country,
+    zipCode,
+  } = req.body;
+  console.log(req.body);
+  try {
+    await user.saveUser({
+      _id: uid,
+      firstName,
+      lastName,
+      email,
+      address: {
+        street,
+        city,
+        state,
+        country,
+        zipCode,
+      },
+    });
+    res.send("COOL!");
+  } catch (err) {
+    console.error(err);
+  }
+});
+// user info:
+
+app.put("/toggleCart", async (req, res) => {
+  const { uid, cartItem } = req.body;
+  console.log(cartItem);
+  try {
+    const userData = await user.getUser({ _id: uid });
+
+    if (userData.cart.includes(cartItem)) {
+      console.log("Item is here!");
+      const itemIndex = userData.cart.indexOf(cartItem);
+      userData.cart.splice(itemIndex, 1);
+      await user.updateUser(uid, { cart: [...userData.cart] });
+      res.status(204).send("Item removed!");
+    } else {
+      await user.updateUser(uid, { cart: [...userData.cart, cartItem] });
+      res.status(200).send("Item Added!");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+// user Id:
+// cart item:
+
+app.get("/cart", async (req, res) => {
+  const { uid } = req.params;
+  try {
+    const userData = await user.getUser({ _id: uid });
+    res.send(JSON.parse(userData.cart));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 // setTimeout(dbRefresher, 1000);
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "./../dist/index.html"), function (err) {
@@ -430,3 +499,6 @@ app.get("/*", function (req, res) {
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+// turn each item in the lists into a tile.
+// each tile will have a different
