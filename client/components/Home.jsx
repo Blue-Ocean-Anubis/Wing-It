@@ -46,6 +46,9 @@ const Home = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // useEffect(() => {
+
+  // }, [show])
 
 
   const [currentTab, setCurrentTab] = useState('');
