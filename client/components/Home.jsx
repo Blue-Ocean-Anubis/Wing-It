@@ -9,6 +9,7 @@ import PointsOfInterest from "./PointsOfInterest.jsx";
 import RentalDetails from "./RentalDetails.jsx";
 import RestaurantDetails from "./RestaurantDetails.jsx";
 import { AuthContext } from "./contexts/AuthContext.jsx";
+import UserProfile from "./UserProfile.jsx";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import Tabs from "react-bootstrap/Tabs";
@@ -129,6 +130,7 @@ const Home = () => {
     axios
       .get(`/user/${user.uid}`)
       .then((results) => {
+        console.log('results.data', results.data);
         setUserData(results.data);
       })
       .catch((error) => console.error(error));
@@ -232,8 +234,7 @@ const Home = () => {
               <Offcanvas.Title>{` Hello, ${userData.firstName}`}</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <div>{userData.email}</div>
-              <div>{`${userData.address.city}, ${userData.address.state}`}</div>
+              <UserProfile details={userData} />
             </Offcanvas.Body>
           </>
         )}

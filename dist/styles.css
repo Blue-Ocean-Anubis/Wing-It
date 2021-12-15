@@ -329,3 +329,13 @@ html, body {
     visibility: hidden;
   }
 }
+
+.user-profile-offcanvas {
+  background-color: #505c7c;
+}
+.offcanvas-body {
+  background-color: #505c7c;
+}
+.offcanvas-header {
+  background-color: #505c7c;
+}
