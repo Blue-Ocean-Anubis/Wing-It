@@ -17,7 +17,7 @@ const Registration = (props) => {
   const zipcodeRef = useRef();
 
   const telRef = useRef();
-  const { signup } = useContext(AuthContext);
+  const { signup, user } = useContext(AuthContext);
   const [errorMessage, setError] = useState("");
   const history = useHistory();
 
@@ -52,35 +52,40 @@ const Registration = (props) => {
   }
 
   return (
-    <div className="registration-form">
+    <div className="registration-form-container">
       {errorMessage && <div>{errorMessage}</div>}
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name:</label>
+      <form className='registration-form' onSubmit={handleSubmit}>
+        <label className='registration-form-labels' htmlFor="firstName">First Name:</label>
         <input
+        className='registration-form-inputs'
           id="firstName"
           type="text"
-          placeholder="Firstname"
+          placeholder="First name"
           ref={firstNameRef}
           required
         />
-        <label htmlFor="lastName">Last Name:</label>
+        <label className='registration-form-labels' htmlFor="lastName">Last Name:</label>
         <input
+        className='registration-form-inputs'
           id="lastName"
           type="text"
           placeholder="Last Name"
           ref={lastNameRef}
           required
         />
-        <label htmlFor="email">email: </label>
+        <label className='registration-form-labels' htmlFor="email">email: </label>
         <input
+        className='registration-form-inputs'
           id="email"
           type="email"
           ref={emailRef}
-          placeholder="email"
+          autoComplete="on"
+          placeholder="email@example.com"
           required
         />
-        <label htmlFor="street">Street</label>
+        <label className='registration-form-labels' htmlFor="street">Street</label>
         <input
+        className='registration-form-inputs'
           id="street"
           type="text"
           autoComplete="on"
@@ -88,8 +93,9 @@ const Registration = (props) => {
           placeholder="street"
           required
         />
-        <label htmlFor="city">City</label>
+        <label className='registration-form-labels' htmlFor="city">City</label>
         <input
+        className='registration-form-inputs'
           id="city"
           type="text"
           ref={cityRef}
@@ -97,8 +103,9 @@ const Registration = (props) => {
           placeholder="City"
           required
         />
-        <label htmlFor="state">State</label>
+        <label className='registration-form-labels' htmlFor="state">State</label>
         <input
+        className='registration-form-inputs'
           id="state"
           type="text"
           ref={stateRef}
@@ -106,8 +113,9 @@ const Registration = (props) => {
           placeholder="State"
           required
         />
-        <label htmlFor="city">Country</label>
+        <label className='registration-form-labels' htmlFor="city">Country</label>
         <input
+        className='registration-form-inputs'
           id="country"
           type="text"
           ref={countryRef}
@@ -115,18 +123,20 @@ const Registration = (props) => {
           placeholder="Country"
           required
         />
-        <label htmlFor="zip-code">Zip Code</label>
+        <label className='registration-form-labels' htmlFor="zip-code">Zip Code</label>
         <input
+        className='registration-form-inputs'
           id="zip-code"
-          type="number"
+          type="text"
           maxLength="10"
           ref={zipcodeRef}
           autoComplete="on"
           placeholder="12345"
           required
         />
-        <label htmlFor="phone">Phone number</label>
+        <label className='registration-form-labels' htmlFor="phone">Phone number</label>
         <input
+        className='registration-form-inputs'
           id="phone"
           type="tel"
           ref={telRef}
@@ -134,27 +144,33 @@ const Registration = (props) => {
           maxLength="14"
           placeholder="(555)555-5555"
         />
-        <label htmlFor="password">Password: </label>
+        <label className='registration-form-labels' htmlFor="password">Password: </label>
         <input
+          className='registration-form-inputs'
           id="password"
           type="password"
           autoComplete="on"
           ref={passwordRef}
+          placeholder="New Password"
           required
         />
-        <label htmlFor="confim-password">Confirm password: </label>
+        <label className='registration-form-labels' htmlFor="confim-password">Confirm password: </label>
         <input
+          className='registration-form-inputs'
           id="confirm-password"
           autoComplete="on"
           type="password"
           ref={passwordConfirmRef}
+          placeholder="Confirm Password"
           required
         />
-        <button>Register</button>
-      </form>
-      <div>
+        <button
+        className='registration-form-button'
+        >Register</button>
+        <div className='registration-link-to-login'>
         Already have an account? <Link to="/login">Login</Link>
       </div>
+      </form>
     </div>
   );
 };
