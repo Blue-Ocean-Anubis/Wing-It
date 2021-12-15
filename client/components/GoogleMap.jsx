@@ -79,6 +79,9 @@ const GoogleMap = (props) => {
             canvasClose={props.handleClose}
             onLocationChange={props.onLocationChange}
           ></AutoCompleteMapSearch>
+          <div className="batarang-movement-container">
+            <img className="batarang" src={batarang} alt=""/>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
       <GoogleMapReact
