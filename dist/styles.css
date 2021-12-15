@@ -236,8 +236,6 @@
   font-size: 1.5vh;
 }
 
-
-
 html, body {
   margin:0px;
   height:100vh;
@@ -281,7 +279,6 @@ html, body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
-
 }
 
 @keyframes animate {
@@ -301,4 +298,34 @@ html, body {
   width: 100%;
 }
 
+/* batarang stuff */
+.batarang-movement-container{
+  animation: leftToRight 2s 1 linear;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
 
+@keyframes leftToRight {
+  from {
+    transform: translateX(-20%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.batarang{
+  animation:
+  rotation .25s infinite linear,
+  disappear 2s 1 forwards;
+  margin: 1rem;
+  height: 6rem;
+  width: 6rem;
+}
+
+@keyframes disappear {
+  to{
+    visibility: hidden;
+  }
+}

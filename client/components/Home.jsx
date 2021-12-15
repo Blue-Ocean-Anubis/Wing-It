@@ -36,11 +36,19 @@ const Home = () => {
   const [airportData, setAirportData] = useState([]);
   const [points, setPoints] = useState([]);
   const [show, setShow] = useState(false);
+  const [cart, setCart] = useState(false);
+
+  //CART OFF CANVAS CLICK HANDLER
+  const handleCartClose = () => setCart(false);
+  const handleCartShow = () => setCart(true);
 
   //SEARCH BAR OFFCANVAS CLICK HANDLER
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // useEffect(() => {
+
+  // }, [show])
 
 
   const [currentTab, setCurrentTab] = useState('');
@@ -173,8 +181,8 @@ const Home = () => {
   return (
     <div className="page">
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
-      <Nav handleShow={handleShow} show={show}/>
-      <GoogleMap className="map"
+      <Nav handleShow={handleShow} handleCartShow={handleCartShow} show={show}/>
+      <GoogleMap
         handleClose={handleClose}
         show={show}
         searchedLocation={searchedLocation}
@@ -208,6 +216,14 @@ const Home = () => {
           </Tab>
         </Tabs>
       </Container>
+      <Offcanvas show={cart} onHide={handleCartClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Put a title right here if you want one</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Put whatever you want in this area
+        </Offcanvas.Body>
+      </Offcanvas>
     </div>
   );
 };
