@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import AutoCompleteMapSearch from "./AutoCompleteMapSearch.jsx";
 // require('dotenv').config();
-import Offcanvas from "react-bootstrap/Offcanvas";
-import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
-import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
-import OffcanvasBody from "react-bootstrap/OffcanvasBody";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader';
+import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle';
+import OffcanvasBody from 'react-bootstrap/OffcanvasBody';
+import batarang from './batarang.png';
 
 // const Marker = () => <div><FontAwesomeIcon icon={faMapMarkerAlt} size="2x"/></div>;
 import Marker from "./Marker.jsx";
@@ -45,15 +46,7 @@ const GoogleMap = (props) => {
       } else {
         // AIRPORT CASE
         return business.map((each, key) => {
-          return (
-            <Marker
-              lat={each.location.latitude}
-              lng={each.location.longitude}
-              key={key}
-              name={each.name}
-              address={each.city}
-            />
-          );
+          return <Marker lat={each.location.latitude} lng={each.location.longitude} key={key} name={each.name} address={each.city} code={each.code}/>
         });
       }
     }
@@ -74,11 +67,13 @@ const GoogleMap = (props) => {
           <Offcanvas.Title>City Search</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Search a place that you would like to visit
           <AutoCompleteMapSearch
             canvasClose={props.handleClose}
             onLocationChange={props.onLocationChange}
           ></AutoCompleteMapSearch>
+          <div className="batarang-movement-container">
+            <img className="batarang" src={batarang} alt=""/>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
       <GoogleMapReact
@@ -94,22 +89,15 @@ const GoogleMap = (props) => {
         options={{
           styles: MapStyling,
           clickableIcons: false,
-        }}
+          draggableCursor: "crosshair"
+      }}
       >
-        {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/> */}
-
-        <Marker
-          lat={props.userAddressLocation.lat}
-          lng={props.userAddressLocation.lng}
-        />
-        {props.currentTab === "airports" || props.currentTab === ""
-          ? setMarkers(props.airports)
-          : ""}
-        {props.currentTab === "restaurants"
-          ? setMarkers(props.restaurants)
-          : ""}
-        {props.currentTab === "rentals" ? setMarkers(props.rentals) : ""}
-        {props.currentTab === "POIs" ? setMarkers(props.POIs) : ""}
+        <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/>
+        {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
+        {props.currentTab === 'airports' || props.currentTab === '' ? setMarkers(props.airports) : ''}
+        {props.currentTab === 'restaurants' ? setMarkers(props.restaurants) : ''}
+        {props.currentTab === 'rentals' ? setMarkers(props.rentals) : ''}
+        {props.currentTab === 'POIs' ? setMarkers(props.POIs) : ''}
       </GoogleMapReact>
     </div>
   );
