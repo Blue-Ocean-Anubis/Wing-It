@@ -17,7 +17,7 @@ const Registration = (props) => {
   const zipcodeRef = useRef();
 
   const telRef = useRef();
-  const { signup } = useContext(AuthContext);
+  const { signup, user } = useContext(AuthContext);
   const [errorMessage, setError] = useState("");
   const history = useHistory();
 
@@ -59,7 +59,7 @@ const Registration = (props) => {
         <input
           id="firstName"
           type="text"
-          placeholder="Firstname"
+          placeholder="First name"
           ref={firstNameRef}
           required
         />
