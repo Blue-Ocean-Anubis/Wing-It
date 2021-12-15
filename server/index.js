@@ -248,6 +248,7 @@ app.get("/latLongNearestAirport", async (req, res) => {
           country: airport.address.countryName,
           name: airport.name,
           code: airport.iataCode,
+          types: ["airport"]
         };
         responseData.push(airportDetail);
       });
