@@ -1,3 +1,5 @@
+
+
 .page {
   font-family: 'Roboto Slab', serif;
   background-color: #505c7c;
@@ -134,6 +136,7 @@
   /* height: 8rem;
   width: 16rem; */
   width: fit-content;
+  max-width: 40vw;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -143,14 +146,18 @@
   border-radius: 0.5rem;
 }
 
+.exit-marker-info {
+  margin: 0.2rem;
+}
+
 .marker-name {
   font-family: 'Roboto Slab', serif;
   white-space: nowrap;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .marker-address {
-  font-size: 1.5rem;
+  font-size: .75rem;
 }
 
 .tab-content {
@@ -180,8 +187,7 @@
 
 .tabs-container {
   background-color: black;
-  border-radius: 1rem;
-  border: 0.25rem outset grey;
+  border: 0.1rem solid grey;
   padding: 1rem;
 }
 

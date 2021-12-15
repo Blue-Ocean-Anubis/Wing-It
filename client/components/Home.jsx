@@ -63,14 +63,26 @@ const Home = () => {
   useEffect(() => {
     console.log("new place clicked", searchedLocation);
 
-    let cityData = searchedLocation.city.split(', ');
-    let location = {
-      lat: searchedLocation.coordinates.lat,
-      lng: searchedLocation.coordinates.lng,
-      city: cityData[0],
-      state: (cityData[2] ? cityData[1] : ''),
-      country: (cityData[2] ? cityData[2] : cityData[1])
-    };
+    let cityData, location;
+    if (searchedLocation.city) {
+      cityData = searchedLocation.city.split(', ');
+      location = {
+        lat: searchedLocation.coordinates.lat,
+        lng: searchedLocation.coordinates.lng,
+        city: cityData[0],
+        state: (cityData[2] ? cityData[1] : ''),
+        country: (cityData[2] ? cityData[2] : cityData[1])
+      };
+    } else { // IF NOTHING YET SEARCHED, DEFAULT TO USER ADDRESS
+      cityData = userAddress.string.split(', ');
+      location = {
+        lat: userAddress.coordinates.lat,
+        lng: userAddress.coordinates.lng,
+        city: cityData[0],
+        state: (cityData[2] ? cityData[1] : ''),
+        country: (cityData[2] ? cityData[2] : cityData[1])
+      };
+    }
 
     axios
       .get("/restaurants", { params: location })
@@ -96,8 +108,9 @@ const Home = () => {
         setAirportData(airports.data);
       })
       .catch((err) => {
-        console.log(error);
+        console.log(err);
       });
+
     axios
       .get("/POI", { params: location })
       .then((points) => {
@@ -106,7 +119,7 @@ const Home = () => {
       .catch((err) => {
         console.log("Axios Error: ", err);
       });
-  }, [searchedLocation]);
+  }, [searchedLocation, userAddress]);
 
   // GET USER LOCATION DATA
   const getUserLocation = () => {
@@ -143,12 +156,13 @@ const Home = () => {
 
   // ON COMPONENT MOUNT, FIND USERLOCATION AND COORDS FOR THEIR ADDRESS
   useEffect(() => {
-    getUserLocation();
     convertAddressToCoords(userAddress.string);
+    getUserLocation();
   }, []);
 
   useEffect(() => {
-    // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData)
+    // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData,
+    // '\nPOIs', points)
   });
 
   const handleTabSelect = (event) => {
@@ -170,6 +184,7 @@ const Home = () => {
         restaurants={restaurantData}
         rentals={rentalData}
         airports={airportData}
+        POIs={points}
         currentTab={currentTab}
       />
       <Container className="tabs-container container">
@@ -182,14 +197,14 @@ const Home = () => {
           <Tab eventKey="airports" title="Airports">
             <AirportDetails airports={airportData} />
           </Tab>
-          <Tab eventKey="POI" title="Points of Interest" >
-            <PointsOfInterest points={points} />
-          </Tab>
           <Tab eventKey="rentals" title="Rentals" >
             <RentalDetails rentals={rentalData} />
           </Tab>
           <Tab eventKey="restaurants" title="Restaurants" >
             <RestaurantDetails restaurants={restaurantData} />
+          </Tab>
+          <Tab eventKey="POIs" title="Points of Interest" >
+            <PointsOfInterest points={points} />
           </Tab>
         </Tabs>
       </Container>
