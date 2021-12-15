@@ -174,7 +174,7 @@ const Home = () => {
     <div className="page">
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
       <Nav handleShow={handleShow} show={show}/>
-      <GoogleMap
+      <GoogleMap className="map"
         handleClose={handleClose}
         show={show}
         searchedLocation={searchedLocation}

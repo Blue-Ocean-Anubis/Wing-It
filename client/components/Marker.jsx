@@ -25,6 +25,7 @@ const Marker = (props) => {
       {/* <img src={'https://maps.gstatic.com/mapfiles/place_api/icons/airport-71.png'}/> */}
       {mouseOn ? <div className="marker-info" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMouseLeave}>
         <FontAwesomeIcon icon={faTimes} size='sm' className="exit-marker-info" onClick={handleMouseLeave}/>
+        <span className='marker-airport-code'>{props.code}</span>
         <span className="marker-name">
           {props.name}
         </span>

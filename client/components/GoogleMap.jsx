@@ -36,14 +36,14 @@ const GoogleMap = (props) => {
         });
       } else { // AIRPORT CASE
         return business.map((each, key) => {
-          return <Marker lat={each.location.latitude} lng={each.location.longitude} key={key} name={each.name} address={each.city}/>
+          return <Marker lat={each.location.latitude} lng={each.location.longitude} key={key} name={each.name} address={each.city} code={each.code}/>
         });
       }
     }
   };
 
   useEffect(() => {
-    // console.log('maps props: ', props);
+    console.log('maps props: ', props);
   });
 
   useEffect(() => {
@@ -70,6 +70,7 @@ const GoogleMap = (props) => {
         options={{
           styles: MapStyling,
           clickableIcons: false,
+          draggableCursor: "crosshair"
       }}
       >
         {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng}/> */}
