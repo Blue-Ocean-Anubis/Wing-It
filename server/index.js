@@ -452,7 +452,7 @@ app.post("/register", async (req, res) => {
 });
 // user info:
 
-app.put("/toggleFromCart", async (req, res) => {
+app.put("/toggleCart", async (req, res) => {
   const { uid, cartItem } = req.body;
   try {
     const userData = await user.getUser({ _id: uid });
@@ -475,11 +475,11 @@ app.put("/toggleFromCart", async (req, res) => {
 // user Id:
 // cart item:
 
-app.get("/getCart", async (req, res) => {
+app.get("/cart", async (req, res) => {
   const { uid } = req.params;
   try {
     const userData = await user.getUser({ _id: uid });
-    res.send(userData.cart);
+    res.send(JSON.parse(userData.cart));
   } catch (err) {
     res.status(500).send(err);
   }
