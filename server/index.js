@@ -458,10 +458,6 @@ app.post("/register", async (req, res) => {
 
 app.put("/toggleCart", async (req, res) => {
   const { uid, cartItem } = req.body;
-<<<<<<< HEAD
-=======
-  console.log(cartItem, "<<");
->>>>>>> dev
   try {
     const userData = await user.getUser({ _id: uid });
 
