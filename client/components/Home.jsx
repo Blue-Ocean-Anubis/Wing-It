@@ -15,10 +15,10 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Container from "react-bootstrap/Container";
 import Nav from "./Nav.jsx";
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader';
-import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle';
-import OffcanvasBody from 'react-bootstrap/OffcanvasBody';
+import Offcanvas from "react-bootstrap/Offcanvas";
+import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
+import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
+import OffcanvasBody from "react-bootstrap/OffcanvasBody";
 
 const Home = () => {
   const [userLocation, setUserLocation] = useState({});
@@ -37,6 +37,8 @@ const Home = () => {
   const [points, setPoints] = useState([]);
   const [show, setShow] = useState(false);
   const [cart, setCart] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const { user } = useContext(AuthContext);
 
   //CART OFF CANVAS CLICK HANDLER
   const handleCartClose = () => setCart(false);
@@ -46,12 +48,7 @@ const Home = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // useEffect(() => {
-
-  // }, [show])
-
-
-  const [currentTab, setCurrentTab] = useState('');
+  const [currentTab, setCurrentTab] = useState("");
 
   // ON MAP CLICK, ADD COORDS AND CITY/COUNTRY TO SEARCHED LOCATION STATE
   const onLocationChange = (lat, lng) => {
@@ -73,22 +70,23 @@ const Home = () => {
 
     let cityData, location;
     if (searchedLocation.city) {
-      cityData = searchedLocation.city.split(', ');
+      cityData = searchedLocation.city.split(", ");
       location = {
         lat: searchedLocation.coordinates.lat,
         lng: searchedLocation.coordinates.lng,
         city: cityData[0],
-        state: (cityData[2] ? cityData[1] : ''),
-        country: (cityData[2] ? cityData[2] : cityData[1])
+        state: cityData[2] ? cityData[1] : "",
+        country: cityData[2] ? cityData[2] : cityData[1],
       };
-    } else { // IF NOTHING YET SEARCHED, DEFAULT TO USER ADDRESS
-      cityData = userAddress.string.split(', ');
+    } else {
+      // IF NOTHING YET SEARCHED, DEFAULT TO USER ADDRESS
+      cityData = userAddress.string.split(", ");
       location = {
         lat: userAddress.coordinates.lat,
         lng: userAddress.coordinates.lng,
         city: cityData[0],
-        state: (cityData[2] ? cityData[1] : ''),
-        country: (cityData[2] ? cityData[2] : cityData[1])
+        state: cityData[2] ? cityData[1] : "",
+        country: cityData[2] ? cityData[2] : cityData[1],
       };
     }
 
@@ -127,6 +125,13 @@ const Home = () => {
       .catch((err) => {
         console.log("Axios Error: ", err);
       });
+
+    axios
+      .get(`/user/${user.uid}`)
+      .then((results) => {
+        setUserData(results.data);
+      })
+      .catch((error) => console.error(error));
   }, [searchedLocation, userAddress]);
 
   // GET USER LOCATION DATA
@@ -176,12 +181,16 @@ const Home = () => {
   const handleTabSelect = (event) => {
     // console.log(event)
     setCurrentTab(event);
-  }
+  };
 
   return (
     <div className="page">
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
-      <Nav handleShow={handleShow} handleCartShow={handleCartShow} show={show}/>
+      <Nav
+        handleShow={handleShow}
+        handleCartShow={handleCartShow}
+        show={show}
+      />
       <GoogleMap
         handleClose={handleClose}
         show={show}
@@ -205,24 +214,24 @@ const Home = () => {
           <Tab eventKey="airports" title="Airports">
             <AirportDetails airports={airportData} />
           </Tab>
-          <Tab eventKey="rentals" title="Rentals" >
+          <Tab eventKey="rentals" title="Rentals">
             <RentalDetails rentals={rentalData} />
           </Tab>
-          <Tab eventKey="restaurants" title="Restaurants" >
+          <Tab eventKey="restaurants" title="Restaurants">
             <RestaurantDetails restaurants={restaurantData} />
           </Tab>
-          <Tab eventKey="POIs" title="Points of Interest" >
+          <Tab eventKey="POIs" title="Points of Interest">
             <PointsOfInterest points={points} />
           </Tab>
         </Tabs>
       </Container>
       <Offcanvas show={cart} onHide={handleCartClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Put a title right here if you want one</Offcanvas.Title>
+          <Offcanvas.Title>
+            Put a title right here if you want one
+          </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-          Put whatever you want in this area
-        </Offcanvas.Body>
+        <Offcanvas.Body>Put whatever you want in this area</Offcanvas.Body>
       </Offcanvas>
     </div>
   );
