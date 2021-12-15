@@ -62,11 +62,11 @@ const GoogleMap = (props) => {
 
   return (
     <div style={{ height: "70vh", width: "85%", margin: "2vh auto 2vh auto" }}>
-      <Offcanvas show={props.show} onHide={props.handleClose} placement="top">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>City Search</Offcanvas.Title>
+      <Offcanvas className='offcanvas-search' show={props.show} onHide={props.handleClose} placement="top">
+        <Offcanvas.Header className='offcanvas-header' closeButton>
+          <Offcanvas.Title className='offcanvas-title'>City Search</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className='offcanvas-body'>
           <AutoCompleteMapSearch
             canvasClose={props.handleClose}
             onLocationChange={props.onLocationChange}
