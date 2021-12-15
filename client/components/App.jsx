@@ -1,21 +1,6 @@
 import React, { useState, useEffect, componentDidMount } from "react";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Link,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { BrowserRouter, Route, Switch, useLocation } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faHome,
-  faSearch,
-  faShoppingCart,
-} from "@fortawesome/free-solid-svg-icons";
 import Home from "./Home.jsx";
 import WelcomePage from "./WelcomePage.jsx";
 import WelcomeBackPage from "./WelcomeBackPage.jsx";
@@ -62,8 +47,14 @@ const App = () => {
                 >
                   <AuthProvider>
                     <Switch location={location} key={location.pathname}>
-                      <Route path="/user" component={UserProfile}></Route>
-                      <Route path="/cart" component={Cart}></Route>
+                      <PrivateRoute
+                        path="/user"
+                        component={UserProfile}
+                      ></PrivateRoute>
+                      <PrivateRoute
+                        path="/cart"
+                        component={Cart}
+                      ></PrivateRoute>
                       <PrivateRoute
                         exact
                         path="/"
@@ -79,7 +70,11 @@ const App = () => {
                         path="/welcomeBack"
                         component={WelcomeBackPage}
                       ></PrivateRoute>
-                      <Route exact path="/search" component={Home}></Route>
+                      <PrivateRoute
+                        exact
+                        path="/search"
+                        component={Home}
+                      ></PrivateRoute>
                       <Route path="/register" component={Registration}></Route>
                       <Route path="/login" component={Login}></Route>
                     </Switch>
