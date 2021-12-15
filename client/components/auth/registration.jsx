@@ -79,7 +79,8 @@ const Registration = (props) => {
           id="email"
           type="email"
           ref={emailRef}
-          placeholder="email"
+          autoComplete="on"
+          placeholder="email@example.com"
           required
         />
         <label className='registration-form-labels' htmlFor="street">Street</label>
@@ -126,7 +127,7 @@ const Registration = (props) => {
         <input
         className='registration-form-inputs'
           id="zip-code"
-          type="number"
+          type="text"
           maxLength="10"
           ref={zipcodeRef}
           autoComplete="on"
@@ -150,6 +151,7 @@ const Registration = (props) => {
           type="password"
           autoComplete="on"
           ref={passwordRef}
+          placeholder="New Password"
           required
         />
         <label className='registration-form-labels' htmlFor="confim-password">Confirm password: </label>
@@ -159,6 +161,7 @@ const Registration = (props) => {
           autoComplete="on"
           type="password"
           ref={passwordConfirmRef}
+          placeholder="Confirm Password"
           required
         />
         <button
