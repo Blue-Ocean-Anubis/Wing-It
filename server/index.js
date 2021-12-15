@@ -478,12 +478,20 @@ app.put("/toggleCart", async (req, res) => {
 // cart item:
 
 app.get("/cart", async (req, res) => {
-  const { uid } = req.params;
+  const { uid } = req.query;
   try {
     const userData = await user.getUser({ _id: uid });
     res.send(JSON.parse(userData.cart));
   } catch (err) {
     res.status(500).send(err);
+  }
+});
+
+app.get("/user/:uid", async (req, res) => {
+  try {
+    res.send(await user.getUser({ _id: req.params.uid }));
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
