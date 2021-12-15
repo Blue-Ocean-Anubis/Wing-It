@@ -4,22 +4,24 @@ import axios from "axios";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 
 const Cart = () => {
-
-  const [list, getList] = useState([]);
+  const [list, getList] = useState();
   const { user } = useContext(AuthContext);
 
-  axios.get('/cart', {
-    params: {
-      uid: user.uid
-    }
-  })
-    .then(list => {
-      console.log('Success: ', list)
-      getList(list);
-    })
-    .catch(err => {
-      console.log('Error retrieving user list: ', err);
-    })
+  useEffect(() => {
+    axios
+      .get("/cart", {
+        params: {
+          uid: user.uid,
+        },
+      })
+      .then((list) => {
+        console.log("Success: ", list);
+        getList(list);
+      })
+      .catch((err) => {
+        console.log("Error retrieving user list: >>>>", err);
+      });
+  }, []);
 
   return (
     <div className="page">

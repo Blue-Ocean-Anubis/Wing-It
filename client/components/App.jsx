@@ -9,6 +9,7 @@ import Cart from "./Cart.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import Registration from "./auth/Registration.jsx";
 import Login from "./auth/Login.jsx";
+import CompleteSignup from "./auth/CompleteSignup";
 import PrivateRoute from "./PrivateRoute.jsx";
 import batwing from "./batwing.png";
 
@@ -77,6 +78,10 @@ const App = () => {
                       ></PrivateRoute>
                       <Route path="/register" component={Registration}></Route>
                       <Route path="/login" component={Login}></Route>
+                      <Route
+                        path="/complete-signup"
+                        component={CompleteSignup}
+                      ></Route>
                     </Switch>
                   </AuthProvider>
                 </CSSTransition>

@@ -1,13 +1,10 @@
 import axios from "axios";
 
 import React, { useState, useRef, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "./../contexts/AuthContext.jsx";
 
 const Registration = (props) => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const streetRef = useRef();
@@ -15,9 +12,8 @@ const Registration = (props) => {
   const stateRef = useRef();
   const countryRef = useRef();
   const zipcodeRef = useRef();
-
   const telRef = useRef();
-  const { signup, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [errorMessage, setError] = useState("");
   const history = useHistory();
 
@@ -27,26 +23,23 @@ const Registration = (props) => {
       return setError("Passwords do not match");
     }
 
-    signup(emailRef.current.value, passwordRef.current.value)
-      .then((results) => {
-        return axios.post("/register", {
-          uid: results.user.uid,
-          firstName: firstNameRef.current.value,
-          lastName: lastNameRef.current.value,
-          email: emailRef.current.value,
-          street: streetRef.current.value,
-          city: cityRef.current.value,
-          state: stateRef.current.value,
-          country: countryRef.current.value,
-          zipCode: zipcodeRef.current.value,
-          phone: telRef.current.value,
-        });
+    axios
+      .post("/register", {
+        uid: user.uid,
+        firstName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
+        email: user.email,
+        street: streetRef.current.value,
+        city: cityRef.current.value,
+        state: stateRef.current.value,
+        country: countryRef.current.value,
+        zipCode: zipcodeRef.current.value,
+        phone: telRef.current.value,
       })
       .then(() => {
         history.push("/welcome");
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(() => {
         setError("Failed to create account");
       });
   }
@@ -54,6 +47,10 @@ const Registration = (props) => {
   return (
     <div className="registration-form">
       {errorMessage && <div>{errorMessage}</div>}
+      <div>
+        <h2>Hi, {user.displayName}!</h2>
+        <p>Please finish signing up</p>
+      </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="firstName">First Name:</label>
         <input
@@ -69,15 +66,6 @@ const Registration = (props) => {
           type="text"
           placeholder="Last Name"
           ref={lastNameRef}
-          required
-        />
-        <label htmlFor="email">email: </label>
-        <input
-          id="email"
-          type="email"
-          ref={emailRef}
-          autoComplete="on"
-          placeholder="email@example.com"
           required
         />
         <label htmlFor="street">Street</label>
@@ -135,29 +123,8 @@ const Registration = (props) => {
           maxLength="14"
           placeholder="(555)555-5555"
         />
-        <label htmlFor="password">Password: </label>
-        <input
-          id="password"
-          type="password"
-          autoComplete="on"
-          ref={passwordRef}
-          placeholder="New Password"
-          required
-        />
-        <label htmlFor="confim-password">Confirm password: </label>
-        <input
-          id="confirm-password"
-          autoComplete="on"
-          type="password"
-          ref={passwordConfirmRef}
-          placeholder="Confirm Password"
-          required
-        />
         <button>Register</button>
       </form>
-      <div>
-        Already have an account? <Link to="/login">Login</Link>
-      </div>
     </div>
   );
 };
