@@ -14,6 +14,9 @@ var Amadeus = require("amadeus");
 
 const { restaurant, airport, pointsOfInterest, rental, user } =
   require("../db/schema").module;
+const { Card } = require("react-bootstrap");
+const { markAsUntransferable } = require("worker_threads");
+const { send } = require("process");
 
 var amadeus = new Amadeus({
   clientId: process.env.AMADEUS_KEY,
@@ -455,7 +458,7 @@ app.post("/register", async (req, res) => {
 
 app.put("/toggleCart", async (req, res) => {
   const { uid, cartItem } = req.body;
-  console.log(cartItem);
+  console.log(cartItem, "<<");
   try {
     const userData = await user.getUser({ _id: uid });
 
@@ -474,14 +477,16 @@ app.put("/toggleCart", async (req, res) => {
     res.status(500).send(err);
   }
 });
-// user Id:
-// cart item:
 
 app.get("/cart", async (req, res) => {
   const { uid } = req.query;
   try {
     const userData = await user.getUser({ _id: uid });
-    res.send(JSON.parse(userData.cart));
+    let cart = [];
+    for (let item of userData.cart) {
+      cart.push(JSON.parse(item));
+    }
+    res.send(cart);
   } catch (err) {
     res.status(500).send(err);
   }
