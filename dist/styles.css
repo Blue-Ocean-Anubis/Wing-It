@@ -133,11 +133,25 @@
 }
 
 .marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor:pointer;
 }
 
 .pin {
+  position: absolute;
   z-index: 0;
+  /* color: blue; */
+
+}
+
+.marker-index {
+  position: absolute;
+  z-index: 1;
+  font-family: 'Roboto Slab', serif;
+  color: white;
+  font-weight: bold;
 }
 
 .marker-info {

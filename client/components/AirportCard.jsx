@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import CardButton from "./CardButton.jsx";
 
-const AirportCard = ({ airport }) => (
+const AirportCard = ({ airport, index }) => (
   <div className="card">
+    <div className="card-indx">{index}</div>
     {
       <span
         className="name"

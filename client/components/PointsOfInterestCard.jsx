@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import CardButton from "./CardButton.jsx";
 
-const PointsOfInterestCard = ({ point }) => (
+const PointsOfInterestCard = ({ point, index }) => (
   <div className="card">
+    <div className="card-indx">{index}</div>
     {<span className="name">{point.name}</span>}
     {<span>{point.rating} of 5</span>}
     {<span>{point.category}</span>}
