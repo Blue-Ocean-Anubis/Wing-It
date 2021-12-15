@@ -478,6 +478,8 @@ app.put("/toggleCart", async (req, res) => {
 // cart item:
 
 app.get("/cart", async (req, res) => {
+  console.log('req.params: ', req.params);
+  console.log('req.body: ', req.body);
   const { uid } = req.params;
   try {
     const userData = await user.getUser({ _id: uid });
