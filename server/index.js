@@ -455,7 +455,6 @@ app.post("/register", async (req, res) => {
 
 app.put("/toggleCart", async (req, res) => {
   const { uid, cartItem } = req.body;
-  console.log(cartItem);
   try {
     const userData = await user.getUser({ _id: uid });
 
@@ -478,12 +477,10 @@ app.put("/toggleCart", async (req, res) => {
 // cart item:
 
 app.get("/cart", async (req, res) => {
-  console.log('req.params: ', req.params);
-  console.log('req.body: ', req.body);
-  const { uid } = req.params;
+  const { uid } = req.query;
   try {
     const userData = await user.getUser({ _id: uid });
-    res.send(JSON.parse(userData.cart));
+    res.send(userData.cart);
   } catch (err) {
     res.status(500).send(err);
   }

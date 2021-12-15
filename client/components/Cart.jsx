@@ -5,13 +5,16 @@ import { AuthContext } from "./contexts/AuthContext.jsx";
 
 const Cart = () => {
 
-  const [list, getList] = useState();
+  const [list, getList] = useState([]);
   const { user } = useContext(AuthContext);
-  console.log('user: ', user);
+
   axios.get('/cart', {
-    uid: user.uid
+    params: {
+      uid: user.uid
+    }
   })
     .then(list => {
+      console.log('Success: ', list)
       getList(list);
     })
     .catch(err => {
