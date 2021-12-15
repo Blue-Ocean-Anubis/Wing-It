@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 
 
 const UserProfile = (props) => {
-  console.log('details in userprofile component', props.details);
   return (
     <Form className="user-profile-offcanvas">
     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
