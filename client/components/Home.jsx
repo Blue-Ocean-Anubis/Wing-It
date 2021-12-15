@@ -226,12 +226,17 @@ const Home = () => {
         </Tabs>
       </Container>
       <Offcanvas show={cart} onHide={handleCartClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-            Put a title right here if you want one
-          </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>Put whatever you want in this area</Offcanvas.Body>
+        {!userData ? null : (
+          <>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>{` Hello, ${userData.firstName}`}</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <div>{userData.email}</div>
+              <div>{`${userData.address.city}, ${userData.address.state}`}</div>
+            </Offcanvas.Body>
+          </>
+        )}
       </Offcanvas>
     </div>
   );
