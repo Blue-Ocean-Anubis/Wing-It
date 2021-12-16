@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 import { Offcanvas } from "react-bootstrap";
 import UserProfile from "./UserProfile.jsx";
+import RemoveCard from "./RemoveCard.jsx";
 
 const Cart = () => {
   const [list, getList] = useState([]);
@@ -47,6 +48,7 @@ const Cart = () => {
             <div key={location.code}>
               <span>{`${location.name} (${location.code})`}</span>
               <span>{`${location.city}, ${location.country}`}</span>
+              <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
         <h2>Rentals</h2>
@@ -59,6 +61,7 @@ const Cart = () => {
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
+              <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
         <h2>Restaurants</h2>
@@ -71,6 +74,7 @@ const Cart = () => {
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
+              <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
         <h2>Interesting Places</h2>
@@ -88,6 +92,7 @@ const Cart = () => {
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
+              <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
 
