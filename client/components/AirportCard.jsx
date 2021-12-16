@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import CardButton from "./CardButton.jsx";
 
-const AirportCard = ({ airport }) => (
+const AirportCard = ({ airport, index, updateCart, cartList }) => (
   <div className="card">
+    <div className="card-index">{index}</div>
     {
       <span
         className="name"
@@ -14,7 +15,7 @@ const AirportCard = ({ airport }) => (
         {airport.city + ", " + airport.country}
       </span>
     }
-    <CardButton cartItem={airport} />
+    <CardButton cartItem={airport} updateCart={updateCart} cartList={cartList}/>
   </div>
 );
 

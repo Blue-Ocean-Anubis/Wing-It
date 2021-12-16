@@ -290,6 +290,7 @@ app.get("/latLongNearestAirport", async (req, res) => {
           country: airport.address.countryName,
           name: airport.name,
           code: airport.iataCode,
+          types: ["airport"]
         };
         responseData.push(airportDetail);
       });
@@ -411,7 +412,6 @@ app.post("/register", async (req, res) => {
 
 app.put("/toggleCart", async (req, res) => {
   const { uid, cartItem } = req.body;
-  console.log(cartItem, "<<");
   try {
     const userData = await user.getUser({ _id: uid });
 

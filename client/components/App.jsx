@@ -1,4 +1,4 @@
-import React, { useState, useEffect, componentDidMount } from "react";
+import React, { useState, useEffect, useContext, componentDidMount } from "react";
 import { BrowserRouter, Route, Switch, useLocation } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Home from "./Home.jsx";
