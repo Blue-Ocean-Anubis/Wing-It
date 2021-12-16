@@ -369,7 +369,22 @@ html, body {
 .user-profile-offcanvas {
   background-color: black;
 }
+.user-profile-spacing {
+  display: flex;
+}
 
+.offcanvas-body {
+  background-color: black;
+}
+
+.offcanvas-header {
+  background-color: black;
+  color: black;
+}
+.btn-close {
+  color: white;
+  background-color: white;
+}
 /* registration form styling */
 .registration-form-container{
   height: 100vh;

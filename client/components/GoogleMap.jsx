@@ -114,6 +114,7 @@ const GoogleMap = (props) => {
           styles: MapStyling,
           clickableIcons: false,
           draggableCursor: "crosshair",
+          disableDefaultUI: true,
         }}
       >
         {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng} /> */}
