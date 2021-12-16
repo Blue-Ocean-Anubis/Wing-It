@@ -131,7 +131,7 @@ const Home = () => {
     axios
       .get(`/user/${user.uid}`)
       .then((results) => {
-        console.log('results.data', results.data);
+        // console.log('results.data', results.data);
         setUserData(results.data);
       })
       .catch((error) => console.error(error));
