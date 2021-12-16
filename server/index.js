@@ -49,7 +49,8 @@ const getPhotos = (photoId) => {
   return client.placePhoto({
     params: {
       photo_reference: photoId,
-      maxwidth: 500,
+      maxwidth: 250,
+      maxheight: 250,
       key: GOOGLE_API_KEY,
     },
   });
@@ -167,7 +168,6 @@ app.get("/restaurants", async (req, res) => {
           apiResult: JSON.stringify(results),
         });
 
-        console.log(results[0]);
         res.send(results);
       } catch (err) {
         console.log(err);
@@ -386,7 +386,6 @@ app.post("/register", async (req, res) => {
     country,
     zipCode,
   } = req.body;
-  console.log(req.body);
   try {
     await user.saveUser({
       _id: uid,
@@ -413,7 +412,6 @@ app.put("/toggleCart", async (req, res) => {
     const userData = await user.getUser({ _id: uid });
 
     if (userData.cart.includes(cartItem)) {
-      console.log("Item is here!");
       const itemIndex = userData.cart.indexOf(cartItem);
       userData.cart.splice(itemIndex, 1);
       await user.updateUser(uid, { cart: [...userData.cart] });
