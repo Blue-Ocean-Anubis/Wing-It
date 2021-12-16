@@ -40,7 +40,6 @@ const RemoveCard = ({ cartItem, getList }) => {
       variant="dark"
       disabled={isLoading}
       onClick={!isLoading ? handleClick : null}
-      // style={inDatabase ? {backgroundColor: '#b56100'} : {}}
     >
       {isLoading ? "Loading" : "Remove Item"}
     </Button>
