@@ -3,7 +3,7 @@ import CardButton from "./CardButton.jsx";
 
 const PointsOfInterestCard = ({ point, index, updateCart, cartList }) => (
   <div className="card">
-    <div className="card-indx">{index}</div>
+    <div className="card-index">{index}</div>
     {<span className="name">{point.name}</span>}
     {<span>{point.rating} of 5</span>}
     {<span>{point.category}</span>}

@@ -27,7 +27,13 @@
   background-color: silver;
   /* background-color: black; */
   border-radius: 1rem;
-  border: 4px solid grey;
+  /* border: 4px solid grey; */
+  background-color: silver;
+  border: 1px solid grey;
+}
+
+.nav-button{
+  cursor: pointer;
 }
 
 .visually-hidden {
@@ -130,12 +136,9 @@
 }
 
 .pin {
-  /* z-index: 1; */
-  text-shadow: 0 0 3px #000;
   stroke: black;
-  stroke-width: 10;
+  stroke-width: 15;
 }
-
 
 .marker-index {
   transform: translate(1.1rem, -0.2rem);
@@ -195,6 +198,21 @@
   border-top-left-radius: 0.5rem !important;
 }
 
+@media (max-width: 1000px) {
+  .nav-item {
+    min-width: 35vw;
+    margin: 0.25vw 0.25vw 0vw 0.25vw;
+
+  }
+}
+
+.nav-item{
+  margin: 0.25vw 0.25vw 0vw 0.25vw;
+}
+
+/* .nav-tabs {
+} */
+
 .tab-content {
   color: grey;
   background-color: black;
@@ -202,11 +220,6 @@
   /* margin-top: 5px; */
 
 }
-
-/* .container{
-  margin-left: 5px;
-  margin-right: 5px;
-} */
 
 .tabs-container {
   background-color: black;
@@ -229,12 +242,21 @@
 
 .card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  /* display: grid;
+  grid-template: repeat(5, 20%) / repeat(5,20%); */
   margin: 1vh auto;
   width: 90%;
   border-radius: 1vh;
   color: rgb(0, 0, 0);
   background-color: rgb(143, 143, 143) !important;
+}
+
+.card-index {
+  align-self: center;
+  /* font-weight: 700;
+  margin: 0.5rem */
+  /* grid-area: 1 / 5 / 2 / 6; */
 }
 
 .name {
