@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState, useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "./../contexts/AuthContext.jsx";
+import batwing from "../batwing.png";
 
 const Registration = (props) => {
   const emailRef = useRef();
@@ -54,6 +55,9 @@ const Registration = (props) => {
   return (
     <div className="registration-form-container">
       {errorMessage && <div>{errorMessage}</div>}
+      <div className='registration-batwing-container'>
+        <img className="batwing-registration" src={batwing} alt="" />
+      </div>
       <form className='registration-form' onSubmit={handleSubmit}>
         <label className='registration-form-labels' htmlFor="firstName">First Name:</label>
         <input
@@ -167,10 +171,15 @@ const Registration = (props) => {
         <button
         className='registration-form-button'
         >Register</button>
-        <div className='registration-link-to-login'>
-        Already have an account? <Link to="/login">Login</Link>
-      </div>
+
       </form>
+      <div className='registration-link-to-login-container'>
+        <div className='already-text'>Already have an account? </div>
+        <div>
+
+          <Link className='register-to-login-link' to="/login">Login</Link>
+          </div>
+  </div>
     </div>
   );
 };

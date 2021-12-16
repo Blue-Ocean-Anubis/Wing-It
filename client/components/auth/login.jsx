@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "./../contexts/AuthContext.jsx";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import batwing from "../batwing.png";
 
 const Login = (props) => {
   const history = useHistory();
@@ -71,6 +72,9 @@ const Login = (props) => {
     <div className="login-container">
       <div className="login-wrapper">
         {error && <div>{error}</div>}
+        <div className='login-batwing-container'>
+          <img className="batwing-login" src={batwing} alt="" />
+        </div>
         <form className="login-form" onSubmit={handleSubmit}>
           <label className="login-form-labels" htmlFor="email">
             email:
@@ -132,15 +136,15 @@ const Login = (props) => {
                 </Modal.Footer>
               </form>
             </Modal>
-            <Button variant="primary" onClick={handleShow}>
+            <button  className='forgot-password-btn' onClick={handleShow}>
               Forgot Password?
-            </Button>
+            </button>
           </div>
         </div>
         <div className="login-link-to-registration-container">
           Don't have an account?
           <Link className="login-link-to-registration" to="/register">
-            Register for an account
+            Register here
           </Link>
         </div>
       </div>
