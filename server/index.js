@@ -45,6 +45,17 @@ const getDetails = (placeId) => {
   });
 };
 
+const getPhotos = (photoId) => {
+  return client.placePhoto({
+    params: {
+      photo_reference: photoId,
+      maxwidth: 250,
+      maxheight: 250,
+      key: GOOGLE_API_KEY,
+    },
+  });
+};
+
 const detailDecorator = async (resultsArray, limit) => {
   let details = [];
   limit = limit || 5;
@@ -73,9 +84,39 @@ const detailDecorator = async (resultsArray, limit) => {
   return resultsArray;
 };
 
+const photosDecorator = async (resultsArray, limit) => {
+  let photo = [];
+  limit = limit || 5;
+
+  resultsArray = resultsArray
+    .sort(function (a, b) {
+      return a["user_ratings_total"] - b["user_ratings_total"];
+    })
+    .reverse();
+
+  resultsArray.forEach((result, i) => {
+    if (i < limit) {
+      photo.push(getPhotos(result.photos[0].photo_reference));
+    }
+  });
+
+  photo = await Promise.all(photo);
+
+  photo = photo.map((response) => {
+    const { data } = response;
+    const img = "data:image/jpeg;base64," + data.toString("base64");
+    return img;
+  });
+
+  for (let i = 0; i < resultsArray.length; i++) {
+    resultsArray[i]["photo"] = photo[i];
+  }
+
+  return resultsArray;
+};
+
 /******************RESTAURANTS WITHIN CITY********************/
 app.get("/restaurants", async (req, res) => {
-  // May need to be altered based on front end inputs
   const { lat, lng, city, state = "N/A", country } = req.query;
 
   if (lat === undefined || lng === undefined) {
@@ -113,7 +154,8 @@ app.get("/restaurants", async (req, res) => {
     })
     .then(async (r) => {
       try {
-        const results = await detailDecorator(r.data.results);
+        let results = await detailDecorator(r.data.results);
+        results = await photosDecorator(results);
         await restaurant.saveRestaurant({
           city: city,
           state: state,
@@ -125,6 +167,7 @@ app.get("/restaurants", async (req, res) => {
           dateAdded: Date.now(),
           apiResult: JSON.stringify(results),
         });
+
         res.send(results);
       } catch (err) {
         console.log(err);
@@ -138,7 +181,6 @@ app.get("/restaurants", async (req, res) => {
 
 /******************CAR RENTALS WITHIN CITY********************/
 app.get("/rentals", async (req, res) => {
-  // May need to be altered based on front end inputs
   const { lat, lng, city, state = "N/A", country } = req.query;
 
   if (lat === undefined || lng === undefined) {
@@ -176,7 +218,8 @@ app.get("/rentals", async (req, res) => {
     })
     .then(async (r) => {
       try {
-        const results = await detailDecorator(r.data.results);
+        let results = await detailDecorator(r.data.results);
+        results = await photosDecorator(results);
         await rental.saveRental({
           city: city,
           state: state,
@@ -199,12 +242,7 @@ app.get("/rentals", async (req, res) => {
     });
 });
 
-/******************NEAREST AIRPORT TO LAT/LONG********************
- * 'lat': <latitude>
- *  'long': <longitude>
- * example query parameters: 'lat': 38.407524
- *                           'long': -89.764714
- */
+/******************NEAREST AIRPORT TO LAT/LONG*********************/
 app.get("/latLongNearestAirport", async (req, res) => {
   const { lat, lng, city, state = "N/A", country } = req.query;
 
@@ -248,7 +286,7 @@ app.get("/latLongNearestAirport", async (req, res) => {
           country: airport.address.countryName,
           name: airport.name,
           code: airport.iataCode,
-          types: ["airport"]
+          types: ["airport"],
         };
         responseData.push(airportDetail);
       });
@@ -274,45 +312,7 @@ app.get("/latLongNearestAirport", async (req, res) => {
     });
 });
 
-/********************** AIRPORT BY CITY NAME ***********************
- * 'city': 'CityNameHere'
- * example query parameters: 'city': 'Dallas'
- */
-
-app.get("/cityNameAirport", (req, res) => {
-  const { city } = req.query;
-  amadeus.referenceData.locations
-    .get({
-      subType: "AIRPORT",
-      keyword: city,
-    })
-    .then(function (response) {
-      let airportData = JSON.parse(response.body);
-      let responseData = [];
-      airportData.data.map((airport) => {
-        let airportDetail = {
-          location: airport.geoCode,
-          city: airport.address.cityName,
-          country: airport.address.countryName,
-          name: airport.name,
-          code: airport.iataCode,
-        };
-        responseData.push(airportDetail);
-      });
-      res.send(responseData);
-    })
-    .catch(function (response) {
-      res.status(404).send(response);
-    });
-});
-
-/********************POINT OF INTEREST***********************
- * Include in response: Geocode, name, category, rank, tags
- *  'lat': <latitude>
- *  'long': <longitude>
- * example query parameters: 'lat': 38.407524
- *                           'long': -89.764714
- */
+/********************POINT OF INTEREST************************/
 app.get("/POI", async (req, res) => {
   const { lat, lng, city, state = "N/A", country } = req.query;
 
@@ -350,7 +350,8 @@ app.get("/POI", async (req, res) => {
     })
     .then(async (r) => {
       try {
-        const results = await detailDecorator(r.data.results);
+        let results = await detailDecorator(r.data.results);
+        results = await photosDecorator(results);
         await pointsOfInterest.savePointsOfInterest({
           city: city,
           state: state,
@@ -372,56 +373,6 @@ app.get("/POI", async (req, res) => {
       res.send("Error loading POIs.");
     });
 });
-//   amadeus.referenceData.locations.pointsOfInterest
-//     .get({
-//       latitude: lat,
-//       longitude: lng,
-//       radius: 20,
-//     })
-//     .then(function (response) {
-//       let poiData = JSON.parse(response.body);
-//       let poiResponse = [];
-//       poiData.data.map((poi) => {
-//         let poiDetail = {
-//           location: poi.geoCode,
-//           name: poi.name,
-//           category: poi.category,
-//           rank: poi.rank,
-//           tags: poi.tags,
-//         };
-//         poiResponse.push(poiDetail);
-//       });
-//     })
-//     .then(async function (response) {
-//       let poiData = JSON.parse(response.body);
-//       let poiResponse = [];
-//       poiData.data.map((poi) => {
-//         let poiDetail = {
-//           location: poi.geoCode,
-//           name: poi.name,
-//           category: poi.category,
-//           rank: poi.rank,
-//           tags: poi.tags,
-//         };
-//         poiResponse.push(poiDetail);
-//       });
-//       await pointsOfInterest.savePointsOfInterest({
-//         city: city,
-//         state: state,
-//         country: country,
-//         coordinates: {
-//           latitude: lat,
-//           longitude: lng,
-//         },
-//         dateAdded: Date.now(),
-//         apiResult: JSON.stringify(poiResponse),
-//       });
-//       res.send(poiResponse);
-//     })
-//     .catch(function (response) {
-//       res.status(404).send(response);
-//     });
-// });
 
 app.post("/register", async (req, res) => {
   const {
@@ -435,7 +386,6 @@ app.post("/register", async (req, res) => {
     country,
     zipCode,
   } = req.body;
-  console.log(req.body);
   try {
     await user.saveUser({
       _id: uid,
@@ -455,7 +405,6 @@ app.post("/register", async (req, res) => {
     console.error(err);
   }
 });
-// user info:
 
 app.put("/toggleCart", async (req, res) => {
   const { uid, cartItem } = req.body;
@@ -463,7 +412,6 @@ app.put("/toggleCart", async (req, res) => {
     const userData = await user.getUser({ _id: uid });
 
     if (userData.cart.includes(cartItem)) {
-      console.log("Item is here!");
       const itemIndex = userData.cart.indexOf(cartItem);
       userData.cart.splice(itemIndex, 1);
       await user.updateUser(uid, { cart: [...userData.cart] });
@@ -500,7 +448,6 @@ app.get("/user/:uid", async (req, res) => {
   }
 });
 
-// setTimeout(dbRefresher, 1000);
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "./../dist/index.html"), function (err) {
     if (err) {
@@ -512,6 +459,3 @@ app.get("/*", function (req, res) {
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
-
-// turn each item in the lists into a tile.
-// each tile will have a different
