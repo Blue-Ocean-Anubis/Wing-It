@@ -82,6 +82,7 @@ const GoogleMap = (props) => {
         onHide={props.handleClose}
         placement="top"
       >
+        <div className='offcanvas-search-container'>
         <Offcanvas.Header className="offcanvas-header" closeButton>
           <Offcanvas.Title className="offcanvas-title">
             City Search
@@ -96,6 +97,7 @@ const GoogleMap = (props) => {
             <img className="batarang" src={batarang} alt="" />
           </div>
         </Offcanvas.Body>
+        </div>
       </Offcanvas>
       <GoogleMapReact
       className='map'

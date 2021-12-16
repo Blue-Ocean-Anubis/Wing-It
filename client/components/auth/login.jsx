@@ -122,18 +122,25 @@ const Login = (props) => {
                     renderEmailSent()
                   ) : (
                     <input
+                      className='forgot-pword-email-input'
                       type="email"
                       ref={emailResetRef}
                       placeholder="email@example.com"
                     />
                   )}
-                </Modal.Body>
-                <Modal.Footer>
+                  <div className='modal-buttons-container'>
+                  <button className='modal-close-btn' variant="secondary" onClick={handleClose}>
+                    Close
+                  </button>
+                  {sent ? null : <button className='modal-submit-btn' variant="primary">Submit</button>}
+                  </div>
+                </Modal.Body >
+                {/* <Modal.Footer >
                   <Button variant="secondary" onClick={handleClose}>
                     Close
                   </Button>
                   {sent ? null : <Button variant="primary">Submit</Button>}
-                </Modal.Footer>
+                </Modal.Footer> */}
               </form>
             </Modal>
             <button  className='forgot-password-btn' onClick={handleShow}>
