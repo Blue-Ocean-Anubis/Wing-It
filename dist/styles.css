@@ -1,6 +1,18 @@
 .page {
   font-family: 'Roboto Slab', serif;
-  background-color: #505c7c;
+  /* background-color: #505c7c; */
+  /* background-color: #222; */
+  background-color: #090909;
+  /* background-color: silver; */
+
+  /* background-color: #333; */
+}
+
+/* trying to figure out how to play around with map border, stretch goal */
+.map{
+  /* width: auto;
+  border: 1px solid yellow;
+  border-radius: 5px; */
 }
 
 .navigation {
@@ -11,7 +23,12 @@
   display: flex;
   padding: 1rem;
   justify-content: space-around;
-  background-color: rgb(199, 199, 199);
+  /* background-color: rgb(199, 199, 199); */
+  background-color: silver;
+  /* background-color: black; */
+  border-radius: 1rem;
+  /* border: 4px solid grey; */
+  background-color: silver;
   border: 1px solid grey;
 }
 
@@ -165,10 +182,6 @@
   font-size: .75rem;
 }
 
-.tab-content {
-  height: 150vh
-}
-
 .nav-link.active {
   color: black !important;
   background-color: rgb(197, 197, 197) !important;
@@ -204,13 +217,20 @@
   color: grey;
   background-color: black;
   min-height: 200vh;
+  /* margin-top: 5px; */
+
 }
 
 .tabs-container {
   background-color: black;
-  border: 0.1rem solid grey;
-  padding: 1rem;
-  min-height: 200vh;
+  /* margin-left: 5px;
+  margin-right: 5px; */
+  margin: 10px;
+  /* padding-right: 2rem; */
+  border-radius: 1rem;
+  border: .25em solid silver;
+  /* padding: 1rem; */
+  /* min-height: 200vh; */
 }
 
 .details {
@@ -361,11 +381,11 @@ html, body {
   height: 100vh;
   /* width: 25rem; */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  background-color: #505c7c;
+  background-color: black;
 }
 
 .registration-form{
@@ -373,12 +393,12 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-items: center;
-  align-content: center;
-  border: solid 2px black;
+  /* align-items: center; */
+  border: solid 2px grey;
   border-radius: 5px;
    /* margin-bottom: 100px; */
    /* margin-top: 100px; */
-  background-color: rgb(199, 199, 199);
+  background-color: silver;
 }
 
 .registration-form-inputs{
@@ -399,17 +419,36 @@ html, body {
   /* width:25rem; */
   border-radius: 5px;
   border-color: black;
-  margin-top:5px;
+  margin-top:6px;
+  margin-bottom: 6px;
   font-weight: bolder;
 
   margin-left:3px;
   margin-right: 3px;
+
+  width: 50%;
+
+  position: relative;
+left: 50%;
+transform: translateX(-50%);
 }
 
-.registration-link-to-login{
-  margin-top: 3px;
+.registration-link-to-login-container{
+  margin-top: 15px;
   margin-left:5px;
   margin-right: 5px;
+  color: white;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-content: center;
+  align-items:center;
+}
+
+.register-to-login-link{
+  color: white;
+  font-weight: bolder;
 }
 /* end registration form styling */
 
@@ -421,8 +460,10 @@ html, body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  /* align-content: center; */
   justify-content: center;
   background-color: #505c7c;
+  background-color: black;
   /* justify-items: center; */
   /* align-content: center; */
 }
@@ -445,11 +486,11 @@ html, body {
   /* width: 80%; */
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  align-content: center;
-  border: solid 2px black;
+  /* justify-items: center; */
+  /* align-items: center; */
+  border: solid 2px grey;
   border-radius: 5px;
-  background-color: rgb(199, 199, 199);
+  background-color: silver;
 }
 
 .login-form-inputs{
@@ -457,20 +498,22 @@ html, body {
  border-color: black;
  margin-left:3px;
  margin-right: 3px;
+ /* margin:3px; */
 }
 
 .login-form-labels{
   font-weight: bolder;
   margin-left: 3px;
   margin-right: 3px;
+  margin-top:3px;
 }
 
 .login-link-to-registration-container{
   /* margin-top: 3px;
   margin-left:5px; */
   font-weight: bolder;
-  color: black;
-  margin-top: 3px;
+  color: white;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -496,13 +539,20 @@ html, body {
 .login-btn{
   border-radius: 5px;
   border-color: black;
-  margin-top:5px;
-  margin-bottom: 5px;
+  margin-top:6px;
+  margin-bottom: 3px;
   font-weight: bolder;
-
+  /* position: relative; */
+  width: 50%;
   margin-left:3px;
   margin-right: 3px;
+
+  position: relative;
+left: 50%;
+transform: translateX(-50%);
 }
+
+
 
 .google-login-container{
   /* border-radius: 5px; */
@@ -516,12 +566,43 @@ html, body {
 
 .google-login-btn{
   border-radius: 5px;
-  border-color: black;
-  margin-top:5px;
+  border-color: grey;
+  margin-top:7px;
   font-weight: bolder;
 
   /* margin-left:3px; */
   /* margin-right: 3px; */
+}
+
+.forgot-password-btn{
+  border-radius: 5px;
+  border-color: grey;
+  margin-top:7px;
+  font-weight: bolder;
+
+  /* margin-left:3px; */
+  /* margin-right: 3px; */
+}
+
+.login-batwing-container{
+  /* color: silver; */
+
+  /* margin-bottom: 70%; */
+}
+
+.batwing-login{
+  height: 5rem;
+  margin-bottom: 20px;
+  /* width: 7rem; */
+}
+
+.registration-batwing-container{
+
+}
+.batwing-registration{
+  height: 3rem;
+  margin-bottom: 20px;
+  /* width: 7rem; */
 }
 /* end login form styling */
 
