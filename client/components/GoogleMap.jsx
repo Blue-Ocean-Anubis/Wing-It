@@ -98,6 +98,7 @@ const GoogleMap = (props) => {
         </Offcanvas.Body>
       </Offcanvas>
       <GoogleMapReact
+      className='map'
         bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
         center={
           props.searchedLocation.city
