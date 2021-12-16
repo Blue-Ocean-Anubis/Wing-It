@@ -84,7 +84,7 @@ const detailDecorator = async (resultsArray, limit) => {
 };
 
 const photosDecorator = async (resultsArray, limit) => {
-  let details = [];
+  let photo = [];
   limit = limit || 5;
 
   resultsArray = resultsArray
@@ -95,25 +95,20 @@ const photosDecorator = async (resultsArray, limit) => {
 
   resultsArray.forEach((result, i) => {
     if (i < limit) {
-      details.push(getPhotos(result.photos[0].photo_reference));
+      photo.push(getPhotos(result.photos[0].photo_reference));
     }
   });
 
-  console.log("Before promise all", details);
+  photo = await Promise.all(photo);
 
-  details = await Promise.all(details);
-
-  console.log("After promise all", details);
-
-  details = details.map((response) => {
+  photo = photo.map((response) => {
     const { data } = response;
-    const img = new Buffer.from(data).toString("ascii");
-    console.log(img);
+    const img = "data:image/jpeg;base64," + data.toString("base64");
     return img;
   });
 
   for (let i = 0; i < resultsArray.length; i++) {
-    resultsArray[i]["photo"] = details[i];
+    resultsArray[i]["photo"] = photo[i];
   }
 
   return resultsArray;
@@ -223,7 +218,8 @@ app.get("/rentals", async (req, res) => {
     })
     .then(async (r) => {
       try {
-        const results = await detailDecorator(r.data.results);
+        let results = await detailDecorator(r.data.results);
+        results = await photosDecorator(results);
         await rental.saveRental({
           city: city,
           state: state,
@@ -290,7 +286,7 @@ app.get("/latLongNearestAirport", async (req, res) => {
           country: airport.address.countryName,
           name: airport.name,
           code: airport.iataCode,
-          types: ["airport"]
+          types: ["airport"],
         };
         responseData.push(airportDetail);
       });
@@ -354,7 +350,8 @@ app.get("/POI", async (req, res) => {
     })
     .then(async (r) => {
       try {
-        const results = await detailDecorator(r.data.results);
+        let results = await detailDecorator(r.data.results);
+        results = await photosDecorator(results);
         await pointsOfInterest.savePointsOfInterest({
           city: city,
           state: state,
