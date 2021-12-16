@@ -30,7 +30,7 @@ const Marker = (props) => {
       <FontAwesomeIcon icon={faMapMarker} size='3x' color={props.inCart ? "#b56100" : "grey"}  className="pin" />
       {/* <img src={'https://maps.gstatic.com/mapfiles/place_api/icons/airport-71.png'}/> */}
       </div>
-      {mouseOn ? <div className="marker-info" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {mouseOn ? <div className="marker-info" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{zIndex: 5}}>
         <FontAwesomeIcon icon={faTimes} size='sm' className="exit-marker-info" onClick={handleMouseLeave}/>
         <span className='marker-airport-code'>{props.code}</span>
         <span className="marker-name">

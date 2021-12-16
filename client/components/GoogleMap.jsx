@@ -75,15 +75,18 @@ const GoogleMap = (props) => {
 
 
   return (
-    <div style={{ height: '70vh', width: '85%', margin: '2vh auto 2vh auto' }}>
-      <Offcanvas show={props.show} onHide={props.handleClose} placement='top'>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>City Search</Offcanvas.Title>
+    <div style={{ height: "70vh", width: "85%", margin: "2vh auto 2vh auto" }}>
+      <Offcanvas className='offcanvas-search' show={props.show} onHide={props.handleClose} placement="top">
+        <Offcanvas.Header className='offcanvas-header' closeButton>
+          <Offcanvas.Title className='offcanvas-title'>City Search</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-          <AutoCompleteMapSearch canvasClose={props.handleClose} onLocationChange={props.onLocationChange}></AutoCompleteMapSearch>
-          <div className='batarang-movement-container'>
-            <img className='batarang' src={batarang} alt='' />
+        <Offcanvas.Body className='offcanvas-body'>
+          <AutoCompleteMapSearch
+            canvasClose={props.handleClose}
+            onLocationChange={props.onLocationChange}
+          ></AutoCompleteMapSearch>
+          <div className="batarang-movement-container">
+            <img className="batarang" src={batarang} alt=""/>
           </div>
         </Offcanvas.Body>
       </Offcanvas>
@@ -99,7 +102,7 @@ const GoogleMap = (props) => {
           draggableCursor: 'crosshair',
         }}
       >
-        <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng} />
+        {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng} /> */}
         {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
         {props.currentTab === 'airports' || props.currentTab === '' ? setMarkers(props.airports) : ''}
         {props.currentTab === 'restaurants' ? setMarkers(props.restaurants) : ''}

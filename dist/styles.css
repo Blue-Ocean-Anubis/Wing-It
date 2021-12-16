@@ -255,9 +255,11 @@ html, body {
 }
 
 .welcome-text{
+  margin-left: 5%;
+  margin-right: 5%;
   color: white;
   font-weight: bolder;
-  font-size: x-large;
+  font-size: large;
   position: relative;
   font-family: Impact, sans-serif;
   font-size: 45px;
@@ -265,7 +267,7 @@ html, body {
   background: linear-gradient(90deg, rgba(189, 189, 189, 0), rgb(255, 255, 255), rgba(189, 189, 189, 0));
   background-repeat: no-repeat;
   background-size: 80%;
-  animation: animate 2.5s infinite;
+  animation: animate 3s infinite;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
@@ -320,6 +322,17 @@ html, body {
   }
 }
 
+.user-profile-offcanvas {
+  background-color: #505c7c;
+}
+
+.offcanvas-body {
+  background-color: #505c7c;
+}
+
+.offcanvas-header {
+  background-color: #505c7c;
+}
 /* registration form styling */
 .registration-form-container{
   height: 100vh;
@@ -333,14 +346,15 @@ html, body {
 }
 
 .registration-form{
-  width: 25rem;
+  /* width: 25rem; */
   display: flex;
   flex-direction: column;
   justify-items: center;
   align-content: center;
   border: solid 2px black;
   border-radius: 5px;
-
+   /* margin-bottom: 100px; */
+   /* margin-top: 100px; */
   background-color: rgb(199, 199, 199);
 }
 
@@ -372,34 +386,31 @@ html, body {
 .registration-link-to-login{
   margin-top: 3px;
   margin-left:5px;
-  /* margin-right: 3px; */
+  margin-right: 5px;
 }
 /* end registration form styling */
 
-/* page backgournd color: */
-/* background-color: #505c7c; */
-
-/* navbar color: */
-/* rgb(199, 199, 199); */
 
 /* login form styling */
 .login-container{
   height: 100vh;
-  /* width: 25rem; */
+  width: 100vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: #505c7c;
+  /* justify-items: center; */
+  /* align-content: center; */
 }
 
 .login-wrapper{
-  width: 25rem;
+  /* width: auto; */
   height: 80vh;
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  align-content: center;
+  justify-content: center;
+  align-items: center;
   /* border: solid 2px black;
   border-radius: 5px; */
 
@@ -407,7 +418,8 @@ html, body {
 }
 
 .login-form{
-  width: 25rem;
+  /* padding-bottom: 20vh; */
+  /* width: 80%; */
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -436,11 +448,19 @@ html, body {
   font-weight: bolder;
   color: black;
   margin-top: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-no-account-text{
+  color: white;
 }
 
 .login-link-to-registration{
  color: white;
- text-decoration: none;
+ text-decoration: underline;
  margin-left: 3px;
  /* margin-top: 3px; */
 }
@@ -481,3 +501,28 @@ html, body {
   /* margin-right: 3px; */
 }
 /* end login form styling */
+
+/* .offcanvas-search offcanvas offcanvas-top show{
+  /* background-color: rgb(199, 199, 199); */
+  /* background-color: #505c7c;
+  width: auto;
+  border-radius: 5px; */
+/* } */
+
+.offcanvas-header{
+  background-color: #505c7c;
+  color: white;
+  /* font-weight: bolder; */
+
+}
+
+.offcanvas-body{
+  /* background-color: rgb(199, 199, 199); */
+}
+
+.offcanvas-title{
+  margin-left: 5px;
+}
+
+
+
