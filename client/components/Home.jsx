@@ -228,7 +228,7 @@ const Home = () => {
         <Tabs
           defaultActiveKey="airports"
           id="uncontrolled-tab-example"
-          className="mb-3"
+          className="mb-3 nav-justified"
           onSelect={handleTabSelect}
         >
           <Tab eventKey="airports" title="Airports">
