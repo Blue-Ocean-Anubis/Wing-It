@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
+import axios from "axios";
 import { GOOGLE_API_KEY } from "../../config.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import AutoCompleteMapSearch from "./AutoCompleteMapSearch.jsx";
-// require('dotenv').config();
 import Offcanvas from "react-bootstrap/Offcanvas";
 import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
 import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
 import OffcanvasBody from "react-bootstrap/OffcanvasBody";
-// import batarang from './batarang.png';
-import batarang from "./batarang1.png";
-
-// const Marker = () => <div><FontAwesomeIcon icon={faMapMarkerAlt} size="2x"/></div>;
 import Marker from "./Marker.jsx";
 import MapStyling from "./MapStyling.js";
+import batarang from "./batarang1.png";
 
 const GoogleMap = (props) => {
   const handleMapClick = (event) => {
@@ -25,22 +22,30 @@ const GoogleMap = (props) => {
     ? props.userLocation
     : props.userAddressLocation;
 
-  let setMarkers = (business) => {
-    // console.log('busiess', business)
+  let cartPlaceIDs = props.cartList.data
+    ? props.cartList.data.map((each) => {
+        return each.place_id ? each.place_id : each.code;
+      })
+    : [];
 
+  let setMarkers = (business) => {
     if (Array.isArray(business) && business.length > 0) {
       // CHECK THAT BUSINESS DATA HAS ARRIVED
 
       if (business[0].geometry) {
-        // RENTAL AND RESTAURANT CASE
+        // RENTAL, RESTAURANT, and POI CASE
         return business.map((each, key) => {
           return (
             <Marker
+              testProps={"hello there"}
               lat={each.geometry.location.lat}
               lng={each.geometry.location.lng}
+              index={key}
               key={key}
               name={each.name}
               address={each.formatted_address}
+              details={each.details}
+              inCart={cartPlaceIDs.includes(each.place_id)}
             />
           );
         });
@@ -51,10 +56,13 @@ const GoogleMap = (props) => {
             <Marker
               lat={each.location.latitude}
               lng={each.location.longitude}
-              key={key}
               name={each.name}
               address={each.city}
+              index={key}
+              key={key}
               code={each.code}
+              details={each.details}
+              inCart={cartPlaceIDs.includes(each.code)}
             />
           );
         });
@@ -65,10 +73,6 @@ const GoogleMap = (props) => {
   useEffect(() => {
     // console.log('maps props: ', props);
   });
-
-  useEffect(() => {
-    // console.log(props.currentTab);
-  }, [props.currentTab]);
 
   return (
     <div style={{ height: "70vh", width: "85%", margin: "2vh auto 2vh auto" }}>
@@ -109,10 +113,7 @@ const GoogleMap = (props) => {
           draggableCursor: "crosshair",
         }}
       >
-        <Marker
-          lat={props.searchedLocation.coordinates.lat}
-          lng={props.searchedLocation.coordinates.lng}
-        />
+        {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng} /> */}
         {/* <Marker lat={props.userAddressLocation.lat} lng={props.userAddressLocation.lng} /> */}
         {props.currentTab === "airports" || props.currentTab === ""
           ? setMarkers(props.airports)
