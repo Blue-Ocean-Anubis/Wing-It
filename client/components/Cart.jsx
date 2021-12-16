@@ -2,10 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import Nav from "./Nav.jsx";
 import axios from "axios";
 import { AuthContext } from "./contexts/AuthContext.jsx";
+import { Offcanvas } from "react-bootstrap";
+import UserProfile from "./UserProfile.jsx";
 
 const Cart = () => {
   const [list, getList] = useState([]);
+  const [show, setShow] = useState(false);
+  const [userData, setUserData] = useState(null);
   const { user } = useContext(AuthContext);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     axios
@@ -21,6 +27,10 @@ const Cart = () => {
       .catch((err) => {
         console.log("Error retrieving user list: >>>>", err);
       });
+    axios
+      .get(`/user/${user.uid}`)
+      .then((results) => setUserData(results.data))
+      .catch((error) => console.error("Cannot retrieve user data"));
   }, []);
 
   if (list.length === 0) {
@@ -28,17 +38,21 @@ const Cart = () => {
   } else {
     return (
       <div className="page">
-        <Nav />
+        <Nav handleCartShow={handleShow} />
         <h1>My Trip Destinations</h1>
         <h2>Airports</h2>
-          {list.data.filter(loc => loc.types.includes("airport")).map(location => (
+        {list.data
+          .filter((loc) => loc.types.includes("airport"))
+          .map((location) => (
             <div key={location.code}>
               <span>{`${location.name} (${location.code})`}</span>
               <span>{`${location.city}, ${location.country}`}</span>
             </div>
           ))}
         <h2>Rentals</h2>
-          {list.data.filter(loc => loc.types.includes("car_rental")).map(location => (
+        {list.data
+          .filter((loc) => loc.types.includes("car_rental"))
+          .map((location) => (
             <div key={location.place_id}>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
@@ -48,7 +62,9 @@ const Cart = () => {
             </div>
           ))}
         <h2>Restaurants</h2>
-          {list.data.filter(loc => loc.types.includes("restaurant")).map(location => (
+        {list.data
+          .filter((loc) => loc.types.includes("restaurant"))
+          .map((location) => (
             <div key={location.place_id}>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
@@ -58,7 +74,14 @@ const Cart = () => {
             </div>
           ))}
         <h2>Interesting Places</h2>
-          {list.data.filter(loc => !loc.types.includes("car_rental") && !loc.types.includes("restaurant") && !loc.types.includes("airport")).map(location => (
+        {list.data
+          .filter(
+            (loc) =>
+              !loc.types.includes("car_rental") &&
+              !loc.types.includes("restaurant") &&
+              !loc.types.includes("airport")
+          )
+          .map((location) => (
             <div key={location.place_id}>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
@@ -67,6 +90,19 @@ const Cart = () => {
               <a href={location.details.website}>Website</a>
             </div>
           ))}
+
+        <Offcanvas show={show} onHide={handleClose}>
+          {!userData ? null : (
+            <>
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>{` Hello, ${userData.firstName}`}</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <UserProfile details={userData} />
+              </Offcanvas.Body>
+            </>
+          )}
+        </Offcanvas>
       </div>
     );
   }
