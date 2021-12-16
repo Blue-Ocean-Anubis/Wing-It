@@ -2,7 +2,7 @@ import React from 'react';
 import RentalCard from './RentalCard.jsx';
 
 const RentalDetails = (props) => (
-  <div className="rental-details">
+  <div className="details">
   <h3>Rental Information</h3>
     <div className="list-container">
       {props.rentals.map((rental, index) => (

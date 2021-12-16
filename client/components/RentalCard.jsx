@@ -3,7 +3,7 @@ import CardButton from "./CardButton.jsx";
 
 const RentalCard = ({ rental, index, updateCart, cartList }) => (
   <div className="card">
-    <div className="card-indx">{index}</div>
+    <div className="card-index">{index}</div>
     {<span className="name">{rental.name}</span>}
     {<span className="address">{rental.formatted_address}</span>}
     <CardButton cartItem={rental} updateCart={updateCart} cartList={cartList}/>
