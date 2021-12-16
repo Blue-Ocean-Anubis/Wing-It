@@ -47,6 +47,7 @@ const CardButton = ({ cartItem, updateCart, cartList }) => {
       disabled={isLoading}
       onClick={!isLoading ? handleClick : null}
       style={inDatabase ? { backgroundColor: "#b56100" } : {}}
+      className="card-button"
     >
       {isLoading ? "Loading…" : inDatabase ? "Remove Item" : "Add Item"}
     </Button>

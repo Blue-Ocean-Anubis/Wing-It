@@ -20,6 +20,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
 import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
 import OffcanvasBody from "react-bootstrap/OffcanvasBody";
+import batwing from "./batwing.png";
+import Image from 'react-bootstrap/Image';
 
 const Home = () => {
   const [userLocation, setUserLocation] = useState({});
@@ -264,11 +266,12 @@ const Home = () => {
       <Offcanvas show={cart} onHide={handleCartClose}>
         {!userData ? null : (
           <>
-            <Offcanvas.Header closeButton>
+            <Offcanvas.Header className="bg-white text-black" closeButton>
               <Offcanvas.Title>{` Hello, ${userData.firstName}`}</Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body>
+            <Offcanvas.Body className="d-flex flex-column" >
               <UserProfile details={userData} />
+              <Image className="mt-auto" rounded="true" src={batwing} />
             </Offcanvas.Body>
           </>
         )}
