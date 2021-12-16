@@ -40,7 +40,7 @@ const Home = () => {
   const [cart, setCart] = useState(false);
   const [userData, setUserData] = useState(null);
   const { user } = useContext(AuthContext);
-  const [cartList , setCartList] = useState([]);
+  const [cartList, setCartList] = useState([]);
 
   //CART OFF CANVAS CLICK HANDLER
   const handleCartClose = () => setCart(false);
@@ -232,16 +232,32 @@ const Home = () => {
           onSelect={handleTabSelect}
         >
           <Tab eventKey="airports" title="Airports">
-            <AirportDetails airports={airportData} updateCart={updateCart} cartList={cartList}/>
+            <AirportDetails
+              airports={airportData}
+              updateCart={updateCart}
+              cartList={cartList}
+            />
           </Tab>
           <Tab eventKey="rentals" title="Rentals">
-            <RentalDetails rentals={rentalData} updateCart={updateCart} cartList={cartList}/>
+            <RentalDetails
+              rentals={rentalData}
+              updateCart={updateCart}
+              cartList={cartList}
+            />
           </Tab>
           <Tab eventKey="restaurants" title="Restaurants">
-            <RestaurantDetails restaurants={restaurantData} updateCart={updateCart} cartList={cartList}/>
+            <RestaurantDetails
+              restaurants={restaurantData}
+              updateCart={updateCart}
+              cartList={cartList}
+            />
           </Tab>
           <Tab eventKey="POIs" title="Points of Interest">
-            <PointsOfInterest points={points} updateCart={updateCart} cartList={cartList}/>
+            <PointsOfInterest
+              points={points}
+              updateCart={updateCart}
+              cartList={cartList}
+            />
           </Tab>
         </Tabs>
       </Container>
