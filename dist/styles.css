@@ -241,32 +241,68 @@
 }
 
 .card {
-  display: flex;
-  flex-direction: row;
-  /* display: grid;
-  grid-template: repeat(5, 20%) / repeat(5,20%); */
+  display: grid !important;
+  /* grid-template: 25% 20% 20% 20% 15% / repeat(5,20%); */
+  grid-template: 1fr 1fr 1fr / repeat(5,20%);
   margin: 1vh auto;
   width: 90%;
+  height: auto;
   border-radius: 1vh;
   color: rgb(0, 0, 0);
   background-color: rgb(143, 143, 143) !important;
 }
 
-.card-index {
-  align-self: center;
-  /* font-weight: 700;
-  margin: 0.5rem */
-  /* grid-area: 1 / 5 / 2 / 6; */
+.card-photo-container {
+  grid-area: 1 / 1 / 3 / 2 ;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.name {
+.card-photo {
+  border: 1px solid rgb(61, 61, 61);
+  border-radius: 0.25rem;
+  margin: 2px;
+  object-fit: cover;
+  width: 14vw;
+  height: 14vw;
+}
+
+.card-index {
+  grid-area: 3 / 1 / 4 / 2;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.25rem;
+  background-color: grey;
+  border-radius: 0.25rem;
+}
+
+.card-name {
+  grid-area: 1 / 2 / 2 / 6;
   margin: 0.25vh;
   font-size: 2vh;
+  /* white-space: nowrap;
+  overflow: hidden; */
 }
 
-.address {
+.card-address {
+  grid-area: 2 / 2 / 3 / 6 ;
   margin: 0.25vh;
   font-size: 1.5vh;
+}
+
+.card-rating {
+
+}
+
+.card-button {
+  font-size: .75rem !important;
+  /* height: 5vh; */
+  grid-area: 3 / 2 / 4 / 6 ;
+  margin: 0.25rem;
 }
 
 html, body {
