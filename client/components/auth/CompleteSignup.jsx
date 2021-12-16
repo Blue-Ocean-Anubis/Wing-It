@@ -19,10 +19,6 @@ const Registration = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
-    }
-
     axios
       .post("/register", {
         uid: user.uid,
