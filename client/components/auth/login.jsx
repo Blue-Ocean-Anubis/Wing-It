@@ -2,13 +2,25 @@ import axios from "axios";
 import React, { useState, useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "./../contexts/AuthContext.jsx";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 const Login = (props) => {
   const history = useHistory();
   let emailRef = useRef();
+  let emailResetRef = useRef();
   let passwordRef = useRef();
   const [error, setError] = useState("");
-  const { login, loginWithGoogle, setUser } = useContext(AuthContext);
+  const [sent, setSent] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+    setSent(false);
+  };
+  const handleShow = () => setShow(true);
+
+  const { login, loginWithGoogle, setUser, resetPassword } =
+    useContext(AuthContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,6 +31,18 @@ const Login = (props) => {
       .catch((e) => {
         setError(e.message);
       });
+  }
+
+  async function handlePasswordReset(e) {
+    e.preventDefault();
+    try {
+      setSent(true);
+      if (emailResetRef.current.value) {
+        await resetPassword(emailResetRef.current.value);
+      }
+    } catch (error) {
+      setError(error);
+    }
   }
 
   async function handleLoginWithGoogle(e) {
@@ -37,33 +61,90 @@ const Login = (props) => {
     }
   }
 
+  const renderEmailSent = () => {
+    return emailResetRef.current.value ? (
+      <div>email sent to: {emailResetRef.current.value}</div>
+    ) : null;
+  };
+
   return (
-    <div className='login-container'>
-    <div className="login-wrapper">
-      {error && <div>{error}</div>}
-      <form className='login-form' onSubmit={handleSubmit}>
-        <label className='login-form-labels' htmlFor="email">email: </label>
-        <input className='login-form-inputs' name="email" type="email" ref={emailRef} required />
-        <label className='login-form-labels' htmlFor="password">password: </label>
-        <input
-          className='login-form-inputs'
-          name="password"
-          type="password"
-          autoComplete="on"
-          ref={passwordRef}
-          required
-        />
-        <button className='login-btn'>Login</button>
-      </form>
-      <div className="google-login-container">
-        <button className="google-login-btn" onClick={handleLoginWithGoogle}>Login with Google</button>
-      </div>
-      <div className='login-link-to-registration-container'>
-        Don't have an account?
-        <Link className='login-link-to-registration' to="/register">Register for an account</Link>
+    <div className="login-container">
+      <div className="login-wrapper">
+        {error && <div>{error}</div>}
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label className="login-form-labels" htmlFor="email">
+            email:
+          </label>
+          <input
+            className="login-form-inputs"
+            name="email"
+            type="email"
+            ref={emailRef}
+            required
+          />
+          <label className="login-form-labels" htmlFor="password">
+            password:
+          </label>
+          <input
+            className="login-form-inputs"
+            name="password"
+            type="password"
+            autoComplete="on"
+            ref={passwordRef}
+            required
+          />
+          <button className="login-btn">Login</button>
+        </form>
+        <div className="google-login-container">
+          <button className="google-login-btn" onClick={handleLoginWithGoogle}>
+            Login with Google
+          </button>
+          <div>
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="static"
+              keyboard={false}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Enter email:</Modal.Title>
+              </Modal.Header>
+              <form className="form-group" onSubmit={handlePasswordReset}>
+                <Modal.Body>
+                  {error && (
+                    <div className="alert primary-alert" role="alert"></div>
+                  )}
+                  {sent ? (
+                    renderEmailSent()
+                  ) : (
+                    <input
+                      type="email"
+                      ref={emailResetRef}
+                      placeholder="email@example.com"
+                    />
+                  )}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  {sent ? null : <Button variant="primary">Submit</Button>}
+                </Modal.Footer>
+              </form>
+            </Modal>
+            <Button variant="primary" onClick={handleShow}>
+              Forgot Password?
+            </Button>
+          </div>
+        </div>
+        <div className="login-link-to-registration-container">
+          Don't have an account?
+          <Link className="login-link-to-registration" to="/register">
+            Register for an account
+          </Link>
+        </div>
       </div>
     </div>
-   </div>
   );
 };
 

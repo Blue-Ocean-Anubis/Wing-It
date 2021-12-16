@@ -9,6 +9,7 @@ import PointsOfInterest from "./PointsOfInterest.jsx";
 import RentalDetails from "./RentalDetails.jsx";
 import RestaurantDetails from "./RestaurantDetails.jsx";
 import { AuthContext } from "./contexts/AuthContext.jsx";
+import UserProfile from "./UserProfile.jsx";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import Tabs from "react-bootstrap/Tabs";
@@ -39,6 +40,7 @@ const Home = () => {
   const [cart, setCart] = useState(false);
   const [userData, setUserData] = useState(null);
   const { user } = useContext(AuthContext);
+  const [cartList , setCartList] = useState([]);
 
   //CART OFF CANVAS CLICK HANDLER
   const handleCartClose = () => setCart(false);
@@ -129,6 +131,7 @@ const Home = () => {
     axios
       .get(`/user/${user.uid}`)
       .then((results) => {
+        // console.log('results.data', results.data);
         setUserData(results.data);
       })
       .catch((error) => console.error(error));
@@ -171,7 +174,23 @@ const Home = () => {
   useEffect(() => {
     convertAddressToCoords(userAddress.string);
     getUserLocation();
+    updateCart();
   }, []);
+
+  const updateCart = () => {
+    axios
+      .get("/cart", {
+        params: {
+          uid: user.uid,
+        },
+      })
+      .then((list) => {
+        setCartList(list);
+      })
+      .catch((err) => {
+        console.log("Error retrieving user cart list: >>>>", err);
+      });
+  };
 
   useEffect(() => {
     // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData,
@@ -203,6 +222,7 @@ const Home = () => {
         airports={airportData}
         POIs={points}
         currentTab={currentTab}
+        cartList={cartList}
       />
       <Container className="tabs-container container">
         <Tabs
@@ -212,16 +232,16 @@ const Home = () => {
           onSelect={handleTabSelect}
         >
           <Tab eventKey="airports" title="Airports">
-            <AirportDetails airports={airportData} />
+            <AirportDetails airports={airportData} updateCart={updateCart} cartList={cartList}/>
           </Tab>
           <Tab eventKey="rentals" title="Rentals">
-            <RentalDetails rentals={rentalData} />
+            <RentalDetails rentals={rentalData} updateCart={updateCart} cartList={cartList}/>
           </Tab>
           <Tab eventKey="restaurants" title="Restaurants">
-            <RestaurantDetails restaurants={restaurantData} />
+            <RestaurantDetails restaurants={restaurantData} updateCart={updateCart} cartList={cartList}/>
           </Tab>
           <Tab eventKey="POIs" title="Points of Interest">
-            <PointsOfInterest points={points} />
+            <PointsOfInterest points={points} updateCart={updateCart} cartList={cartList}/>
           </Tab>
         </Tabs>
       </Container>
@@ -232,8 +252,7 @@ const Home = () => {
               <Offcanvas.Title>{` Hello, ${userData.firstName}`}</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <div>{userData.email}</div>
-              <div>{`${userData.address.city}, ${userData.address.state}`}</div>
+              <UserProfile details={userData} />
             </Offcanvas.Body>
           </>
         )}
