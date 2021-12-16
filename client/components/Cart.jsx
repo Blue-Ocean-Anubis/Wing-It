@@ -15,23 +15,21 @@ const Cart = () => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    axios
-      .get("/cart", {
+    return Promise.all([
+      axios.get("/cart", {
         params: {
           uid: user.uid,
         },
-      })
-      .then((list) => {
-        console.log(list.data);
+      }),
+      axios.get(`/user/${user.uid}`),
+    ])
+      .then(([list, userInfo]) => {
         getList(list);
+        setUserData(userInfo.data);
       })
-      .catch((err) => {
-        console.log("Error retrieving user list: >>>>", err);
+      .catch((error) => {
+        console.error("Cannot retrieve user information", error);
       });
-    axios
-      .get(`/user/${user.uid}`)
-      .then((results) => setUserData(results.data))
-      .catch((error) => console.error("Cannot retrieve user data"));
   }, []);
 
   if (list.length === 0) {
