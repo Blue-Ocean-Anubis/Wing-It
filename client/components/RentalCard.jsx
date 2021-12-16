@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import CardButton from "./CardButton.jsx";
 
-const RentalCard = ({ rental, index }) => (
+const RentalCard = ({ rental, index, updateCart, cartList }) => (
   <div className="card">
     <div className="card-indx">{index}</div>
     {<span className="name">{rental.name}</span>}
     {<span className="address">{rental.formatted_address}</span>}
-    <CardButton cartItem={rental} />
+    <CardButton cartItem={rental} updateCart={updateCart} cartList={cartList}/>
   </div>
 );
 

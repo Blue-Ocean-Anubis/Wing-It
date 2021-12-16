@@ -6,7 +6,7 @@ const RentalDetails = (props) => (
   <h3>Rental Information</h3>
     <div className="list-container">
       {props.rentals.map((rental, index) => (
-        <RentalCard key={rental.place_id} rental={rental} index={index}/>
+        <RentalCard key={rental.place_id} rental={rental} index={index} updateCart={props.updateCart} cartList={props.cartList}/>
       ))}
     </div>
   </div>

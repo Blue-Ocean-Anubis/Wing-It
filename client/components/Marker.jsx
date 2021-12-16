@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt, faMapPin, faTimes, faCircle} from '@fortawesome/free-solid-svg-icons';
+import { faMapMarker, faMapPin, faTimes, faCircle} from '@fortawesome/free-solid-svg-icons';
 
 const Marker = (props) => {
 
@@ -19,14 +19,15 @@ const Marker = (props) => {
   useEffect(() => {
     // console.log('marker props: ', props)
   })
+  const style = (props.inCart ? {
+    zIndex: 4
+  } : {zIndex: 0});
 
-  // console.log('props of each: ', props)
   return (
     <div >
-      <div className="marker" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMouseEnter}>
+      <div className="marker" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMouseEnter}  style={style}>
       <div className="marker-index">{props.index}</div>
-      <FontAwesomeIcon icon={faCircle} size='2x' color={props.name ? "DarkGrey" : "grey"}  className="pin" >
-        </FontAwesomeIcon>
+      <FontAwesomeIcon icon={faMapMarker} size='3x' color={props.inCart ? "#b56100" : "grey"}  className="pin" />
       {/* <img src={'https://maps.gstatic.com/mapfiles/place_api/icons/airport-71.png'}/> */}
       </div>
       {mouseOn ? <div className="marker-info" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

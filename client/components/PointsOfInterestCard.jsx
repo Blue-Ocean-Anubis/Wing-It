@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CardButton from "./CardButton.jsx";
 
-const PointsOfInterestCard = ({ point, index }) => (
+const PointsOfInterestCard = ({ point, index, updateCart, cartList }) => (
   <div className="card">
     <div className="card-indx">{index}</div>
     {<span className="name">{point.name}</span>}
@@ -14,7 +14,7 @@ const PointsOfInterestCard = ({ point, index }) => (
         )}
       </span>
     }
-    <CardButton cartItem={point} />
+    <CardButton cartItem={point} updateCart={updateCart} cartList={cartList}/>
   </div>
 );
 

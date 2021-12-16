@@ -39,6 +39,7 @@ const Home = () => {
   const [cart, setCart] = useState(false);
   const [userData, setUserData] = useState(null);
   const { user } = useContext(AuthContext);
+  const [cartList , setCartList] = useState([]);
 
   //CART OFF CANVAS CLICK HANDLER
   const handleCartClose = () => setCart(false);
@@ -171,7 +172,23 @@ const Home = () => {
   useEffect(() => {
     convertAddressToCoords(userAddress.string);
     getUserLocation();
+    updateCart();
   }, []);
+
+  const updateCart = () => {
+    axios
+      .get("/cart", {
+        params: {
+          uid: user.uid,
+        },
+      })
+      .then((list) => {
+        setCartList(list);
+      })
+      .catch((err) => {
+        console.log("Error retrieving user cart list: >>>>", err);
+      });
+  };
 
   useEffect(() => {
     // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData,
@@ -203,6 +220,7 @@ const Home = () => {
         airports={airportData}
         POIs={points}
         currentTab={currentTab}
+        cartList={cartList}
       />
       <Container className="tabs-container container">
         <Tabs
@@ -212,16 +230,16 @@ const Home = () => {
           onSelect={handleTabSelect}
         >
           <Tab eventKey="airports" title="Airports">
-            <AirportDetails airports={airportData} />
+            <AirportDetails airports={airportData} updateCart={updateCart} cartList={cartList}/>
           </Tab>
           <Tab eventKey="rentals" title="Rentals">
-            <RentalDetails rentals={rentalData} />
+            <RentalDetails rentals={rentalData} updateCart={updateCart} cartList={cartList}/>
           </Tab>
           <Tab eventKey="restaurants" title="Restaurants">
-            <RestaurantDetails restaurants={restaurantData} />
+            <RestaurantDetails restaurants={restaurantData} updateCart={updateCart} cartList={cartList}/>
           </Tab>
           <Tab eventKey="POIs" title="Points of Interest">
-            <PointsOfInterest points={points} />
+            <PointsOfInterest points={points} updateCart={updateCart} cartList={cartList}/>
           </Tab>
         </Tabs>
       </Container>

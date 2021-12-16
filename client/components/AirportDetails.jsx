@@ -6,7 +6,7 @@ const AirportDetails = (props) => (
   <h3>Airport Information</h3>
     <div className="list-container">
       {props.airports.map((airport, index) => (
-        <AirportCard key={airport.code} airport={airport} index={index}/>
+        <AirportCard key={airport.code} airport={airport} index={index} updateCart={props.updateCart} cartList={props.cartList}/>
       ))}
     </div>
   </div>

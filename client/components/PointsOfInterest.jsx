@@ -6,7 +6,7 @@ const PointsOfInterest = (props) => (
   <h3>Points Of Interest</h3>
     <div className="list-container">
     {props.points.map((point, index) => (
-      <PointsOfInterestCard key={point.place_id} point={point} index={index} />
+      <PointsOfInterestCard key={point.place_id} point={point} index={index} updateCart={props.updateCart} cartList={props.cartList}/>
     ))}
     </div>
   </div>

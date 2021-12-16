@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
+import axios from 'axios';
 import { GOOGLE_API_KEY } from '../../config.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
@@ -19,14 +20,17 @@ const GoogleMap = (props) => {
 
   let userLocation = props.userLocation.lat ? props.userLocation : props.userAddressLocation;
 
+  let cartPlaceIDs = props.cartList.data ? props.cartList.data.map((each) => {
+    return (each.place_id ? each.place_id : each.code)
+  }) : []
+
   let setMarkers = (business) => {
-    // console.log('busiess', business)
 
     if (Array.isArray(business) && business.length > 0) {
       // CHECK THAT BUSINESS DATA HAS ARRIVED
 
       if (business[0].geometry) {
-        // RENTAL AND RESTAURANT CASE
+        // RENTAL, RESTAURANT, and POI CASE
         return business.map((each, key) => {
           return (
             <Marker
@@ -38,6 +42,7 @@ const GoogleMap = (props) => {
               name={each.name}
               address={each.formatted_address}
               details={each.details}
+              inCart={cartPlaceIDs.includes(each.place_id)}
             />
           );
         });
@@ -54,6 +59,7 @@ const GoogleMap = (props) => {
               key={key}
               code={each.code}
               details={each.details}
+              inCart={cartPlaceIDs.includes(each.code)}
             />
           );
         });
@@ -65,9 +71,8 @@ const GoogleMap = (props) => {
     // console.log('maps props: ', props);
   });
 
-  useEffect(() => {
-    // console.log(props.currentTab);
-  }, [props.currentTab]);
+
+
 
   return (
     <div style={{ height: '70vh', width: '85%', margin: '2vh auto 2vh auto' }}>

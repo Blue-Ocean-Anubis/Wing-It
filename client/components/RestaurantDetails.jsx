@@ -6,7 +6,7 @@ const RestaurantDetails = (props) => (
     <h3>Restaurant Information</h3>
     <div className="list-container">
       {props.restaurants.map((restaurant, index) => (
-        <RestaurantCard key={restaurant.place_id} restaurant={restaurant} index={index}/>
+        <RestaurantCard key={restaurant.place_id} restaurant={restaurant} index={index} updateCart={props.updateCart} cartList={props.cartList}/>
       ))}
     </div>
   </div>
