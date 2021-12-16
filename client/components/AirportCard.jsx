@@ -3,7 +3,7 @@ import CardButton from "./CardButton.jsx";
 
 const AirportCard = ({ airport, index, updateCart, cartList }) => (
   <div className="card">
-    <div className="card-indx">{index}</div>
+    <div className="card-index">{index}</div>
     {
       <span
         className="name"
