@@ -29,7 +29,7 @@ const Cart = () => {
     return (
       <div>
         <>
-        <Accordion >
+        <Accordion defaultActiveKey="0">
         <Accordion.Item  className="bg-black text-white" eventKey="0">
         <Accordion.Header className="bg-black text-white" >Airports</Accordion.Header>
         <Accordion.Body className="bg-black text-white" >
@@ -47,7 +47,7 @@ const Cart = () => {
           </Accordion>
           </>
           <>
-        <Accordion >
+        <Accordion defaultActiveKey="0">
         <Accordion.Item  className="bg-black text-white" eventKey="0">
         <Accordion.Header className="bg-black text-white" >Car Rentals</Accordion.Header>
         <Accordion.Body className="bg-black text-white" >
@@ -55,6 +55,7 @@ const Cart = () => {
           .filter((loc) => loc.types.includes("car_rental"))
           .map((location) => (
             <div key={location.place_id}>
+              <img src={location.photo}/>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
               <span>{location.details.rating}</span>
@@ -68,7 +69,7 @@ const Cart = () => {
           </Accordion>
           </>
           <>
-        <Accordion >
+        <Accordion defaultActiveKey="0">
         <Accordion.Item  className="bg-black text-white" eventKey="0">
         <Accordion.Header className="bg-black text-white" >Restaurants</Accordion.Header>
         <Accordion.Body className="bg-black text-white" >
@@ -76,6 +77,7 @@ const Cart = () => {
           .filter((loc) => loc.types.includes("restaurant"))
           .map((location) => (
             <div key={location.place_id}>
+              <img src={location.photo}/>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
               <span>{location.details.rating}</span>
@@ -89,7 +91,7 @@ const Cart = () => {
           </Accordion>
           </>
           <>
-        <Accordion >
+        <Accordion defaultActiveKey="0">
         <Accordion.Item  className="bg-black text-white" eventKey="0">
         <Accordion.Header className="bg-black text-white" >Interesting Places</Accordion.Header>
         <Accordion.Body className="bg-black text-white" >
@@ -102,6 +104,7 @@ const Cart = () => {
           )
           .map((location) => (
             <div key={location.place_id}>
+              <img src={location.photo}/>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
               <span>{location.details.rating}</span>

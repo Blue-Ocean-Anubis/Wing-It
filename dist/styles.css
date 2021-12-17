@@ -319,6 +319,17 @@
   /* width: 50vw */
 }
 
+.trip-card-container {
+  display: grid !important;
+  grid-template: 1fr 1fr 1fr / repeat(5,20%);
+  margin: 1vh auto;
+  width: 90%;
+  height: auto;
+  border-radius: 1vh;
+  color: rgb(0, 0, 0);
+  background-color: rgb(143, 143, 143) !important;
+}
+
 html, body {
   margin:0px;
   height:100vh;
