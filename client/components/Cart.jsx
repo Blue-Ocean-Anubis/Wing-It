@@ -1,31 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import Nav from "./Nav.jsx";
 import axios from "axios";
 import { AuthContext } from "./contexts/AuthContext.jsx";
-import { Offcanvas } from "react-bootstrap";
-import UserProfile from "./UserProfile.jsx";
 import RemoveCard from "./RemoveCard.jsx";
 
 const Cart = () => {
   const [list, getList] = useState([]);
-  const [show, setShow] = useState(false);
-  const [userData, setUserData] = useState(null);
   const { user } = useContext(AuthContext);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
-    return Promise.all([
-      axios.get("/cart", {
+    axios
+      .get("/cart", {
         params: {
           uid: user.uid,
         },
-      }),
-      axios.get(`/user/${user.uid}`),
-    ])
-      .then(([list, userInfo]) => {
+      })
+      .then((list) => {
         getList(list);
-        setUserData(userInfo.data);
       })
       .catch((error) => {
         console.error("Cannot retrieve user information", error);
@@ -36,9 +26,7 @@ const Cart = () => {
     return null;
   } else {
     return (
-      <div className="page">
-        <Nav handleCartShow={handleShow} />
-        <h1>My Trip Destinations</h1>
+      <div>
         <h2>Airports</h2>
         {list.data
           .filter((loc) => loc.types.includes("airport"))
@@ -93,19 +81,6 @@ const Cart = () => {
               <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
-
-        <Offcanvas show={show} onHide={handleClose}>
-          {!userData ? null : (
-            <>
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title>{` Hello, ${userData.firstName}`}</Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <UserProfile details={userData} />
-              </Offcanvas.Body>
-            </>
-          )}
-        </Offcanvas>
       </div>
     );
   }
