@@ -1,0 +1,622 @@
+.page {
+  font-family: "Roboto Slab", serif;
+  background-color: #090909;
+}
+
+.navigation {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 0rem auto;
+  display: flex;
+  padding: 1rem;
+  justify-content: space-around;
+  background-color: silver;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: silver;
+  border: 1px solid grey;
+}
+
+.nav-button {
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  color: #f7b932;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.submission-form-container {
+  position: relative;
+  display: flex;
+  min-width: 100px;
+}
+
+.search-bar {
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 20px;
+  width: 100%;
+  padding: 2px 23px 2px 30px;
+  outline: 0;
+  background-color: #f5f5f5;
+}
+
+.search-button {
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.search-bar:hover,
+.search-bar:focus {
+  border: 1.5px solid #009688;
+  background-color: white;
+}
+
+.search-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-search-input {
+  width: 100%;
+  margin-bottom: 0.25rem;
+  background-color: aliceblue;
+  border-radius: 1rem;
+  border: 4px solid grey;
+}
+
+.point-card {
+  border-style: solid;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms linear 150ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 150ms linear;
+}
+
+.map {
+  cursor: crosshair;
+}
+
+.marker {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pin {
+  stroke: black;
+  stroke-width: 15;
+}
+
+.marker-index {
+  transform: translate(1.1rem, -0.2rem);
+  font-family: "Roboto Slab", serif;
+  color: white;
+  font-weight: bold;
+}
+
+.marker-info {
+  padding: 1vw;
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, 2rem);
+  min-width: 50vw;
+  max-width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: rgb(206, 206, 206);
+  border: 2px solid black;
+  border-radius: 0.5rem;
+}
+
+.marker-photo {
+  border: 1px solid rgb(61, 61, 61);
+  border-radius: 0.25rem;
+  object-fit: cover;
+  width: 15vw;
+  height: 15vw;
+  margin: 1vw;
+}
+
+.exit-marker-info {
+  align-self: flex-end;
+  margin: 0.2rem;
+}
+
+.marker-airport-code {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto Slab", serif;
+  white-space: nowrap;
+  font-size: 2rem;
+}
+
+.marker-name {
+  font-family: "Roboto Slab", serif;
+  white-space: wrap;
+  font-size: 1rem;
+}
+
+.marker-address {
+  font-size: 0.75rem;
+}
+
+.nav-link.active {
+  color: black !important;
+  background-color: rgb(197, 197, 197) !important;
+  border: 0.2rem inset grey !important;
+}
+
+.nav-link {
+  color: black !important;
+  background-color: rgb(143, 143, 143) !important;
+  margin-right: 0.5vw;
+  border: 0.2rem outset grey !important;
+  border-top-right-radius: 0.5rem !important;
+  border-top-left-radius: 0.5rem !important;
+}
+
+@media (max-width: 1000px) {
+  .nav-item {
+    min-width: 35vw;
+    margin: 0.25vw 0.25vw 0vw 0.25vw;
+  }
+}
+
+.nav-item {
+  margin: 0.25vw 0.25vw 0vw 0.25vw;
+}
+
+.tab-content {
+  color: grey;
+  background-color: black;
+  min-height: 200vh;
+}
+
+.tabs-container {
+  background-color: black;
+  margin: 10px;
+  border-radius: 0.5rem;
+  border: 0.25em solid silver;
+}
+
+.details {
+  color: rgb(180, 180, 180);
+  background-color: rgb(0, 0, 0);
+  border-radius: 1rem;
+}
+
+.card {
+  display: grid !important;
+  grid-template: 1fr 1fr 1fr / repeat(5, 20%);
+  margin: 1vh auto;
+  width: 90%;
+  height: auto;
+  border-radius: 1vh;
+  color: rgb(0, 0, 0);
+  background-color: rgb(143, 143, 143) !important;
+}
+
+.card-photo-container {
+  grid-area: 1 / 1 / 3 / 2;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-photo {
+  border: 1px solid rgb(61, 61, 61);
+  border-radius: 0.25rem;
+  margin: 2px;
+  object-fit: cover;
+  width: 14vw;
+  height: 14vw;
+}
+
+.card-index {
+  grid-area: 3 / 1 / 4 / 2;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vw;
+  background-color: grey;
+  border-radius: 0.25rem;
+}
+
+.card-name {
+  grid-area: 1 / 2 / 2 / 6;
+  margin: 0.25vh;
+  font-size: 2vh;
+  display: flex;
+  align-items: flex-end;
+}
+
+.card-address {
+  grid-area: 2 / 2 / 3 / 6;
+  margin: 0.25vh;
+  font-size: 1.5vh;
+}
+
+.card-button {
+  font-size: 0.75rem !important;
+  grid-area: 3 / 2 / 4 / 6;
+  margin: 1vw;
+}
+
+.trip-title {
+  font-size: 1.5rem;
+}
+
+.card-photo-title {
+  border: 1px solid rgb(61, 61, 61);
+  border-radius: 0.25rem;
+  margin: 2px;
+  object-fit: cover;
+}
+
+html,
+body {
+  margin: 0px;
+  height: 100vh;
+}
+
+.welcome-container {
+  height: 100vh;
+  background-color: #090909;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.batwing-logo {
+  animation: rotation 1.5s infinite linear;
+  margin: 7rem;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.welcome-text {
+  margin-left: 5%;
+  margin-right: 5%;
+  color: white;
+  font-weight: bolder;
+  font-size: large;
+  position: relative;
+  font-family: Impact, sans-serif;
+  font-size: 45px;
+  letter-spacing: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(189, 189, 189, 0),
+    rgb(255, 255, 255),
+    rgba(189, 189, 189, 0)
+  );
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 3s infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
+
+.autocomplete {
+  width: 100%;
+}
+
+.autocomplete-dropdown-container {
+  width: 100%;
+}
+
+/* batarang stuff */
+.batarang-movement-container {
+  animation: leftToRight 2s 1 linear;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+@keyframes leftToRight {
+  from {
+    transform: translateX(-20%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.batarang {
+  animation: rotation 0.25s infinite linear, disappear 2s 1 forwards;
+  margin: 1rem;
+  height: 6rem;
+  width: 6rem;
+}
+
+@keyframes disappear {
+  to {
+    visibility: hidden;
+  }
+}
+
+.user-profile-offcanvas {
+  background-color: black;
+}
+.user-profile-spacing {
+  display: flex;
+}
+
+.offcanvas-body {
+  background-color: black;
+}
+
+.offcanvas-header {
+  background-color: black;
+  color: black;
+}
+.btn-close {
+  color: white;
+  background-color: white;
+}
+
+/* registration styling */
+.registration-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+}
+
+.registration-wrapper{
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registration-form {
+  display: flex;
+  max-height: 100%;
+  flex-direction: column;
+  justify-items: center;
+  border: solid 2px grey;
+  border-radius: 5px;
+  background-color: silver;
+  overflow-y:scroll;
+}
+
+.registration-form-inputs {
+  border-radius: 5px;
+  border-color: black;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.registration-form-labels {
+  font-weight: bolder;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+
+.registration-form-button {
+  border-radius: 5px;
+  border-color: black;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-weight: bolder;
+  margin-left: 3px;
+  margin-right: 3px;
+  width: 50%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.registration-link-to-login-container {
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: white;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.register-to-login-link {
+  color: white;
+  font-weight: bolder;
+}
+
+/* login form styling */
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #505c7c; */
+  background-color: black;
+}
+
+.login-wrapper {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px grey;
+  border-radius: 5px;
+  background-color: silver;
+}
+
+.login-form-inputs {
+  border-radius: 5px;
+  border-color: black;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.login-form-labels {
+  font-weight: bolder;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 3px;
+}
+
+.login-link-to-registration-container {
+  font-weight: bolder;
+  color: white;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-no-account-text {
+  color: white;
+}
+
+.login-link-to-registration {
+  color: white;
+  text-decoration: underline;
+  margin-left: 3px;
+}
+
+.login-link-to-registration:hover {
+  color: rgb(225, 223, 223);
+  text-decoration: underline;
+}
+
+.login-btn {
+  border-radius: 5px;
+  border-color: black;
+  margin-top: 6px;
+  margin-bottom: 3px;
+  font-weight: bolder;
+  width: 50%;
+  margin-left: 3px;
+  margin-right: 3px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.google-login-btn {
+  border-radius: 5px;
+  border-color: grey;
+  margin-top: 7px;
+  font-weight: bolder;
+}
+
+.forgot-password-btn {
+  border-radius: 5px;
+  border-color: grey;
+  margin-top: 7px;
+  font-weight: bolder;
+}
+
+.batwing-login {
+  height: 5rem;
+  margin-bottom: 20px;
+}
+
+.batwing-registration {
+  height: 3rem;
+  margin-bottom: 20px;
+}
+
+/* .offcanvas-search offcanvas offcanvas-top show{
+  /* background-color: rgb(199, 199, 199); */
+/* background-color: #505c7c;
+  width: auto;
+  border-radius: 5px; */
+/* } */
+
+.offcanvas-header {
+  background-color: #505c7c;
+  color: white;
+}
+
+.offcanvas-title {
+  margin-left: 5px;
+}
+
+.accordion-button {
+  background-color: white !important;
+  color: black !important;
+}
+

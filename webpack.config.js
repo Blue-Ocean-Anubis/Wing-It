@@ -1,28 +1,39 @@
-const webpack = require('webpack');
-const path = require('path');
+const path = require("path");
 
-const config = {
-  entry: './src/index.js',
+module.exports = {
+  entry: './client/src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
+  mode: "development",
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
+      { test: /\.js$/, enforce: "pre", use: ["source-map-loader"] },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      }
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: "url-loader",
+        options: {
+          limit: 10000
+        }
+      },
     ]
+  },
+  resolve: {
+    extensions: [".js", ".jsx"]
   }
 };
-
-module.exports = config;
