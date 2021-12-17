@@ -1,18 +1,6 @@
 .page {
   font-family: "Roboto Slab", serif;
-  /* background-color: #505c7c; */
-  /* background-color: #222; */
   background-color: #090909;
-  /* background-color: silver; */
-
-  /* background-color: #333; */
-}
-
-/* trying to figure out how to play around with map border, stretch goal */
-.map {
-  /* width: auto;
-  border: 1px solid yellow;
-  border-radius: 5px; */
 }
 
 .navigation {
@@ -23,7 +11,6 @@
   display: flex;
   padding: 1rem;
   justify-content: space-around;
-  /* background-color: rgb(199, 199, 199); */
   background-color: silver;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
@@ -224,38 +211,27 @@
   margin: 0.25vw 0.25vw 0vw 0.25vw;
 }
 
-/* .nav-tabs {
-} */
-
 .tab-content {
   color: grey;
   background-color: black;
   min-height: 200vh;
-  /* margin-top: 5px; */
 }
 
 .tabs-container {
   background-color: black;
-  /* margin-left: 5px;
-  margin-right: 5px; */
   margin: 10px;
-  /* padding-right: 2rem; */
   border-radius: 0.5rem;
   border: 0.25em solid silver;
-  /* padding: 1rem; */
-  /* min-height: 200vh; */
 }
 
 .details {
   color: rgb(180, 180, 180);
   background-color: rgb(0, 0, 0);
   border-radius: 1rem;
-  /* border: 2px solid rgb(248, 240, 121); */
 }
 
 .card {
   display: grid !important;
-  /* grid-template: 25% 20% 20% 20% 15% / repeat(5,20%); */
   grid-template: 1fr 1fr 1fr / repeat(5, 20%);
   margin: 1vh auto;
   width: 90%;
@@ -299,8 +275,6 @@
   font-size: 2vh;
   display: flex;
   align-items: flex-end;
-  /* white-space: nowrap;
-  overflow: hidden; */
 }
 
 .card-address {
@@ -309,15 +283,10 @@
   font-size: 1.5vh;
 }
 
-.card-rating {
-}
-
 .card-button {
   font-size: 0.75rem !important;
-  /* height: 5vh; */
   grid-area: 3 / 2 / 4 / 6;
   margin: 1vw;
-  /* width: 50vw */
 }
 
 html,
@@ -439,10 +408,10 @@ body {
   color: white;
   background-color: white;
 }
+
 /* registration form styling */
 .registration-form-container {
   height: 100vh;
-  /* width: 25rem; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -452,20 +421,15 @@ body {
 }
 
 .registration-form {
-  /* width: 25rem; */
   display: flex;
   flex-direction: column;
   justify-items: center;
-  /* align-items: center; */
   border: solid 2px grey;
   border-radius: 5px;
-  /* margin-bottom: 100px; */
-  /* margin-top: 100px; */
   background-color: silver;
 }
 
 .registration-form-inputs {
-  /* width:25rem; */
   border-radius: 5px;
   border-color: black;
   margin-left: 3px;
@@ -479,18 +443,14 @@ body {
 }
 
 .registration-form-button {
-  /* width:25rem; */
   border-radius: 5px;
   border-color: black;
   margin-top: 6px;
   margin-bottom: 6px;
   font-weight: bolder;
-
   margin-left: 3px;
   margin-right: 3px;
-
   width: 50%;
-
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -504,7 +464,6 @@ body {
   font-weight: bolder;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-content: center;
   align-items: center;
 }
@@ -513,7 +472,6 @@ body {
   color: white;
   font-weight: bolder;
 }
-/* end registration form styling */
 
 /* login form styling */
 .login-container {
@@ -522,34 +480,22 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* align-content: center; */
   justify-content: center;
   background-color: #505c7c;
   background-color: black;
-  /* justify-items: center; */
-  /* align-content: center; */
 }
 
 .login-wrapper {
-  /* width: auto; */
   height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: solid 2px black;
-  border-radius: 5px; */
-
-  /* background-color: rgb(199, 199, 199); */
 }
 
 .login-form {
-  /* padding-bottom: 20vh; */
-  /* width: 80%; */
   display: flex;
   flex-direction: column;
-  /* justify-items: center; */
-  /* align-items: center; */
   border: solid 2px grey;
   border-radius: 5px;
   background-color: silver;
@@ -560,7 +506,6 @@ body {
   border-color: black;
   margin-left: 3px;
   margin-right: 3px;
-  /* margin:3px; */
 }
 
 .login-form-labels {
@@ -571,8 +516,6 @@ body {
 }
 
 .login-link-to-registration-container {
-  /* margin-top: 3px;
-  margin-left:5px; */
   font-weight: bolder;
   color: white;
   margin-top: 5px;
@@ -590,7 +533,6 @@ body {
   color: white;
   text-decoration: underline;
   margin-left: 3px;
-  /* margin-top: 3px; */
 }
 
 .login-link-to-registration:hover {
@@ -604,24 +546,12 @@ body {
   margin-top: 6px;
   margin-bottom: 3px;
   font-weight: bolder;
-  /* position: relative; */
   width: 50%;
   margin-left: 3px;
   margin-right: 3px;
-
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.google-login-container {
-  /* border-radius: 5px; */
-  /* border-color: black; */
-  /* margin-top:5px; */
-  /* font-weight: bolder; */
-
-  /* margin-left:3px; */
-  /* margin-right: 3px; */
 }
 
 .google-login-btn {
@@ -629,9 +559,6 @@ body {
   border-color: grey;
   margin-top: 7px;
   font-weight: bolder;
-
-  /* margin-left:3px; */
-  /* margin-right: 3px; */
 }
 
 .forgot-password-btn {
@@ -639,31 +566,17 @@ body {
   border-color: grey;
   margin-top: 7px;
   font-weight: bolder;
-
-  /* margin-left:3px; */
-  /* margin-right: 3px; */
-}
-
-.login-batwing-container {
-  /* color: silver; */
-
-  /* margin-bottom: 70%; */
 }
 
 .batwing-login {
   height: 5rem;
   margin-bottom: 20px;
-  /* width: 7rem; */
 }
 
-.registration-batwing-container {
-}
 .batwing-registration {
   height: 3rem;
   margin-bottom: 20px;
-  /* width: 7rem; */
 }
-/* end login form styling */
 
 /* .offcanvas-search offcanvas offcanvas-top show{
   /* background-color: rgb(199, 199, 199); */
@@ -675,11 +588,6 @@ body {
 .offcanvas-header {
   background-color: #505c7c;
   color: white;
-  /* font-weight: bolder; */
-}
-
-.offcanvas-body {
-  /* background-color: rgb(199, 199, 199); */
 }
 
 .offcanvas-title {
@@ -690,3 +598,4 @@ body {
   background-color: white !important;
   color: black !important;
 }
+

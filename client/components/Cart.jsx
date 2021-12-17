@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 import RemoveCard from "./RemoveCard.jsx";
-import Accordion from 'react-bootstrap/Accordion';
 
 const Cart = () => {
   const [list, getList] = useState([]);
@@ -28,11 +27,7 @@ const Cart = () => {
   } else {
     return (
       <div>
-        <>
-        <Accordion >
-        <Accordion.Item  className="bg-black text-white" eventKey="0">
-        <Accordion.Header className="bg-black text-white" >Airports</Accordion.Header>
-        <Accordion.Body className="bg-black text-white" >
+        <h2>Airports</h2>
         {list.data
           .filter((loc) => loc.types.includes("airport"))
           .map((location) => (
@@ -42,15 +37,7 @@ const Cart = () => {
               <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
-          </Accordion.Body>
-          </Accordion.Item>
-          </Accordion>
-          </>
-          <>
-        <Accordion >
-        <Accordion.Item  className="bg-black text-white" eventKey="0">
-        <Accordion.Header className="bg-black text-white" >Car Rentals</Accordion.Header>
-        <Accordion.Body className="bg-black text-white" >
+        <h2>Rentals</h2>
         {list.data
           .filter((loc) => loc.types.includes("car_rental"))
           .map((location) => (
@@ -63,15 +50,7 @@ const Cart = () => {
               <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
-          </Accordion.Body>
-          </Accordion.Item>
-          </Accordion>
-          </>
-          <>
-        <Accordion >
-        <Accordion.Item  className="bg-black text-white" eventKey="0">
-        <Accordion.Header className="bg-black text-white" >Restaurants</Accordion.Header>
-        <Accordion.Body className="bg-black text-white" >
+        <h2>Restaurants</h2>
         {list.data
           .filter((loc) => loc.types.includes("restaurant"))
           .map((location) => (
@@ -84,15 +63,7 @@ const Cart = () => {
               <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
-          </Accordion.Body>
-          </Accordion.Item>
-          </Accordion>
-          </>
-          <>
-        <Accordion >
-        <Accordion.Item  className="bg-black text-white" eventKey="0">
-        <Accordion.Header className="bg-black text-white" >Interesting Places</Accordion.Header>
-        <Accordion.Body className="bg-black text-white" >
+        <h2>Interesting Places</h2>
         {list.data
           .filter(
             (loc) =>
@@ -110,30 +81,9 @@ const Cart = () => {
               <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
-          </Accordion.Body>
-          </Accordion.Item>
-          </Accordion>
-          </>
-
       </div>
     );
   }
 };
 
 export default Cart;
-
-{/* <Accordion defaultActiveKey="0">
-<Form className="user-profile-offcanvas">
-<Accordion.Item eventKey="0">
-<Accordion.Header>Email</Accordion.Header>
-<Accordion.Body>
-<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-  <Form.Label column sm="2">
-    Email
-  </Form.Label>
-  <Col sm="10">
-    <Form.Control readOnly defaultValue={props.details.email} />
-  </Col>
-</Form.Group>
-</Accordion.Body>
-</Accordion.Item> */}
