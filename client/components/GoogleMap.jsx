@@ -45,6 +45,7 @@ const GoogleMap = (props) => {
               name={each.name}
               address={each.formatted_address}
               details={each.details}
+              photo={each.photo}
               inCart={cartPlaceIDs.includes(each.place_id)}
             />
           );
@@ -62,6 +63,7 @@ const GoogleMap = (props) => {
               key={key}
               code={each.code}
               details={each.details}
+              photo={each.photo}
               inCart={cartPlaceIDs.includes(each.code)}
             />
           );
