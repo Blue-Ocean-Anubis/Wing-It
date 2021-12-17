@@ -176,9 +176,12 @@
 }
 
 .marker-airport-code {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: 'Roboto Slab', serif;
   white-space: nowrap;
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 
 .marker-name {
@@ -211,7 +214,6 @@
   .nav-item {
     min-width: 35vw;
     margin: 0.25vw 0.25vw 0vw 0.25vw;
-
   }
 }
 

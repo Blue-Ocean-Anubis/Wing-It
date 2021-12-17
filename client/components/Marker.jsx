@@ -32,8 +32,8 @@ const Marker = (props) => {
       </div>
       {mouseOn ? <div className="marker-info" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{zIndex: 5}}>
         <FontAwesomeIcon icon={faTimes} size='sm' className="exit-marker-info" onClick={handleMouseLeave}/>
-        <img src={props.photo} className="marker-photo"/>
-        <div className='marker-airport-code'>{props.code}</div>
+        {props.code ? <div className='marker-airport-code'>{props.code}</div> : <img src={props.photo} className="marker-photo"/>}
+
         <div className="marker-name">
           {props.name}
         </div>
