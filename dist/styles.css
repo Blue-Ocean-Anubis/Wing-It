@@ -686,5 +686,8 @@ transform: translateX(-50%);
   margin-left: 5px;
 }
 
-
+.accordion-button {
+  background-color: white !important;
+  color: black !important;
+}
 

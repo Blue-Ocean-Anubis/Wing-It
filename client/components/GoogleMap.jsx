@@ -84,7 +84,7 @@ const GoogleMap = (props) => {
         onHide={props.handleClose}
         placement="top"
       >
-        <Offcanvas.Header className="offcanvas-header" closeButton>
+        <Offcanvas.Header className="bg-white text-black" closeButton>
           <Offcanvas.Title className="offcanvas-title">
             City Search
           </Offcanvas.Title>
