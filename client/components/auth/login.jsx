@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "./../contexts/AuthContext.jsx";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 import batwing from "../batwing.png";
 
 const Login = (props) => {
@@ -29,8 +30,14 @@ const Login = (props) => {
       .then(() => {
         history.push("/welcomeBack");
       })
-      .catch((e) => {
-        setError(e.message);
+      .catch((error) => {
+        if (error.code === "auth/user-not-found") {
+          setError("Email not found");
+        } else if (error.code === "auth/wrong-password") {
+          setError("Invalid pass word");
+        } else {
+          setError("Failed to Login");
+        }
       });
   }
 
@@ -42,7 +49,7 @@ const Login = (props) => {
         await resetPassword(emailResetRef.current.value);
       }
     } catch (error) {
-      setError(error);
+      setError("Failed to Reset Password");
     }
   }
 
@@ -58,7 +65,7 @@ const Login = (props) => {
         history.push("/complete-signup");
       }
     } catch (error) {
-      setError(error);
+      setError("Failed to Sign in with Google");
     }
   }
 
@@ -71,8 +78,8 @@ const Login = (props) => {
   return (
     <div className="login-container">
       <div className="login-wrapper">
-        {error && <div>{error}</div>}
-        <div className='login-batwing-container'>
+        {error && <Alert className="alert-secondary">{error}</Alert>}
+        <div className="login-batwing-container">
           <img className="batwing-login" src={batwing} alt="" />
         </div>
         <form className="login-form" onSubmit={handleSubmit}>
@@ -136,7 +143,7 @@ const Login = (props) => {
                 </Modal.Footer>
               </form>
             </Modal>
-            <button  className='forgot-password-btn' onClick={handleShow}>
+            <button className="forgot-password-btn" onClick={handleShow}>
               Forgot Password?
             </button>
           </div>
