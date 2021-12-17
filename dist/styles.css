@@ -147,6 +147,7 @@
 }
 
 .marker-info {
+  padding: 1vw;
   position: absolute;
   z-index: 2;
   transform: translate(-50%, 2rem);
@@ -161,9 +162,12 @@
 }
 
 .marker-photo {
+  border: 1px solid rgb(61, 61, 61);
+  border-radius: 0.25rem;
   object-fit: cover;
   width: 15vw;
   height: 15vw;
+  margin: 1vw;
 }
 
 .exit-marker-info {
