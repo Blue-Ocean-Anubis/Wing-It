@@ -27,43 +27,82 @@ const Cart = () => {
   } else {
     return (
       <div>
-        <h2>Airports</h2>
+        <>
+        <Accordion defaultActiveKey="0">
+        <Accordion.Item  className="bg-black text-white" eventKey="0">
+        <Accordion.Header className="bg-black text-white" >Airports</Accordion.Header>
+        <Accordion.Body className="bg-black text-white" >
         {list.data
           .filter((loc) => loc.types.includes("airport"))
           .map((location) => (
             <div key={location.code}>
-              <span>{`${location.name} (${location.code})`}</span>
-              <span>{`${location.city}, ${location.country}`}</span>
-              <RemoveCard cartItem={location} getList={getList} />
+              <div className="trip-title">{`${location.name} (${location.code})`}</div>
+              <div>{`${location.city}, ${location.country}`}</div>
+              <div>
+                <RemoveCard cartItem={location} getList={getList} />
+              </div>
+              <hr/>
             </div>
           ))}
-        <h2>Rentals</h2>
+          </Accordion.Body>
+          </Accordion.Item>
+          </Accordion>
+          </>
+          <>
+        <Accordion defaultActiveKey="0">
+        <Accordion.Item  className="bg-black text-white" eventKey="0">
+        <Accordion.Header className="bg-black text-white" >Car Rentals</Accordion.Header>
+        <Accordion.Body className="bg-black text-white" >
         {list.data
           .filter((loc) => loc.types.includes("car_rental"))
           .map((location) => (
             <div key={location.place_id}>
-              <span>{location.name}</span>
-              <span>{location.formatted_address}</span>
-              <span>{location.details.rating}</span>
-              <span>{location.details.international_phone_number}</span>
+              <img src={location.photo} className="card-photo-title"/>
+              <div className="trip-title">{location.name}</div>
+              <div>{location.formatted_address}</div>
+              <div>{`${location.details.rating} of 5`}</div>
+              <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <div>
+                <RemoveCard cartItem={location} getList={getList} />
+              </div>
+              <hr/>
             </div>
           ))}
-        <h2>Restaurants</h2>
+          </Accordion.Body>
+          </Accordion.Item>
+          </Accordion>
+          </>
+          <>
+        <Accordion defaultActiveKey="0">
+        <Accordion.Item  className="bg-black text-white" eventKey="0">
+        <Accordion.Header className="bg-black text-white" >Restaurants</Accordion.Header>
+        <Accordion.Body className="bg-black text-white" >
         {list.data
           .filter((loc) => loc.types.includes("restaurant"))
           .map((location) => (
             <div key={location.place_id}>
-              <span>{location.name}</span>
-              <span>{location.formatted_address}</span>
-              <span>{location.details.rating}</span>
-              <span>{location.details.international_phone_number}</span>
+              <img src={location.photo} className="card-photo-title"/>
+              <div className="trip-title">{location.name}</div>
+              <div>{location.formatted_address}</div>
+              <div>{`${location.details.rating} of 5`}</div>
+              <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <div>
+                <RemoveCard cartItem={location} getList={getList} />
+              </div>
+              <hr/>
             </div>
           ))}
-        <h2>Interesting Places</h2>
+          </Accordion.Body>
+          </Accordion.Item>
+          </Accordion>
+          </>
+          <>
+        <Accordion defaultActiveKey="0">
+        <Accordion.Item  className="bg-black text-white" eventKey="0">
+        <Accordion.Header className="bg-black text-white" >Interesting Places</Accordion.Header>
+        <Accordion.Body className="bg-black text-white" >
         {list.data
           .filter(
             (loc) =>
@@ -73,12 +112,16 @@ const Cart = () => {
           )
           .map((location) => (
             <div key={location.place_id}>
-              <span>{location.name}</span>
-              <span>{location.formatted_address}</span>
-              <span>{location.details.rating}</span>
-              <span>{location.details.international_phone_number}</span>
+              <img src={location.photo} className="card-photo-title"/>
+              <div className="trip-title">{location.name}</div>
+              <div>{location.formatted_address}</div>
+              <div>{`${location.details.rating} of 5`}</div>
+              <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <div>
+                <RemoveCard cartItem={location} getList={getList} />
+              </div>
+              <hr/>
             </div>
           ))}
       </div>
