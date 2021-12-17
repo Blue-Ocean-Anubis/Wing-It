@@ -34,7 +34,7 @@ const Login = (props) => {
         if (error.code === "auth/user-not-found") {
           setError("Email not found");
         } else if (error.code === "auth/wrong-password") {
-          setError("Invalid pass word");
+          setError("Invalid password");
         } else {
           setError("Failed to Login");
         }
