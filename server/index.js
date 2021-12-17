@@ -156,6 +156,7 @@ app.get("/restaurants", async (req, res) => {
       try {
         let results = await detailDecorator(r.data.results);
         results = await photosDecorator(results);
+        results = results.slice(0, 5);
         await restaurant.saveRestaurant({
           city: city,
           state: state,
@@ -220,6 +221,7 @@ app.get("/rentals", async (req, res) => {
       try {
         let results = await detailDecorator(r.data.results);
         results = await photosDecorator(results);
+        results = results.slice(0, 5);
         await rental.saveRental({
           city: city,
           state: state,
@@ -229,7 +231,7 @@ app.get("/rentals", async (req, res) => {
             longitude: lng,
           },
           dateAdded: Date.now(),
-          apiResult: JSON.stringify(results),
+          apiResult: JSON.stringify(results.slice(0, 5)),
         });
         res.send(results);
       } catch (err) {
@@ -290,6 +292,7 @@ app.get("/latLongNearestAirport", async (req, res) => {
         };
         responseData.push(airportDetail);
       });
+      responseData = responseData.slice(0, 5);
       try {
         await airport.saveAirport({
           city: city,
@@ -352,6 +355,7 @@ app.get("/POI", async (req, res) => {
       try {
         let results = await detailDecorator(r.data.results);
         results = await photosDecorator(results);
+        results = results.slice(0, 5);
         await pointsOfInterest.savePointsOfInterest({
           city: city,
           state: state,
