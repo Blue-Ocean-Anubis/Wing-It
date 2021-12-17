@@ -1,5 +1,5 @@
 .page {
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   /* background-color: #505c7c; */
   /* background-color: #222; */
   background-color: #090909;
@@ -9,7 +9,7 @@
 }
 
 /* trying to figure out how to play around with map border, stretch goal */
-.map{
+.map {
   /* width: auto;
   border: 1px solid yellow;
   border-radius: 5px; */
@@ -32,8 +32,12 @@
   border: 1px solid grey;
 }
 
-.nav-button{
+.nav-button {
   cursor: pointer;
+}
+
+.nav-button:hover {
+  color: #f7b932;
 }
 
 .visually-hidden {
@@ -81,7 +85,7 @@
   justify-content: center;
 }
 
-.location-search-input{
+.location-search-input {
   width: 100%;
   margin-bottom: 0.25rem;
   background-color: aliceblue;
@@ -132,7 +136,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .pin {
@@ -142,7 +146,7 @@
 
 .marker-index {
   transform: translate(1.1rem, -0.2rem);
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   color: white;
   font-weight: bold;
 }
@@ -167,26 +171,25 @@
 }
 
 .marker-airport-code {
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   white-space: nowrap;
   font-size: 1.25rem;
 }
 
 .marker-name {
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   white-space: wrap;
   font-size: 1rem;
 }
 
 .marker-address {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
 
 .nav-link.active {
   color: black !important;
   background-color: rgb(197, 197, 197) !important;
   border: 0.2rem inset grey !important;
-
 }
 
 .nav-link {
@@ -202,11 +205,10 @@
   .nav-item {
     min-width: 35vw;
     margin: 0.25vw 0.25vw 0vw 0.25vw;
-
   }
 }
 
-.nav-item{
+.nav-item {
   margin: 0.25vw 0.25vw 0vw 0.25vw;
 }
 
@@ -218,7 +220,6 @@
   background-color: black;
   min-height: 200vh;
   /* margin-top: 5px; */
-
 }
 
 .tabs-container {
@@ -228,7 +229,7 @@
   margin: 10px;
   /* padding-right: 2rem; */
   border-radius: 1rem;
-  border: .25em solid silver;
+  border: 0.25em solid silver;
   /* padding: 1rem; */
   /* min-height: 200vh; */
 }
@@ -236,14 +237,14 @@
 .details {
   color: rgb(180, 180, 180);
   background-color: rgb(0, 0, 0);
-  border-radius: 1rem;;
+  border-radius: 1rem;
   /* border: 2px solid rgb(248, 240, 121); */
 }
 
 .card {
   display: grid !important;
   /* grid-template: 25% 20% 20% 20% 15% / repeat(5,20%); */
-  grid-template: 1fr 1fr 1fr / repeat(5,20%);
+  grid-template: 1fr 1fr 1fr / repeat(5, 20%);
   margin: 1vh auto;
   width: 90%;
   height: auto;
@@ -253,7 +254,7 @@
 }
 
 .card-photo-container {
-  grid-area: 1 / 1 / 3 / 2 ;
+  grid-area: 1 / 1 / 3 / 2;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -289,28 +290,28 @@
 }
 
 .card-address {
-  grid-area: 2 / 2 / 3 / 6 ;
+  grid-area: 2 / 2 / 3 / 6;
   margin: 0.25vh;
   font-size: 1.5vh;
 }
 
 .card-rating {
-
 }
 
 .card-button {
-  font-size: .75rem !important;
+  font-size: 0.75rem !important;
   /* height: 5vh; */
-  grid-area: 3 / 2 / 4 / 6 ;
+  grid-area: 3 / 2 / 4 / 6;
   margin: 0.25rem;
 }
 
-html, body {
-  margin:0px;
-  height:100vh;
+html,
+body {
+  margin: 0px;
+  height: 100vh;
 }
 
-.welcome-container{
+.welcome-container {
   height: 100vh;
   background-color: #090909;
   display: flex;
@@ -319,7 +320,7 @@ html, body {
   justify-content: center;
 }
 
-.batwing-logo{
+.batwing-logo {
   animation: rotation 1.5s infinite linear;
   margin: 7rem;
 }
@@ -333,7 +334,7 @@ html, body {
   }
 }
 
-.welcome-text{
+.welcome-text {
   margin-left: 5%;
   margin-right: 5%;
   color: white;
@@ -343,7 +344,12 @@ html, body {
   font-family: Impact, sans-serif;
   font-size: 45px;
   letter-spacing: 4px;
-  background: linear-gradient(90deg, rgba(189, 189, 189, 0), rgb(255, 255, 255), rgba(189, 189, 189, 0));
+  background: linear-gradient(
+    90deg,
+    rgba(189, 189, 189, 0),
+    rgb(255, 255, 255),
+    rgba(189, 189, 189, 0)
+  );
   background-repeat: no-repeat;
   background-size: 80%;
   animation: animate 3s infinite;
@@ -361,16 +367,16 @@ html, body {
   }
 }
 
-.autocomplete{
+.autocomplete {
   width: 100%;
 }
 
-.autocomplete-dropdown-container{
+.autocomplete-dropdown-container {
   width: 100%;
 }
 
 /* batarang stuff */
-.batarang-movement-container{
+.batarang-movement-container {
   animation: leftToRight 2s 1 linear;
   margin: 0;
   border: 0;
@@ -386,17 +392,15 @@ html, body {
   }
 }
 
-.batarang{
-  animation:
-  rotation .25s infinite linear,
-  disappear 2s 1 forwards;
+.batarang {
+  animation: rotation 0.25s infinite linear, disappear 2s 1 forwards;
   margin: 1rem;
   height: 6rem;
   width: 6rem;
 }
 
 @keyframes disappear {
-  to{
+  to {
     visibility: hidden;
   }
 }
@@ -421,7 +425,7 @@ html, body {
   background-color: white;
 }
 /* registration form styling */
-.registration-form-container{
+.registration-form-container {
   height: 100vh;
   /* width: 25rem; */
   display: flex;
@@ -432,7 +436,7 @@ html, body {
   background-color: black;
 }
 
-.registration-form{
+.registration-form {
   /* width: 25rem; */
   display: flex;
   flex-direction: column;
@@ -440,46 +444,46 @@ html, body {
   /* align-items: center; */
   border: solid 2px grey;
   border-radius: 5px;
-   /* margin-bottom: 100px; */
-   /* margin-top: 100px; */
+  /* margin-bottom: 100px; */
+  /* margin-top: 100px; */
   background-color: silver;
 }
 
-.registration-form-inputs{
- /* width:25rem; */
- border-radius: 5px;
- border-color: black;
- margin-left:3px;
- margin-right: 3px;
+.registration-form-inputs {
+  /* width:25rem; */
+  border-radius: 5px;
+  border-color: black;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
-.registration-form-labels{
+.registration-form-labels {
   font-weight: bolder;
   margin-left: 3px;
   margin-right: 3px;
 }
 
-.registration-form-button{
+.registration-form-button {
   /* width:25rem; */
   border-radius: 5px;
   border-color: black;
-  margin-top:6px;
+  margin-top: 6px;
   margin-bottom: 6px;
   font-weight: bolder;
 
-  margin-left:3px;
+  margin-left: 3px;
   margin-right: 3px;
 
   width: 50%;
 
   position: relative;
-left: 50%;
-transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.registration-link-to-login-container{
+.registration-link-to-login-container {
   margin-top: 15px;
-  margin-left:5px;
+  margin-left: 5px;
   margin-right: 5px;
   color: white;
   font-weight: bolder;
@@ -487,18 +491,17 @@ transform: translateX(-50%);
   flex-direction: column;
   /* justify-content: center; */
   align-content: center;
-  align-items:center;
+  align-items: center;
 }
 
-.register-to-login-link{
+.register-to-login-link {
   color: white;
   font-weight: bolder;
 }
 /* end registration form styling */
 
-
 /* login form styling */
-.login-container{
+.login-container {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -512,7 +515,7 @@ transform: translateX(-50%);
   /* align-content: center; */
 }
 
-.login-wrapper{
+.login-wrapper {
   /* width: auto; */
   height: 80vh;
   display: flex;
@@ -525,7 +528,7 @@ transform: translateX(-50%);
   /* background-color: rgb(199, 199, 199); */
 }
 
-.login-form{
+.login-form {
   /* padding-bottom: 20vh; */
   /* width: 80%; */
   display: flex;
@@ -537,22 +540,22 @@ transform: translateX(-50%);
   background-color: silver;
 }
 
-.login-form-inputs{
- border-radius: 5px;
- border-color: black;
- margin-left:3px;
- margin-right: 3px;
- /* margin:3px; */
+.login-form-inputs {
+  border-radius: 5px;
+  border-color: black;
+  margin-left: 3px;
+  margin-right: 3px;
+  /* margin:3px; */
 }
 
-.login-form-labels{
+.login-form-labels {
   font-weight: bolder;
   margin-left: 3px;
   margin-right: 3px;
-  margin-top:3px;
+  margin-top: 3px;
 }
 
-.login-link-to-registration-container{
+.login-link-to-registration-container {
   /* margin-top: 3px;
   margin-left:5px; */
   font-weight: bolder;
@@ -564,41 +567,39 @@ transform: translateX(-50%);
   align-items: center;
 }
 
-.login-no-account-text{
+.login-no-account-text {
   color: white;
 }
 
-.login-link-to-registration{
- color: white;
- text-decoration: underline;
- margin-left: 3px;
- /* margin-top: 3px; */
+.login-link-to-registration {
+  color: white;
+  text-decoration: underline;
+  margin-left: 3px;
+  /* margin-top: 3px; */
 }
 
-.login-link-to-registration:hover{
+.login-link-to-registration:hover {
   color: rgb(225, 223, 223);
   text-decoration: underline;
- }
+}
 
-.login-btn{
+.login-btn {
   border-radius: 5px;
   border-color: black;
-  margin-top:6px;
+  margin-top: 6px;
   margin-bottom: 3px;
   font-weight: bolder;
   /* position: relative; */
   width: 50%;
-  margin-left:3px;
+  margin-left: 3px;
   margin-right: 3px;
 
   position: relative;
-left: 50%;
-transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-
-
-.google-login-container{
+.google-login-container {
   /* border-radius: 5px; */
   /* border-color: black; */
   /* margin-top:5px; */
@@ -608,42 +609,41 @@ transform: translateX(-50%);
   /* margin-right: 3px; */
 }
 
-.google-login-btn{
+.google-login-btn {
   border-radius: 5px;
   border-color: grey;
-  margin-top:7px;
+  margin-top: 7px;
   font-weight: bolder;
 
   /* margin-left:3px; */
   /* margin-right: 3px; */
 }
 
-.forgot-password-btn{
+.forgot-password-btn {
   border-radius: 5px;
   border-color: grey;
-  margin-top:7px;
+  margin-top: 7px;
   font-weight: bolder;
 
   /* margin-left:3px; */
   /* margin-right: 3px; */
 }
 
-.login-batwing-container{
+.login-batwing-container {
   /* color: silver; */
 
   /* margin-bottom: 70%; */
 }
 
-.batwing-login{
+.batwing-login {
   height: 5rem;
   margin-bottom: 20px;
   /* width: 7rem; */
 }
 
-.registration-batwing-container{
-
+.registration-batwing-container {
 }
-.batwing-registration{
+.batwing-registration {
   height: 3rem;
   margin-bottom: 20px;
   /* width: 7rem; */
@@ -652,25 +652,21 @@ transform: translateX(-50%);
 
 /* .offcanvas-search offcanvas offcanvas-top show{
   /* background-color: rgb(199, 199, 199); */
-  /* background-color: #505c7c;
+/* background-color: #505c7c;
   width: auto;
   border-radius: 5px; */
 /* } */
 
-.offcanvas-header{
+.offcanvas-header {
   background-color: #505c7c;
   color: white;
   /* font-weight: bolder; */
-
 }
 
-.offcanvas-body{
+.offcanvas-body {
   /* background-color: rgb(199, 199, 199); */
 }
 
-.offcanvas-title{
+.offcanvas-title {
   margin-left: 5px;
 }
-
-
-
