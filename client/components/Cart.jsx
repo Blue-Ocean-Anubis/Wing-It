@@ -4,7 +4,7 @@ import { AuthContext } from "./contexts/AuthContext.jsx";
 import RemoveCard from "./RemoveCard.jsx";
 import Accordion from 'react-bootstrap/Accordion';
 
-const Cart = () => {
+const Cart = (props) => {
   const [list, getList] = useState([]);
   const { user } = useContext(AuthContext);
 
@@ -40,7 +40,7 @@ const Cart = () => {
               <div className="trip-title">{`${location.name} (${location.code})`}</div>
               <div>{`${location.city}, ${location.country}`}</div>
               <div>
-                <RemoveCard cartItem={location} getList={getList} />
+                <RemoveCard cartItem={location} getList={getList} updateCart={props.updateCart}/>
               </div>
               <hr/>
             </div>
@@ -65,7 +65,7 @@ const Cart = () => {
               <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
               <div>
-                <RemoveCard cartItem={location} getList={getList} />
+                <RemoveCard cartItem={location} getList={getList} updateCart={props.updateCart}/>
               </div>
               <hr/>
             </div>
@@ -90,7 +90,7 @@ const Cart = () => {
               <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
               <div>
-                <RemoveCard cartItem={location} getList={getList} />
+                <RemoveCard cartItem={location} getList={getList} updateCart={props.updateCart}/>
               </div>
               <hr/>
             </div>
@@ -120,7 +120,7 @@ const Cart = () => {
               <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
               <div>
-                <RemoveCard cartItem={location} getList={getList} />
+                <RemoveCard cartItem={location} getList={getList} updateCart={props.updateCart}/>
               </div>
               <hr/>
             </div>

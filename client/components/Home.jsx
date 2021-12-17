@@ -272,7 +272,7 @@ const Home = () => {
           <h1>My Trip Destinations</h1>
         </Offcanvas.Header>
         <Offcanvas.Body className="d-flex flex-column">
-          <Cart />
+          <Cart updateCart={updateCart}/>
         </Offcanvas.Body>
       </Offcanvas>
 

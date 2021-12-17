@@ -8,6 +8,8 @@
   /* background-color: #333; */
 }
 
+.app {}
+
 /* trying to figure out how to play around with map border, stretch goal */
 .map {
   /* width: auto;
@@ -453,6 +455,7 @@ body {
 /* registration form styling */
 .registration-form-container {
   height: 100vh;
+  /* overflow-y: scroll !important; */
   /* width: 25rem; */
   display: flex;
   flex-direction: column;
@@ -464,6 +467,7 @@ body {
 
 .registration-form {
   /* width: 25rem; */
+  /* overflow-y: scroll !important; */
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -488,6 +492,7 @@ body {
   margin-left: 3px;
   margin-right: 3px;
 }
+
 
 .registration-form-button {
   /* width:25rem; */

@@ -37,7 +37,7 @@ const CardButton = ({ cartItem, updateCart, cartList }) => {
       cartPlaceIDs.includes(cartItem.place_id) ||
         cartPlaceIDs.includes(cartItem.code)
     );
-  }, []);
+  }, [cartList]);
 
   const handleClick = () => setLoading(true);
 
