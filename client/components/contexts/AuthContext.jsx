@@ -8,7 +8,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  confirmPasswordReset,
 } from "firebase/auth";
 import fb from "./../auth/firebase.js";
 
