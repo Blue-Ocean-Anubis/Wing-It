@@ -124,6 +124,10 @@ const Cart = () => {
               <hr/>
             </div>
           ))}
+          </Accordion.Body>
+          </Accordion.Item>
+          </Accordion>
+          </>
       </div>
     );
   }

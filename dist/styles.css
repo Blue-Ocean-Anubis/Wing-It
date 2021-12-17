@@ -420,24 +420,44 @@ body {
   background-color: white;
 }
 
-/* registration form styling */
-.registration-form-container {
-  height: 100vh;
+
+/* registration styling */
+.registration-container {
+  height: 80vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* overflow-y:scroll; */
+
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-
+  /* background-color: #505c7c; */
   background-color: black;
+}
+
+.registration-wrapper{
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .registration-form {
   display: flex;
+  max-height: 100%;
   flex-direction: column;
   justify-items: center;
   border: solid 2px grey;
   border-radius: 5px;
   background-color: silver;
+  overflow-y:scroll;
 }
 
 .registration-form-inputs {
@@ -468,7 +488,7 @@ body {
 }
 
 .registration-link-to-login-container {
-  margin-top: 15px;
+  margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
   color: white;
@@ -492,7 +512,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #505c7c;
+  /* background-color: #505c7c; */
   background-color: black;
 }
 
