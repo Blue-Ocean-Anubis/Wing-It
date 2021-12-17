@@ -4,7 +4,7 @@ import { AuthContext } from "./contexts/AuthContext.jsx";
 import RemoveCard from "./RemoveCard.jsx";
 import Accordion from 'react-bootstrap/Accordion';
 
-const Cart = () => {
+const Cart = (props) => {
   const [list, getList] = useState([]);
   const { user } = useContext(AuthContext);
 
@@ -39,7 +39,7 @@ const Cart = () => {
             <div key={location.code}>
               <span>{`${location.name} (${location.code})`}</span>
               <span>{`${location.city}, ${location.country}`}</span>
-              <RemoveCard cartItem={location} getList={getList} />
+              <RemoveCard cartItem={location} getList={getList} updateCart={props.updateCart}/>
             </div>
           ))}
           </Accordion.Body>
@@ -60,7 +60,7 @@ const Cart = () => {
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <RemoveCard cartItem={location} getList={getList} updateCart={props.updateCart}/>
             </div>
           ))}
           </Accordion.Body>
@@ -81,7 +81,7 @@ const Cart = () => {
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <RemoveCard cartItem={location} getList={getList} updateCart={props.updateCart}/>
             </div>
           ))}
           </Accordion.Body>
@@ -107,7 +107,7 @@ const Cart = () => {
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <RemoveCard cartItem={location} getList={getList} updateCart={props.updateCart}/>
             </div>
           ))}
           </Accordion.Body>
