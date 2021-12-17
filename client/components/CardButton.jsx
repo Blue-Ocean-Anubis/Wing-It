@@ -28,11 +28,16 @@ const CardButton = ({ cartItem, updateCart, cartList }) => {
 
   // SET BUTTON STATUS BASED ON WHETHER OR NOT ITEM IS IN CART
   useEffect(() => {
-    let cartPlaceIDs = cartList.data ? cartList.data.map((each) => {
-      return (each.place_id ? each.place_id : each.code)
-    }) : []
-    toggleDatabase((cartPlaceIDs.includes(cartItem.place_id) || cartPlaceIDs.includes(cartItem.code)))
-  }, [])
+    let cartPlaceIDs = cartList.data
+      ? cartList.data.map((each) => {
+          return each.place_id ? each.place_id : each.code;
+        })
+      : [];
+    toggleDatabase(
+      cartPlaceIDs.includes(cartItem.place_id) ||
+        cartPlaceIDs.includes(cartItem.code)
+    );
+  }, []);
 
   const handleClick = () => setLoading(true);
 
@@ -41,7 +46,8 @@ const CardButton = ({ cartItem, updateCart, cartList }) => {
       variant="dark"
       disabled={isLoading}
       onClick={!isLoading ? handleClick : null}
-      style={inDatabase ? {backgroundColor: '#b56100'} : {}}
+      style={inDatabase ? { backgroundColor: "#b56100" } : {}}
+      className="card-button"
     >
       {isLoading ? "Loading…" : inDatabase ? "Remove Item" : "Add Item"}
     </Button>

@@ -3,11 +3,17 @@ import Nav from "./Nav.jsx";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Accordion from 'react-bootstrap/Accordion';
+
 
 
 const UserProfile = (props) => {
   return (
+    <Accordion defaultActiveKey="0">
     <Form className="user-profile-offcanvas">
+    <Accordion.Item eventKey="0">
+    <Accordion.Header>Email</Accordion.Header>
+    <Accordion.Body>
     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
       <Form.Label column sm="2">
         Email
@@ -16,7 +22,12 @@ const UserProfile = (props) => {
         <Form.Control readOnly defaultValue={props.details.email} />
       </Col>
     </Form.Group>
+    </Accordion.Body>
+    </Accordion.Item>
 
+    <Accordion.Item eventKey="1">
+    <Accordion.Header>Name</Accordion.Header>
+    <Accordion.Body>
     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
       <Form.Label column sm="2">
         First Name
@@ -34,7 +45,12 @@ const UserProfile = (props) => {
         <Form.Control readOnly defaultValue={props.details.lastName} />
       </Col>
     </Form.Group>
+    </Accordion.Body>
+    </Accordion.Item>
 
+    <Accordion.Item eventKey="3">
+    <Accordion.Header>Address</Accordion.Header>
+    <Accordion.Body>
     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
       <Form.Label column sm="2">
         Street Address
@@ -61,15 +77,11 @@ const UserProfile = (props) => {
         <Form.Control readOnly defaultValue={props.details.address.zipCode} />
       </Col>
     </Form.Group>
+  </Accordion.Body>
+    </Accordion.Item>
   </Form>
+</Accordion>
   );
 };
 
 export default UserProfile;
-//firstName, lastName,
-/**address:
-city: "abc town"
-country: "US of A"
-state: "Okie"
-street: "123 abc street"
-zipCode: "12345" */

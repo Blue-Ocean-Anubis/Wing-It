@@ -40,7 +40,7 @@ const GoogleMap = (props) => {
               testProps={"hello there"}
               lat={each.geometry.location.lat}
               lng={each.geometry.location.lng}
-              index={key}
+              index={key + 1}
               key={key}
               name={each.name}
               address={each.formatted_address}
@@ -58,7 +58,7 @@ const GoogleMap = (props) => {
               lng={each.location.longitude}
               name={each.name}
               address={each.city}
-              index={key}
+              index={key + 1}
               key={key}
               code={each.code}
               details={each.details}
@@ -112,6 +112,7 @@ const GoogleMap = (props) => {
           styles: MapStyling,
           clickableIcons: false,
           draggableCursor: "crosshair",
+          disableDefaultUI: true,
         }}
       >
         {/* <Marker lat={props.searchedLocation.coordinates.lat} lng={props.searchedLocation.coordinates.lng} /> */}
