@@ -197,8 +197,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData,
-    // '\nPOIs', points)
+    console.log('rentals: ', rentalData, '\nrestaurants: ', restaurantData, '\nairports: ', airportData,
+    '\nPOIs', points)
   });
 
   const handleTabSelect = (event) => {
