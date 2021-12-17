@@ -52,7 +52,8 @@ const Registration = (props) => {
   }
 
   return (
-    <div className="registration-form-container">
+    <div className='registration-container'>
+    <div className="registration-wrapper">
       {errorMessage && (
         <Alert className="alert-secondary">{errorMessage}</Alert>
       )}
@@ -201,6 +202,7 @@ const Registration = (props) => {
           </Link>
         </div>
       </div>
+    </div>
     </div>
   );
 };
