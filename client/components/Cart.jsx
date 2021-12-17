@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import Nav from "./Nav.jsx";
 import axios from "axios";
 import { AuthContext } from "./contexts/AuthContext.jsx";
-import RemoveCard from './RemoveCard.jsx';
+import RemoveCard from "./RemoveCard.jsx";
 
 const Cart = () => {
   const [list, getList] = useState([]);
@@ -16,11 +15,10 @@ const Cart = () => {
         },
       })
       .then((list) => {
-        console.log(list.data);
         getList(list);
       })
-      .catch((err) => {
-        console.log("Error retrieving user list: >>>>", err);
+      .catch((error) => {
+        console.error("Cannot retrieve user information", error);
       });
   }, []);
 
@@ -28,48 +26,59 @@ const Cart = () => {
     return null;
   } else {
     return (
-      <div className="page">
-        <Nav />
-        <h1>My Trip Destinations</h1>
+      <div>
         <h2>Airports</h2>
-          {list.data.filter(loc => loc.types.includes("airport")).map(location => (
+        {list.data
+          .filter((loc) => loc.types.includes("airport"))
+          .map((location) => (
             <div key={location.code}>
               <span>{`${location.name} (${location.code})`}</span>
               <span>{`${location.city}, ${location.country}`}</span>
-              <RemoveCard cartItem={location} getList={getList}/>
+              <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
         <h2>Rentals</h2>
-          {list.data.filter(loc => loc.types.includes("car_rental")).map(location => (
+        {list.data
+          .filter((loc) => loc.types.includes("car_rental"))
+          .map((location) => (
             <div key={location.place_id}>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList}/>
+              <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
         <h2>Restaurants</h2>
-          {list.data.filter(loc => loc.types.includes("restaurant")).map(location => (
+        {list.data
+          .filter((loc) => loc.types.includes("restaurant"))
+          .map((location) => (
             <div key={location.place_id}>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList}/>
+              <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
         <h2>Interesting Places</h2>
-          {list.data.filter(loc => !loc.types.includes("car_rental") && !loc.types.includes("restaurant") && !loc.types.includes("airport")).map(location => (
+        {list.data
+          .filter(
+            (loc) =>
+              !loc.types.includes("car_rental") &&
+              !loc.types.includes("restaurant") &&
+              !loc.types.includes("airport")
+          )
+          .map((location) => (
             <div key={location.place_id}>
               <span>{location.name}</span>
               <span>{location.formatted_address}</span>
               <span>{location.details.rating}</span>
               <span>{location.details.international_phone_number}</span>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList}/>
+              <RemoveCard cartItem={location} getList={getList} />
             </div>
           ))}
       </div>

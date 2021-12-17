@@ -10,18 +10,15 @@ import RentalDetails from "./RentalDetails.jsx";
 import RestaurantDetails from "./RestaurantDetails.jsx";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 import UserProfile from "./UserProfile.jsx";
+import Cart from "./Cart.jsx";
 import axios from "axios";
-import { Button } from "react-bootstrap";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Container from "react-bootstrap/Container";
 import Nav from "./Nav.jsx";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
-import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
-import OffcanvasBody from "react-bootstrap/OffcanvasBody";
 import batwing from "./batwing.png";
-import Image from 'react-bootstrap/Image';
+import Image from "react-bootstrap/Image";
 
 const Home = () => {
   const [userLocation, setUserLocation] = useState({});
@@ -39,18 +36,23 @@ const Home = () => {
   const [airportData, setAirportData] = useState([]);
   const [points, setPoints] = useState([]);
   const [show, setShow] = useState(false);
-  const [cart, setCart] = useState(false);
+  const [showCart, setCartShow] = useState(false);
+  const [userPage, setUserPage] = useState(false);
   const [userData, setUserData] = useState(null);
   const { user } = useContext(AuthContext);
-  const [cartList , setCartList] = useState([]);
+  const [cartList, setCartList] = useState([]);
 
   //CART OFF CANVAS CLICK HANDLER
-  const handleCartClose = () => setCart(false);
-  const handleCartShow = () => setCart(true);
+  const handleUserPageClose = () => setUserPage(false);
+  const handleUserPageShow = () => setUserPage(true);
 
   //SEARCH BAR OFFCANVAS CLICK HANDLER
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // Search Bar off canvase click handler
+  const handleCartClose = () => setCartShow(false);
+  const handleShowCart = () => setCartShow(true);
 
   const [currentTab, setCurrentTab] = useState("");
 
@@ -209,7 +211,8 @@ const Home = () => {
       {/* <SearchBox placeholder={state.searchBoxText} onPlacesChanged={onPlacesChanged}/> */}
       <Nav
         handleShow={handleShow}
-        handleCartShow={handleCartShow}
+        handleUserPageShow={handleUserPageShow}
+        handleShowCart={handleShowCart}
         show={show}
       />
       <GoogleMap
@@ -234,26 +237,52 @@ const Home = () => {
           onSelect={handleTabSelect}
         >
           <Tab eventKey="airports" title="Airports">
-            <AirportDetails airports={airportData} updateCart={updateCart} cartList={cartList}/>
+            <AirportDetails
+              airports={airportData}
+              updateCart={updateCart}
+              cartList={cartList}
+            />
           </Tab>
           <Tab eventKey="rentals" title="Rentals">
-            <RentalDetails rentals={rentalData} updateCart={updateCart} cartList={cartList}/>
+            <RentalDetails
+              rentals={rentalData}
+              updateCart={updateCart}
+              cartList={cartList}
+            />
           </Tab>
           <Tab eventKey="restaurants" title="Restaurants">
-            <RestaurantDetails restaurants={restaurantData} updateCart={updateCart} cartList={cartList}/>
+            <RestaurantDetails
+              restaurants={restaurantData}
+              updateCart={updateCart}
+              cartList={cartList}
+            />
           </Tab>
           <Tab eventKey="POIs" title="Points of Interest">
-            <PointsOfInterest points={points} updateCart={updateCart} cartList={cartList}/>
+            <PointsOfInterest
+              points={points}
+              updateCart={updateCart}
+              cartList={cartList}
+            />
           </Tab>
         </Tabs>
       </Container>
-      <Offcanvas show={cart} onHide={handleCartClose}>
+
+      <Offcanvas show={showCart} onHide={handleCartClose} placement="end">
+        <Offcanvas.Header className="bg-white text-black" closeButton>
+          <h1>My Trip Destinations</h1>
+        </Offcanvas.Header>
+        <Offcanvas.Body className="d-flex flex-column">
+          <Cart />
+        </Offcanvas.Body>
+      </Offcanvas>
+
+      <Offcanvas show={userPage} onHide={handleUserPageClose}>
         {!userData ? null : (
           <>
             <Offcanvas.Header className="bg-white text-black" closeButton>
               <Offcanvas.Title>{` Hello, ${userData.firstName}`}</Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body className="d-flex flex-column" >
+            <Offcanvas.Body className="d-flex flex-column">
               <UserProfile details={userData} />
               <Image className="mt-auto" rounded="true" src={batwing} />
             </Offcanvas.Body>

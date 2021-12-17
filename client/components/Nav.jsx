@@ -6,7 +6,7 @@ import {
   faHome,
   faSearch,
   faStar,
-  faSignOutAlt
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -23,15 +23,44 @@ const Nav = (props) => {
   return (
     <nav className="navigation">
       <Link to="/">
-        <FontAwesomeIcon icon={faHome} size="2x" color="black" className="nav-button"/>
+        <FontAwesomeIcon
+          icon={faHome}
+          size="2x"
+          color="black"
+          className="nav-button"
+        />
       </Link>
-        <FontAwesomeIcon icon={faUser} size="2x" color="black" variant="primary" onClick={props.handleCartShow} className="nav-button"/>
-        <FontAwesomeIcon icon={faSearch} size="2x" color="black" variant="primary" onClick={props.handleShow} className="nav-button"/>
-      <Link to="/cart">
-        <FontAwesomeIcon icon={faStar} size="2x" color="black" className="nav-button"/>
-      </Link>
+      <FontAwesomeIcon
+        icon={faUser}
+        size="2x"
+        color="black"
+        variant="primary"
+        onClick={props.handleUserPageShow}
+        className="nav-button"
+      />
+      <FontAwesomeIcon
+        icon={faSearch}
+        size="2x"
+        color="black"
+        variant="primary"
+        onClick={props.handleShow}
+        className="nav-button"
+      />
+      <FontAwesomeIcon
+        icon={faStar}
+        size="2x"
+        color="black"
+        className="nav-button"
+        onClick={props.handleShowCart}
+      />
       <Link to="/login">
-        <FontAwesomeIcon icon={faSignOutAlt} onClick={handleLogout} size="2x" color="black" className="nav-button"/>
+        <FontAwesomeIcon
+          icon={faSignOutAlt}
+          onClick={handleLogout}
+          size="2x"
+          color="black"
+          className="nav-button"
+        />
       </Link>
     </nav>
   );
