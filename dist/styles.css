@@ -320,6 +320,17 @@
   /* width: 50vw */
 }
 
+.trip-title {
+  font-size: 1.5rem;
+}
+
+.card-photo-title {
+  border: 1px solid rgb(61, 61, 61);
+  border-radius: 0.25rem;
+  margin: 2px;
+  object-fit: cover;
+}
+
 html,
 body {
   margin: 0px;
