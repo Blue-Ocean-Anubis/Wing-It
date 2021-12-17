@@ -37,9 +37,12 @@ const Cart = () => {
           .filter((loc) => loc.types.includes("airport"))
           .map((location) => (
             <div key={location.code}>
-              <span>{`${location.name} (${location.code})`}</span>
-              <span>{`${location.city}, ${location.country}`}</span>
-              <RemoveCard cartItem={location} getList={getList} />
+              <div className="trip-title">{`${location.name} (${location.code})`}</div>
+              <div>{`${location.city}, ${location.country}`}</div>
+              <div>
+                <RemoveCard cartItem={location} getList={getList} />
+              </div>
+              <hr/>
             </div>
           ))}
           </Accordion.Body>
@@ -55,13 +58,16 @@ const Cart = () => {
           .filter((loc) => loc.types.includes("car_rental"))
           .map((location) => (
             <div key={location.place_id}>
-              <img src={location.photo}/>
-              <span>{location.name}</span>
-              <span>{location.formatted_address}</span>
-              <span>{location.details.rating}</span>
-              <span>{location.details.international_phone_number}</span>
+              <img src={location.photo} className="card-photo-title"/>
+              <div className="trip-title">{location.name}</div>
+              <div>{location.formatted_address}</div>
+              <div>{`${location.details.rating} of 5`}</div>
+              <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <div>
+                <RemoveCard cartItem={location} getList={getList} />
+              </div>
+              <hr/>
             </div>
           ))}
           </Accordion.Body>
@@ -77,13 +83,16 @@ const Cart = () => {
           .filter((loc) => loc.types.includes("restaurant"))
           .map((location) => (
             <div key={location.place_id}>
-              <img src={location.photo}/>
-              <span>{location.name}</span>
-              <span>{location.formatted_address}</span>
-              <span>{location.details.rating}</span>
-              <span>{location.details.international_phone_number}</span>
+              <img src={location.photo} className="card-photo-title"/>
+              <div className="trip-title">{location.name}</div>
+              <div>{location.formatted_address}</div>
+              <div>{`${location.details.rating} of 5`}</div>
+              <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <div>
+                <RemoveCard cartItem={location} getList={getList} />
+              </div>
+              <hr/>
             </div>
           ))}
           </Accordion.Body>
@@ -104,13 +113,16 @@ const Cart = () => {
           )
           .map((location) => (
             <div key={location.place_id}>
-              <img src={location.photo}/>
-              <span>{location.name}</span>
-              <span>{location.formatted_address}</span>
-              <span>{location.details.rating}</span>
-              <span>{location.details.international_phone_number}</span>
+              <img src={location.photo} className="card-photo-title"/>
+              <div className="trip-title">{location.name}</div>
+              <div>{location.formatted_address}</div>
+              <div>{`${location.details.rating} of 5`}</div>
+              <div>{location.details.international_phone_number}</div>
               <a href={location.details.website}>Website</a>
-              <RemoveCard cartItem={location} getList={getList} />
+              <div>
+                <RemoveCard cartItem={location} getList={getList} />
+              </div>
+              <hr/>
             </div>
           ))}
           </Accordion.Body>
@@ -124,19 +136,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-{/* <Accordion defaultActiveKey="0">
-<Form className="user-profile-offcanvas">
-<Accordion.Item eventKey="0">
-<Accordion.Header>Email</Accordion.Header>
-<Accordion.Body>
-<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-  <Form.Label column sm="2">
-    Email
-  </Form.Label>
-  <Col sm="10">
-    <Form.Control readOnly defaultValue={props.details.email} />
-  </Col>
-</Form.Group>
-</Accordion.Body>
-</Accordion.Item> */}
