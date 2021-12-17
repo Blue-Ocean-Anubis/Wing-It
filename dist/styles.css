@@ -420,24 +420,14 @@ body {
   background-color: white;
 }
 
-
 /* registration styling */
 .registration-container {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  /* overflow-y:scroll; */
-
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /* background-color: #505c7c; */
   background-color: black;
 }
 
@@ -445,7 +435,6 @@ body {
   height: 95vh;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -472,6 +461,7 @@ body {
   margin-left: 3px;
   margin-right: 3px;
 }
+
 
 .registration-form-button {
   border-radius: 5px;

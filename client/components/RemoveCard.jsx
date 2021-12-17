@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 
-const RemoveCard = ({ cartItem, getList }) => {
+const RemoveCard = ({ cartItem, getList, updateCart }) => {
   const [isLoading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
 
@@ -15,6 +15,7 @@ const RemoveCard = ({ cartItem, getList }) => {
           cartItem: JSON.stringify(cartItem),
         })
         .then(() => {
+          updateCart();
           axios.get('/cart', {
             params: {
               uid: user.uid
