@@ -3,7 +3,7 @@
 ### Table of Contents
 1. [Overview](#overview)
 2. [Main Technologies](#main-technologies)
-3. [Usage](#usage)
+3. [Demo](#demo)
 4. [Contributors](#contributors)
 
 ## Overview
@@ -23,9 +23,7 @@ Travel application that provides users with air travel, restaurant, vehicle rent
 * React: Version 17.0.2
 * React-Bootstrap: Version 2.0.3
 
-
-
-## Usage
+## Demo
 
 Search and add airports, rentals, restaurants, and points of interest by clicking locations on the map <br>
 <img src="https://thumbs.gfycat.com/ImperfectPartialGlobefish-size_restricted.gif" height="350px" weight="350px"/>
@@ -47,11 +45,6 @@ Login using your email registration or Google <br>
 
 Customized loading screen with username <br>
 <img src="https://media.giphy.com/media/naGbBp2wZgppX5OL7i/giphy.gif" height="350px" weight="350px"/>
-
-
-
-
-
 
 ## Contributors
 - [Amitt Dosanjh](https://www.linkedin.com/in/amitt-dosanjh/)
