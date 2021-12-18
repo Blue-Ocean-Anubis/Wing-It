@@ -7,7 +7,7 @@
 4. [Contributors](#contributors)
 
 ## Overview
-Travel application that provides the user with air travel, restaurant, vehicle rental, and points of interest information of a desired city.
+Travel application that provides users with air travel, restaurant, vehicle rental, and points of interest information of a desired city.
 
 ## Main Technologies
 * Amadeus: Version 5.7.1
@@ -27,11 +27,26 @@ Travel application that provides the user with air travel, restaurant, vehicle r
 
 ## Usage
 
+Search and add airports, rentals, restaurants, and points of interest by clicking locations on the map <br>
+<img src="https://thumbs.gfycat.com/ImperfectPartialGlobefish-size_restricted.gif" height="350px" weight="350px"/>
 
-DarkMode / LightMode Button:
+View user profile using off-canvas functionality <br>
+<img src="https://thumbs.gfycat.com/FemaleSplendidCollardlizard-size_restricted.gif" height="350px" weight="350px"/>
 
-![](./Gifs/Darkmode.gif)
+Search for cities to visit using auto-complete search bar <br>
+<img src="https://thumbs.gfycat.com/BetterIncompatibleBoubou-size_restricted.gif" height="350px" weight="350px"/>
 
+View all the destinations and places you favorited <br>
+<img src="https://thumbs.gfycat.com/ThornyIgnorantHornedviper-size_restricted.gif" height="350px" weight="350px"/>
+
+Use the app on any device! iPhone, ipad, or even desktop <br>
+<img src="https://thumbs.gfycat.com/GratefulImprobableCrustacean-size_restricted.gif" height="350px" weight="350px"/>
+
+Login using your email registration or Google <br>
+<img src="https://thumbs.gfycat.com/ImmediateNarrowLeonberger-size_restricted.gif" height="350px" weight="350px"/>
+
+Customized loading screen with username <br>
+<img src="https://media.giphy.com/media/naGbBp2wZgppX5OL7i/giphy.gif" height="350px" weight="350px"/>
 
 
 
