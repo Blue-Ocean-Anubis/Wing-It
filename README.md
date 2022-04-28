@@ -1,4 +1,4 @@
-# BatBook
+# Wing It
 
 ### Table of Contents
 1. [Overview](#overview)
