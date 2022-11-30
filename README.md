@@ -7,7 +7,7 @@
 4. [Contributors](#contributors)
 
 ## Overview
-Travel application that provides users with air travel, restaurant, vehicle rental, and points of interest information of a desired city.
+Travel application that provides users with air travel, restaurant, vehicle rental, and points of interest information for a desired city.
 
 ## Main Technologies
 * Amadeus: Version 5.7.1
